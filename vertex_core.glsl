@@ -20,5 +20,5 @@ void main()
 	vs_texcoord = vec2(vertex_texcoord.x, vertex_texcoord.y * -1.f);
 	vs_normal = mat3(ModelMatrix) * vertex_normal;
 
-	gl_Position =  ProjectionMatrix*ViewMatrix*ModelMatrix*vec4(vertex_position, 1.f);
+	gl_Position =  ProjectionMatrix * ViewMatrix * ModelMatrix * vec4(vertex_position, 1.f);
 }
