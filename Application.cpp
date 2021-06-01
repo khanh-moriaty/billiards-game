@@ -1,12 +1,12 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <glm.hpp>
-#include <vec2.hpp>
-#include <vec3.hpp>
-#include <vec4.hpp>
-#include <mat4x4.hpp>
-#include <gtc/matrix_transform.hpp>
-#include <gtc/type_ptr.hpp> 
+#include <glm/glm.hpp>
+#include <glm/vec2.hpp>
+#include <glm/vec3.hpp>
+#include <glm/vec4.hpp>
+#include <glm/mat4x4.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp> 
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -94,7 +94,7 @@ int main()
 
     // build and compile our shader zprogram
     // ------------------------------------
-    Shader ourShader("C:\\Users\\ASUS\\Desktop\\opengl_tut\\opengl_tut\\src\\vertex_core.glsl", "C:\\Users\\ASUS\\Desktop\\opengl_tut\\opengl_tut\\src\\fragment_core.glsl");
+    Shader ourShader("vertex_core.glsl", "fragment_core.glsl");
     
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
@@ -105,8 +105,8 @@ int main()
 
     // load and create a texture 
     // -------------------------
-    Texture texture0("C:\\Users\\ASUS\\Desktop\\opengl_tut\\opengl_tut\\src\\pusheen.png", GL_TEXTURE_2D, 0);
-    Texture texture1("C:\\Users\\ASUS\\Desktop\\opengl_tut\\opengl_tut\\src\\container1.png", GL_TEXTURE_2D, 1);
+    Texture texture0("pusheen.png", GL_TEXTURE_2D, 0);
+    Texture texture1("container1.png", GL_TEXTURE_2D, 1);
     Material material0(glm::vec3(0.1f), glm::vec3(1.f), glm::vec3(1.f), texture0.getunit(), texture1.getunit());
     //init matrix
     glm::vec3 camPosition(0.f, 0.f, 2.f);
