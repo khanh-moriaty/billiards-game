@@ -207,7 +207,7 @@ int main()
     std::vector<Mesh*>mesh;
     //create obj
     std::vector<Vertex> obj1;
-    obj1 = loadOBJ("combine2.obj");
+    obj1 = loadOBJ("blender_files/combine2.obj");
 
     mesh.push_back(new Mesh(obj1.data(), obj1.size(), NULL, 0, glm::vec3(1.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
 
