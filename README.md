@@ -2,8 +2,9 @@
 
 ## Giới thiệu
 
-<img align="right" height="140" src="https://media1.tenor.com/images/f181464c1be3f16db829c46966eab6fd/tenor.gif?itemid=3452012">
 Nhóm của chúng tôi bao gồm ba thành viên:
+
+<img align="right" height="140" src="https://media1.tenor.com/images/f181464c1be3f16db829c46966eab6fd/tenor.gif?itemid=3452012">
 
 |             | Họ và Tên              | MSSV     |
 |-------------|------------------------|----------|
