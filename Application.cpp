@@ -207,14 +207,14 @@ int main()
     std::vector<Mesh*>mesh;
     //create obj
     std::vector<Vertex> obj1;
-    obj1 = loadOBJ("blender_files/combine2.obj");
+    obj1 = loadOBJ("res/model/combine2.obj");
 
     mesh.push_back(new Mesh(obj1.data(), obj1.size(), NULL, 0, glm::vec3(1.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
 
     // load and create a texture 
     // -------------------------
-    Texture texture0("pusheen.png", GL_TEXTURE_2D, 0);
-    Texture texture1("container1.png", GL_TEXTURE_2D, 1);
+    Texture texture0("res/texture/pusheen.png", GL_TEXTURE_2D, 0);
+    Texture texture1("res/texture/container1.png", GL_TEXTURE_2D, 1);
    
     //init matrix
     glm::mat4 ModelMatrix(1.f);
