@@ -12,7 +12,7 @@
 #include <string>
 #include <fstream>
 #include <SOIL2.h>
-#include "shader.h"
+#include "shaders/shader.h"
 #include "texture.h"
 #include <sstream>
 #include "vertex.h"

@@ -4,7 +4,7 @@
 
 #include "vertex.h"
 #include "primitives.h"
-#include "shader.h"
+#include "shaders/shader.h"
 #include "texture.h"
 #include "material.h"
 

@@ -11,7 +11,7 @@
 #include <string>
 #include <fstream>
 #include <SOIL2.h>
-#include "src/shader.h"
+#include "src/shaders/shader.h"
 #include "src/texture.h"
 #include <sstream>
 #include "src/vertex.h"
