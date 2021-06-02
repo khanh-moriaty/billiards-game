@@ -2,6 +2,7 @@
 
 ## Giới thiệu
 
+<img align="right" height="140" src="https://media1.tenor.com/images/f181464c1be3f16db829c46966eab6fd/tenor.gif?itemid=3452012">
 Nhóm của chúng tôi bao gồm ba thành viên:
 
 |             | Họ và Tên              | MSSV     |
@@ -12,7 +13,7 @@ Nhóm của chúng tôi bao gồm ba thành viên:
 
 <br>
 
-Dưới đây là đồ án môn học CS105.L21.KHTN (Đồ họa Máy tính) và CS231.L21.KHTN (Nhập môn Thị giác Máy tính). Đồ án này bao gồm hai nội dung:
+Dưới đây là đồ án môn học CS105.L21.KHTN (Đồ họa Máy tính) và CS231.L21.KHTN (Nhập môn Thị giác Máy tính). Đồ án này bao gồm hai nội dung chính:
 
 <ol>
     <li> Trò chơi Billiards lỗ (8-ball) cho phép người dùng tương tác và điều khiển.
@@ -29,7 +30,7 @@ Dưới đây là đồ án môn học CS105.L21.KHTN (Đồ họa Máy tính) v
 
 ## Yêu cầu kỹ thuật
 
-TBD.
+Hiện tại chương trình của chúng tôi chỉ mới hỗ trợ cho nền tảng Microsoft Windows. Trước khi đến với bước cài đặt, vui lòng kiểm tra
 
 ## Hướng dẫn cài đặt
 
