@@ -12,12 +12,12 @@
 #include <string>
 #include <fstream>
 #include <SOIL2.h>
-#include "Shader.h"
-#include "Texture.h"
+#include "shader.h"
+#include "texture.h"
 #include <sstream>
-#include "Vertex.h"
-#include "Primitives.h"
-#include "Mesh.h"
+#include "vertex.h"
+#include "primitives.h"
+#include "mesh.h"
 enum Camera_Movement {
     FORWARD,
     BACKWARD,

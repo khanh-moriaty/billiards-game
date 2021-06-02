@@ -2,11 +2,11 @@
 #include<iostream>
 #include<vector>
 
-#include"Vertex.h"
-#include"Primitives.h"
-#include"Shader.h"
-#include"Texture.h"
-#include"Material.h"
+#include "vertex.h"
+#include "primitives.h"
+#include "shader.h"
+#include "texture.h"
+#include "material.h"
 
 class Mesh
 {

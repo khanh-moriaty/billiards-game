@@ -13,11 +13,11 @@
 #include <string>
 #include <fstream>
 #include <SOIL2.h>
-#include "Shader.h"
-#include "Texture.h"
+#include "shader.h"
+#include "texture.h"
 #include <sstream>
 #include <vector>
-#include "Vertex.h"
+#include "vertex.h"
 class Primitive
 {
 private:

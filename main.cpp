@@ -11,13 +11,13 @@
 #include <string>
 #include <fstream>
 #include <SOIL2.h>
-#include "Shader.h"
-#include "Texture.h"
+#include "src/shader.h"
+#include "src/texture.h"
 #include <sstream>
-#include "Vertex.h"
-#include "Primitives.h"
-#include "Mesh.h"
-#include "Camera.h"
+#include "src/vertex.h"
+#include "src/primitives.h"
+#include "src/mesh.h"
+#include "src/camera.h"
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -195,7 +195,7 @@ int main()
     
     // build and compile our shader zprogram
     // ------------------------------------
-    Shader ourShader("vertex_core.glsl", "fragment_core.glsl");
+    Shader ourShader("src/vertex_core.glsl", "src/fragment_core.glsl");
     
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
