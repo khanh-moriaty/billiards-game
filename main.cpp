@@ -11,13 +11,13 @@
 #include <string>
 #include <fstream>
 #include <SOIL2.h>
-#include "src/shaders/shader.h"
-#include "src/texture.h"
+#include "shaders/shader.h"
+#include "texture.h"
 #include <sstream>
-#include "src/vertex.h"
-#include "src/primitives.h"
-#include "src/mesh.h"
-#include "src/camera.h"
+#include "vertex.h"
+#include "primitives.h"
+#include "mesh.h"
+#include "camera.h"
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
