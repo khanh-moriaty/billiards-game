@@ -39,9 +39,8 @@ Hiện tại chương trình của chúng tôi chỉ mới hỗ trợ cho nền 
 
 ## Hướng dẫn cài đặt
 
-> Đối với các trình biên dịch hỗ trợ 32-bit như MinGW, thực thi tệp tin `install_win32.bat`.
->
-> Đối với các trình biên dịch hỗ trợ 64-bit như TDM-GCC hoặc MinGW-w64, thực thi tệp tin `install_win64.bat`.
+Đối với các trình biên dịch hỗ trợ 32-bit như MinGW, thực thi tệp tin `install_win32.bat`. <br>
+Đối với các trình biên dịch hỗ trợ 64-bit như TDM-GCC hoặc MinGW-w64, thực thi tệp tin `install_win64.bat`.
 
 Sau khi thực thi thành công, thư mục của chương trình sẽ phát sinh thêm 3 tệp tin mới:
 
