@@ -15,6 +15,7 @@
 *.so
 *.dylib
 *.dll
+!GLFW/lib/*.dll
 # glfw3.dll
 # glew32.dll
 
