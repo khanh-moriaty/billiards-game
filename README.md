@@ -1,8 +1,18 @@
 <h1><p align="center">MÔ PHỎNG TRẠNG THÁI GAME BILLIARDS</p></h1>
 
-## Mô tả
+## Giới thiệu
 
-Đồ án môn học CS105.L21.KHTN (Đồ họa Máy tính) và CS231.L21.KHTN (Nhập môn Thị giác Máy tính). Đồ án này bao gồm hai nội dung:
+Nhóm của chúng tôi bao gồm ba thành viên:
+
+|             | Họ và Tên              | MSSV     |
+|-------------|------------------------|----------|
+| Trưởng nhóm | Hồ Chung Đức Khánh     | 19520624 |
+| Thành viên  | Nguyễn Thị Minh Phương | 19522065 |
+| Thành viên  | Võ Minh Hiếu           | 19520084 |
+
+<br>
+
+Dưới đây là đồ án môn học CS105.L21.KHTN (Đồ họa Máy tính) và CS231.L21.KHTN (Nhập môn Thị giác Máy tính). Đồ án này bao gồm hai nội dung:
 
 <ol>
     <li> Trò chơi Billiards lỗ (8-ball) cho phép người dùng tương tác và điều khiển.
