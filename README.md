@@ -1,4 +1,4 @@
-<h1 style="text-align: center;">MÔ PHỎNG TRẠNG THÁI GAME BILLIARDS</h1>
+<h1><center>MÔ PHỎNG TRẠNG THÁI GAME BILLIARDS</center></h1>
 
 ## Mô tả
 
@@ -11,13 +11,11 @@
 
 ## Mục lục
 
-<ol>
-    <li> [Yêu cầu kỹ thuật](#yêu-cầu-kỹ-thuật)
-    <li> [Hướng dẫn cài đặt](#hướng-dẫn-cài-đặt)
-    <li> [Hướng dẫn điều khiển](#hướng-dẫn-điều-khiển)
-    <li> [Luật chơi](#luật-chơi)
-    <li> [Mô phỏng trạng thái game](#mô-phỏng-trạng-thái-game)
-</ol>
+1. [Yêu cầu kỹ thuật](#yêu-cầu-kỹ-thuật)
+2. [Hướng dẫn cài đặt](#hướng-dẫn-cài-đặt)
+3. [Hướng dẫn điều khiển](#hướng-dẫn-điều-khiển)
+4. [Luật chơi](#luật-chơi)
+5. [Mô phỏng trạng thái game](#mô-phỏng-trạng-thái-game)
 
 ## Yêu cầu kỹ thuật
 
