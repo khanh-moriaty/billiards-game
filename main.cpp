@@ -195,7 +195,7 @@ int main()
     
     // build and compile our shader zprogram
     // ------------------------------------
-    Shader ourShader("src/vertex_core.glsl", "src/fragment_core.glsl");
+    Shader ourShader("src/shaders/vertex_core.glsl", "src/shaders/fragment_core.glsl");
     
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
