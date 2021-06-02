@@ -195,8 +195,7 @@ int main()
     
     // build and compile our shader zprogram
     // ------------------------------------
-    Shader ourShader("C:\\Users\\ASUS\\Desktop\\opengl_tut\\opengl_tut\\src\\vertex_core.glsl", 
-        "C:\\Users\\ASUS\\Desktop\\opengl_tut\\opengl_tut\\src\\fragment_core.glsl");
+    Shader ourShader("vertex_core.glsl", "fragment_core.glsl");
     
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
@@ -208,14 +207,14 @@ int main()
     std::vector<Mesh*>mesh;
     //create obj
     std::vector<Vertex> obj1;
-    obj1 = loadOBJ("C:\\Users\\ASUS\\Desktop\\opengl_tut\\opengl_tut\\src\\combine2.obj");
+    obj1 = loadOBJ("combine2.obj");
 
     mesh.push_back(new Mesh(obj1.data(), obj1.size(), NULL, 0, glm::vec3(1.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
 
     // load and create a texture 
     // -------------------------
-    Texture texture0("C:\\Users\\ASUS\\Desktop\\opengl_tut\\opengl_tut\\src\\pusheen.png", GL_TEXTURE_2D, 0);
-    Texture texture1("C:\\Users\\ASUS\\Desktop\\opengl_tut\\opengl_tut\\src\\container1.png", GL_TEXTURE_2D, 1);
+    Texture texture0("pusheen.png", GL_TEXTURE_2D, 0);
+    Texture texture1("container1.png", GL_TEXTURE_2D, 1);
    
     //init matrix
     glm::mat4 ModelMatrix(1.f);
