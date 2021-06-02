@@ -1,4 +1,4 @@
-<h1><center>MÔ PHỎNG TRẠNG THÁI GAME BILLIARDS</center></h1>
+<h1><p align="center">MÔ PHỎNG TRẠNG THÁI GAME BILLIARDS</p></h1>
 
 ## Mô tả
 
