@@ -7,7 +7,7 @@
 *.o
 *.obj
 # Blender obj files
-!blender_files/*.obj
+!model/*.obj
 
 # Precompiled Headers
 *.gch
