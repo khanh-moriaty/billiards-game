@@ -12,11 +12,11 @@
 *.pch
 
 # Compiled Dynamic libraries
-# *.so
-# *.dylib
-# *.dll
-glfw3.dll
-glew32.dll
+*.so
+*.dylib
+*.dll
+# glfw3.dll
+# glew32.dll
 
 # Fortran module files
 *.mod
