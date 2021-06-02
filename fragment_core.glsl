@@ -29,7 +29,7 @@ void main()
 	//fs_color = mix(texture(texture0, vs_texcoord), texture(texture1, vs_texcoord), 1);
 
 	//ambient light
-	vec3 ambientLight = vec3(0.1f, 0.1f, 0.1f);
+	vec3 ambientLight = vec3(1.f, 1.f, 1.f);
 
 	//diffuse light
 	vec3 posToLightDirVec = normalize(lightPos0 - vs_position);
@@ -45,6 +45,6 @@ void main()
 	vec3 specularFinal = vec3(1.f, 1.f, 1.f) * specularConstant;
 
 	//Final light
-	fs_color = texture(texture1, vs_texcoord)  * (vec4(ambientLight, 1.f) + vec4(diffuseFinal, 1.f) + vec4(specularFinal, 1.f));
+	fs_color = texture(texture1, vs_texcoord) * (vec4(ambientLight, 1.f) + vec4(diffuseFinal, 1.f) + vec4(specularFinal, 1.f));
 
 }
