@@ -31,11 +31,24 @@ Dưới đây là đồ án môn học CS105.L21.KHTN (Đồ họa Máy tính) v
 
 ## Yêu cầu kỹ thuật
 
-Hiện tại chương trình của chúng tôi chỉ mới hỗ trợ cho nền tảng Microsoft Windows. Trước khi đến với bước cài đặt, vui lòng kiểm tra
+Hiện tại chương trình của chúng tôi chỉ mới hỗ trợ cho nền tảng Microsoft Windows. Trước khi đến với bước cài đặt, vui lòng kiểm tra hệ thống của bạn đã có sẵn những tiện ích sau:
+
+- Windows 32-bit hoặc 64-bit.
+- Trình biên dịch GNU dành cho Windows: MinGW, MinGW-w64, hoặc TDM-GCC.
+- GCC >= 5.1.0.
 
 ## Hướng dẫn cài đặt
 
-TBD.
+Đối với các trình biên dịch hỗ trợ 32-bit, thực thi tệp tin `install_win32.bat`. <br>
+Đối với các trình biên dịch hỗ trợ 64-bit, thực thi tệp tin `install_win64.bat`.
+
+Sau khi thực thi thành công, thư mục của chương trình sẽ phát sinh thêm 3 tệp tin mới:
+
+- `glew32.dll`: Thư viện quản lí các extension cho OpenGL.
+- `glfw3.dll`: Thư viện hỗ trợ việc hiển thị các cửa sổ game.
+- `main.exe`: Tệp tin thực thi game.
+
+Để bắt đầu trò chơi, vui lòng khởi động tệp tin `main.exe` trong thư mục của chương trình.
 
 ## Hướng dẫn điều khiển
 
