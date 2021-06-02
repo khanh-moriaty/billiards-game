@@ -12,11 +12,11 @@
 ## Mục lục
 
 <ol>
-    <li> [Yêu cầu kỹ thuật] (#yêu-cầu-kỹ-thuật)
-    <li> [Hướng dẫn cài đặt] (#hướng-dẫn-cài-đặt)
-    <li> [Hướng dẫn điều khiển] (#hướng-dẫn-điều-khiển)
-    <li> [Luật chơi] (#luật-chơi)
-    <li> [Mô phỏng trạng thái game] (#mô-phỏng-trạng-thái-game)
+    <li> [Yêu cầu kỹ thuật](#yêu-cầu-kỹ-thuật)
+    <li> [Hướng dẫn cài đặt](#hướng-dẫn-cài-đặt)
+    <li> [Hướng dẫn điều khiển](#hướng-dẫn-điều-khiển)
+    <li> [Luật chơi](#luật-chơi)
+    <li> [Mô phỏng trạng thái game](#mô-phỏng-trạng-thái-game)
 </ol>
 
 ## Yêu cầu kỹ thuật
