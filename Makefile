@@ -19,11 +19,12 @@ GLEW_INCLUDE	= -I dependencies/GLEW/include/
 # GLFW_SOURCE		= $(wildcard dependencies/GLFW/src/*.c)
 GLFW_SOURCE_COMMON	= context.c init.c input.c monitor.c vulkan.c window.c
 GLFW_INCLUDE	= -I dependencies/GLFW/include/ -I dependencies/GLFW/src/ -I dependencies/GLFW/deps/mingw/
-GLFW_FLAGS		= -D_GLFW_WIN32
 ifeq ($(OS),Windows_NT)
+	GLFW_FLAGS		= -D_GLFW_WIN32
 	GLFW_SOURCE_FILES = $(GLFW_SOURCE_COMMON) win32_init.c win32_joystick.c win32_monitor.c win32_time.c \
 					win32_thread.c win32_window.c wgl_context.c egl_context.c osmesa_context.c
 else
+	GLFW_FLAGS		= -D_GLFW_X11
 	GLFW_SOURCE_FILES = $(GLFW_SOURCE_COMMON) x11_init.c x11_monitor.c x11_window.c xkb_unicode.c posix_time.c \
 					posix_thread.c glx_context.c egl_context.c osmesa_context.c linux_joystick.c
 endif
