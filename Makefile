@@ -11,8 +11,8 @@ else
 	TARGET		= BilliardsGame
 endif
 
-CPPSOURCES		= main.cpp src/utils/loader.cpp
-CSOURCES		=
+CPPSOURCES		= main.cpp $(wildcard src/*.cpp) $(wildcard src/*/*.cpp) $(wildcard src/*/*/*.cpp)
+CSOURCES		= $(wildcard src/*.c) $(wildcard src/*/*.c) $(wildcard src/*/*/*.c)
 CPPDEPS			= dependencies/GLM/include/glm/detail/glm.cpp
 CDEPS	 		= dependencies/SOIL2/include/SOIL2.c dependencies/SOIL2/include/image_DXT.c \
 					dependencies/SOIL2/include/image_helper.c dependencies/SOIL2/include/wfETC.c
@@ -67,8 +67,6 @@ $(CPPOBJECTS): %.o: %.cpp
 $(TARGET): $(COBJECTS) $(CPPOBJECTS) $(GLEW_OBJECT) $(GLFW_OBJECT)
 	$(CC) -o $@ $^ $(CINCLUDES) $(LDFLAGS)
 
-# Clean object files when done
-
 RM_LIST := $(COBJECTS) $(CPPOBJECTS) $(GLEW_OBJECT) $(GLFW_OBJECT)
 ifeq ($(OS),Windows_NT)
 	RM 		= cmd //C del //Q //F
@@ -79,5 +77,6 @@ else
 	RM_DIR 	= rm -f -r
 endif
 
+# Clean object files when done
 clean:
 	$(RM) $(RM_LIST)
