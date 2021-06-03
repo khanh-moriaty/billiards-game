@@ -2,7 +2,14 @@ CC 				= gcc
 CFLAGS 			= -w
 CPPFLAGS 		= -std=c++0x -DGLEW_NO_GLU -DGLEW_STATIC -DGLEW_BUILD -O2
 CINCLUDES 		= -I src/ -I dependencies/GLEW/include/ -I dependencies/GLFW/include/ -I dependencies/GLM/include/ -I dependencies/SOIL2/include/
-LDFLAGS 		= -L. -lopengl32 -lstdc++ -lglu32 -lgdi32 -luser32 -lkernel32
+
+ifeq ($(OS),Windows_NT)
+	LDFLAGS 	= -L. -lopengl32 -lglu32 -lgdi32 -lstdc++
+	TARGET		= BilliardsGame.exe
+else
+	LDFLAGS 	= -L. -lGL -lGLU -lm -ldl -lX11 -lpthread -lstdc++
+	TARGET		= BilliardsGame
+endif
 
 CPPSOURCES		= main.cpp src/utils/loader.cpp
 CSOURCES		=
@@ -30,8 +37,6 @@ else
 endif
 GLFW_SOURCE		= $(patsubst %, dependencies/GLFW/src/%, $(GLFW_SOURCE_FILES))
 GLFW_OBJECT		= $(patsubst %.c, %.o, $(GLFW_SOURCE))
-
-TARGET		= BilliardsGame.exe
 
 all: $(TARGET)
 
