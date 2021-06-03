@@ -69,6 +69,7 @@ ifeq ($(OS),Windows_NT)
 else
     RM 		= rm -f
     RM_DIR 	= rm -f -r
+endif
 
 clean:
 	RM $(COBJECTS) $(CPPOBJECTS) $(GLEW_OBJECT) $(GLFW_OBJECT)
