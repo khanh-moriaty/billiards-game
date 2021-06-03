@@ -1,5 +1,16 @@
-# Blender MTL File: 'None'
-# Material Count: 3
+# Blender MTL File: 'room.blend'
+# Material Count: 4
+
+newmtl door.005
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd C:\\Users\\MINHPHUONG\\Desktop\\codeOpenGL\\billiards_game\\billiards_game\\res\\texture\\door.jpg
 
 newmtl floor
 Ns 225.000000
@@ -20,7 +31,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd pic.jpg
+map_Kd C:\\Users\\MINHPHUONG\\Desktop\\codeOpenGL\\billiards_game\\billiards_game\\res\\texture\\pic.jpg
 
 newmtl wall
 Ns 225.000000
@@ -31,4 +42,4 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd wall.jpg
+map_Kd C:\\Users\\MINHPHUONG\\Desktop\\Project\\Material\\wall.jpg
