@@ -63,13 +63,15 @@ $(TARGET): $(COBJECTS) $(CPPOBJECTS) $(GLEW_OBJECT) $(GLFW_OBJECT)
 
 # Clean object files when done
 
+RM_LIST := $(COBJECTS) $(CPPOBJECTS) $(GLEW_OBJECT) $(GLFW_OBJECT)
 ifeq ($(OS),Windows_NT)
-    RM 		= cmd //C del //Q //F
-    RM_DIR 	= cmd //C rmdir //Q //S
+	RM 		= cmd //C del //Q //F
+	RM_DIR 	= cmd //C rmdir //Q //S
+	RM_LIST := $(subst /,\,$(RM_LIST))
 else
-    RM 		= rm -f
-    RM_DIR 	= rm -f -r
+	RM 		= rm -f
+	RM_DIR 	= rm -f -r
 endif
 
 clean:
-	RM $(COBJECTS) $(CPPOBJECTS) $(GLEW_OBJECT) $(GLFW_OBJECT)
+	$(RM) $(RM_LIST)
