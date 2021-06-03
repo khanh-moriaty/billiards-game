@@ -14,6 +14,8 @@ TARGET		= BilliardsGame.exe
 
 all: $(TARGET)
 
+install: $(TARGET) clean
+
 # Build objects from C sources
 $(COBJECTS): %.o: %.c
 	$(CC) -c $(CFLAGS) $< $(LDFLAGS) -o $@
