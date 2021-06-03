@@ -18,7 +18,7 @@ GLEW_INCLUDE	= -I dependencies/GLEW/include/
 
 # GLFW_SOURCE		= $(wildcard dependencies/GLFW/src/*.c)
 GLFW_SOURCE_COMMON	= context.c init.c input.c monitor.c vulkan.c window.c
-GLFW_INCLUDE	= -I dependencies/GLFW/include/ -I dependencies/GLFW/src/
+GLFW_INCLUDE	= -I dependencies/GLFW/include/ -I dependencies/GLFW/src/ -I dependencies/GLFW/deps/mingw/
 GLFW_FLAGS		= -D_GLFW_WIN32
 ifeq ($(OS),Windows_NT)
 	GLFW_SOURCE_FILES = $(GLFW_SOURCE_COMMON) win32_init.c win32_joystick.c win32_monitor.c win32_time.c \
