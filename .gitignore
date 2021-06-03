@@ -36,8 +36,9 @@
 *.out
 *.app
 
-# Visual Code
+# Visual Studio
 .vs/
+.vscode/
 *.ilk
 *.pdb
 *.sln

@@ -9,6 +9,6 @@ copy dependencies\GLFW\lib\glfw3_x86-64.dll .\glfw3.dll
 
 gcc -w -std=c++0x -o main.exe ^
 -I src\ -I dependencies\GLEW\include\ -I dependencies\GLFW\include\ -I dependencies\GLM\include\ -I dependencies\SOIL2\include\ ^
-.\main.cpp .\dependencies\GLM\include\glm\detail\glm.cpp .\dependencies\SOIL2\include\SOIL2.c ^
+*.cpp .\src\utils\*.cpp .\dependencies\GLM\include\glm\detail\glm.cpp .\dependencies\SOIL2\include\SOIL2.c ^
 .\dependencies\SOIL2\include\image_DXT.c .\dependencies\SOIL2\include\image_helper.c .\dependencies\SOIL2\include\wfETC.c ^
 -L. -lglfw3 -lglew32 -lopengl32 -lstdc++
