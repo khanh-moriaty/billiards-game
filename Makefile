@@ -18,11 +18,11 @@ install: $(TARGET) clean
 
 # Build objects from C sources
 $(COBJECTS): %.o: %.c
-	$(CC) -c $(CFLAGS) $< $(LDFLAGS) -o $@
+	$(CC) -c $(CFLAGS) $< $(CINCLUDES) -o $@
 
 # Build objects from CPP sources
 $(CPPOBJECTS): %.o: %.cpp
-	$(CC) -c $(CFLAGS) $(CPPFLAGS) $< $(LDFLAGS) $(CINCLUDES) -o $@
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) $< $(CINCLUDES) -o $@
 
 # Make executable
 $(TARGET): $(COBJECTS) $(CPPOBJECTS)
