@@ -12,7 +12,7 @@ COBJECTS	= $(patsubst %.c, %.o, $(CSOURCES)) $(patsubst %.c, %.o, $(CDEPS))
 CPPOBJECTS	= $(patsubst %.cpp, %.o, $(CPPSOURCES)) $(patsubst %.cpp, %.o, $(CPPDEPS)) 
 TARGET		= BilliardsGame.exe
 
-all: $(TARGET) clean
+all: $(TARGET)
 
 # Build objects from C sources
 $(COBJECTS): %.o: %.c
