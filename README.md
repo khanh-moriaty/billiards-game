@@ -39,16 +39,30 @@ Hiện tại chương trình của chúng tôi chỉ mới hỗ trợ cho nền 
 
 ## Hướng dẫn cài đặt
 
-Đối với các trình biên dịch hỗ trợ 32-bit như MinGW, thực thi tệp tin `install_win32.bat`. <br>
-Đối với các trình biên dịch hỗ trợ 64-bit như TDM-GCC hoặc MinGW-w64, thực thi tệp tin `install_win64.bat`.
+### Đối với người dùng cuối
 
-Sau khi thực thi thành công, thư mục của chương trình sẽ phát sinh thêm 3 tệp tin mới:
+Để tiến hành cài đặt chương trình, nhấn tổ hợp phím `Windows + R`, gõ `cmd` để mở cửa sổ dòng lệnh. Kế tiếp, di chuyển đến thư mục chứa mã nguồn chương trình và thực hiện câu lệnh sau:
+```
+make install
+```
 
-- `glew32.dll`: Thư viện quản lí các extension cho OpenGL.
-- `glfw3.dll`: Thư viện hỗ trợ việc hiển thị các cửa sổ game.
-- `main.exe`: Tệp tin thực thi game.
+Sau khi thực thi thành công câu lệnh trên, thư mục chứa chương trình sẽ phát sinh một tệp tin trò chơi: `BilliardsGame.exe`.
 
-Để bắt đầu trò chơi, vui lòng khởi động tệp tin `main.exe` trong thư mục của chương trình.
+### Đối với nhà phát triển
+
+Nếu bạn là nhà phát triển, để giữ lại các tệp tin mã máy sau khi biên dịch, sử dụng lệnh
+```
+make
+```
+Ngoài ra, để tăng tính tiện dụng khi lập trình và kiểm thử, có thể dùng lệnh sau để biên dịch và khởi động trò chơi:
+```
+make run
+```
+Sau khi hoàn tất việc lập trình và kiểm thử cho mã nguồn, có thể dọn dẹp những tệp tin không cần thiết thông qua lệnh
+```
+make clean
+```
+
 
 ## Hướng dẫn điều khiển
 
