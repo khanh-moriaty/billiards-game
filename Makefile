@@ -62,5 +62,13 @@ $(TARGET): $(COBJECTS) $(CPPOBJECTS) $(GLEW_OBJECT) $(GLFW_OBJECT)
 	$(CC) -o $@ $^ $(CINCLUDES) $(LDFLAGS)
 
 # Clean object files when done
+
+ifeq ($(OS),Windows_NT)
+    RM 		= cmd //C del //Q //F
+    RM_DIR 	= cmd //C rmdir //Q //S
+else
+    RM 		= rm -f
+    RM_DIR 	= rm -f -r
+
 clean:
-	rm -rf $(COBJECTS) $(CPPOBJECTS) $(GLEW_OBJECT) $(GLFW_OBJECT)
+	RM $(COBJECTS) $(CPPOBJECTS) $(GLEW_OBJECT) $(GLFW_OBJECT)
