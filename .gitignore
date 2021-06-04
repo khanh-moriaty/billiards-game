@@ -35,6 +35,7 @@
 *.exe
 *.out
 *.app
+BilliardsGame
 
 # Visual Studio
 .vs/
