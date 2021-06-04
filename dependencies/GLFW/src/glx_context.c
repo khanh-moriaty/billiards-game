@@ -349,12 +349,13 @@ GLFWbool _glfwInitGLX(void)
         return GLFW_FALSE;
     }
 
-    if (_glfw.glx.major == 1 && _glfw.glx.minor < 3)
-    {
-        _glfwInputError(GLFW_API_UNAVAILABLE,
-                        "GLX: GLX version 1.3 is required");
-        return GLFW_FALSE;
-    }
+    // Bug
+    // if (_glfw.glx.major == 1 && _glfw.glx.minor < 3)
+    // {
+    //     _glfwInputError(GLFW_API_UNAVAILABLE,
+    //                     "GLX: GLX version 1.3 is required");
+    //     return GLFW_FALSE;
+    // }
 
     if (extensionSupportedGLX("GLX_EXT_swap_control"))
     {
