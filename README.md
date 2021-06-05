@@ -21,46 +21,76 @@ Dưới đây là đồ án môn học CS105.L21.KHTN (Đồ họa Máy tính) v
     <li> Tái hiện lại trạng thái của một ván Billiards bất kỳ thông qua một bức ảnh đầu vào.
 </ol>
 
-## Mục lục
+<details>
+<summary><font size="5">Mục lục</font></summary>
+<font size="4">
 
-1. [Yêu cầu kỹ thuật](#yêu-cầu-kỹ-thuật)
-2. [Hướng dẫn cài đặt](#hướng-dẫn-cài-đặt)
-3. [Hướng dẫn điều khiển](#hướng-dẫn-điều-khiển)
-4. [Luật chơi](#luật-chơi)
-5. [Mô phỏng trạng thái game](#mô-phỏng-trạng-thái-game)
+- [Hướng dẫn cài đặt](#hướng-dẫn-cài-đặt)
+    * [Cài đặt cho hệ điều hành Windows](#cài-đặt-cho-hệ-điều-hành-windows)
+    * [Cài đặt cho các hệ điều hành Linux](#cài-đặt-cho-các-hệ-điều-hành-linux)
+- [Hướng dẫn điều khiển](#hướng-dẫn-điều-khiển)
+- [Luật chơi](#luật-chơi)
+- [Mô phỏng trạng thái game](#mô-phỏng-trạng-thái-game)
 
-## Yêu cầu kỹ thuật
+</font>
+</details>
+
+---
+
+<!-- ## Yêu cầu kỹ thuật
 
 Hiện tại chương trình của chúng tôi chỉ mới hỗ trợ cho nền tảng Microsoft Windows. Trước khi đến với bước cài đặt, vui lòng kiểm tra hệ thống của bạn đã có sẵn những tiện ích sau:
 
 - Windows 32-bit hoặc 64-bit.
 - Trình biên dịch GNU dành cho Windows: MinGW, MinGW-w64, hoặc TDM-GCC.
-- GCC >= 5.1.0.
+- GCC >= 5.1.0. -->
 
 ## Hướng dẫn cài đặt
 
-### Đối với người dùng cuối
+### Cài đặt cho hệ điều hành Windows
 
-Để tiến hành cài đặt chương trình, nhấn tổ hợp phím `Windows + R`, gõ `cmd` để mở cửa sổ dòng lệnh. Kế tiếp, di chuyển đến thư mục chứa mã nguồn chương trình và thực hiện câu lệnh sau:
-```
-make install
+**Yêu cầu kỹ thuật:**
+- Windows 32-bit hoặc 640bit.
+- Trình biên dịch GNU dành cho Windows: MinGW, MinGW-w64, hoặc TDM-GCC.
+- GCC >= 5.1.0.
+- OpenGL >= 3.3.
+
+**Tiến hành cài đặt:**
+
+*Đối với người dùng cuối:* Để thực hiện quy trình cài đặt hoàn chỉnh, thực thi lệnh `make install`. Sau khi thực thi thành công, tệp tin trò chơi `BilliardsGame.exe` sẽ được tạo.
+
+*Đối với các nhà phát triển:* Để giữ lại các tệp tin mã máy sau khi biên dịch, sử dụng lệnh `make`.
+
+Ngoài ra, nhằm tăng tính tiện dụng cho quá trình phát triển và kiểm thử chương trình, có thể thực hiện lệnh `make run` để biên dịch và lập tức khởi động trò chơi.
+
+Sau khi hoàn tất việc lập trình và kiểm thử mã nguồn, thực hiện lệnh `make clean` để dọn dẹp những tệp tin không cần thiết.
+
+### Cài đặt cho các hệ điều hành Linux
+
+**Sử dụng Docker Image có sẵn:** TBA.
+
+**Tự xây dựng Docker Image:**
+
+Để xây dựng lại Docker Image, di chuyển đến thư mục chứa chương trình và thực hiện lệnh sau:
+
+```shellscript
+docker build -t billiards-game:latest .
 ```
 
-Sau khi thực thi thành công câu lệnh trên, thư mục chứa chương trình sẽ phát sinh một tệp tin trò chơi: `BilliardsGame.exe`.
+**Khởi động trò chơi:**
 
-### Đối với nhà phát triển
+Lần đầu khởi động trò chơi, bạn sẽ cần tạo Docker Container cho Image vừa xây dựng. Để tạo Docker Container, thực hiện lệnh sau:
 
-Nếu bạn là nhà phát triển, để giữ lại các tệp tin mã máy sau khi biên dịch, sử dụng lệnh
+```shellscript
+docker run -it --name billiards-game --rm --privileged -v $XAUTHORITY:/root/.Xauthority --network="host" -e DISPLAY=$DISPLAY billiards-game:latest
 ```
-make
-```
-Ngoài ra, để tăng tính tiện dụng khi lập trình và kiểm thử, có thể dùng lệnh sau để biên dịch và khởi động trò chơi:
-```
-make run
-```
-Sau khi hoàn tất việc lập trình và kiểm thử cho mã nguồn, có thể dọn dẹp những tệp tin không cần thiết thông qua lệnh
-```
-make clean
+
+Sau khi thực hiện thành công câu lệnh bên trên, giao diện của trò chơi sẽ được hiển thị lên màn hình.
+
+Nếu những lần sau muốn khởi động trò chơi, bạn chỉ cần thực hiện lệnh sau:
+
+```shellscript
+docker start -i billiards-game
 ```
 
 
