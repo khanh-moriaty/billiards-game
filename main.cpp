@@ -79,7 +79,7 @@ int main()
     mesh.push_back(new Mesh(obj2.data(), obj2.size(), NULL, 0, glm::vec3(-0.5f, 2.f, -1.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
     // load and create a texture 
     // -------------------------
-    //Texture texture0("res/texture/pusheen.png", GL_TEXTURE_2D, 0);
+    Texture texture0("res/texture/pusheen.png", GL_TEXTURE_2D, 0);
     Texture texture1("res/texture/container1.png", GL_TEXTURE_2D, 1);
    
     //init matrix
@@ -120,8 +120,7 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT |GL_STENCIL_BUFFER_BIT);
 
         ourShader.use_Program();
-        //ourShader.set_1i(texture0.getunit(), "texture0");
-        ourShader.set_1i(texture1.getunit(), "texture1");
+        ourShader.set_1i(texture1.getunit(), "_texture");
         ourShader.set_Mat4fv(ModelMatrix, "ModelMatrix");
         glfwGetFramebufferSize(window, &w_buffer, &h_buffer);
         ProjectionMatrix = glm::perspective(glm::radians(camera.Zoom), static_cast<float> (w_buffer) / h_buffer, nearPlane, farPlane);
@@ -136,6 +135,13 @@ int main()
             texture1.bind();
             i->render(&ourShader);            
         }
+
+        // ourShader.set_1i(texture1.getunit(), "_texture");
+        // texture1.bind();
+        // mesh[0]->render(&ourShader);
+        // texture0.bind();
+        // ourShader.set_1i(texture0.getunit(), "_texture");
+        // mesh[1]->render(&ourShader);
         
         glfwSwapBuffers(window);
         glfwPollEvents();

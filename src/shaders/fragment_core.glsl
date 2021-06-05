@@ -20,15 +20,14 @@ in vec3 vs_normal;
 out vec4 fs_color;
 
 uniform Material material;
-uniform sampler2D texture0;
-uniform sampler2D texture1;
+uniform sampler2D _texture;
 uniform vec3 lightPos0;
 uniform vec3 camPosition;
 
 void main()
 {
 	//fs_color = vec4(vs_color, 1.f);
-	//fs_color = mix(texture(texture0, vs_texcoord), texture(texture1, vs_texcoord), 1);
+	//fs_color = mix(texture(_texture, vs_texcoord), texture(_texture, vs_texcoord), 1);
 
 	//ambient light
 	vec3 ambientLight = vec3(1.f, 1.f, 1.f);
@@ -47,6 +46,6 @@ void main()
 	vec3 specularFinal = vec3(1.f, 1.f, 1.f) * specularConstant;
 
 	//Final light
-	fs_color = texture(texture1, vs_texcoord) * (vec4(ambientLight, 1.f) + vec4(diffuseFinal, 1.f) + vec4(specularFinal, 1.f));
+	fs_color = texture(_texture, vs_texcoord) * (vec4(ambientLight, 1.f) + vec4(diffuseFinal, 1.f) + vec4(specularFinal, 1.f));
 
 }
