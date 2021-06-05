@@ -97,7 +97,13 @@ std::vector<Vertex> loadOBJ(const char* file_name)
                     ++counter;
                     ss.ignore(1, '/');
                 }
-                else if (ss.peek() == ' ')
+                if (ss.peek() == '/')
+                {
+                    vertex_texcoord_indicies.push_back(0);
+                    ++counter;
+                    ss.ignore(1, '/');
+                }
+                if (ss.peek() == ' ')
                 {
                     ++counter;
                     ss.ignore(1, ' ');
