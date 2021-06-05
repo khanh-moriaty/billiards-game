@@ -82,7 +82,7 @@ docker build -t billiards-game:latest .
 Lần đầu khởi động trò chơi, bạn sẽ cần tạo Docker Container cho Image vừa xây dựng. Để tạo Docker Container, thực hiện lệnh sau:
 
 ```shellscript
-docker run -it --name billiards-game --rm --privileged -v $XAUTHORITY:/root/.Xauthority --network="host" -e DISPLAY=$DISPLAY billiards-game:latest
+docker run -it --name billiards-game --privileged -v $XAUTHORITY:/root/.Xauthority --network="host" -e DISPLAY=$DISPLAY billiards-game:latest
 ```
 
 Sau khi thực hiện thành công câu lệnh bên trên, giao diện của trò chơi sẽ được hiển thị lên màn hình.
