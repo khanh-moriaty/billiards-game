@@ -21,9 +21,7 @@ Dưới đây là đồ án môn học CS105.L21.KHTN (Đồ họa Máy tính) v
     <li> Tái hiện lại trạng thái của một ván Billiards bất kỳ thông qua một bức ảnh đầu vào.
 </ol>
 
-<details>
-<summary><font size="5">Mục lục</font></summary>
-<font size="4">
+## Mục lục
 
 - [Hướng dẫn cài đặt](#hướng-dẫn-cài-đặt)
     * [Cài đặt cho hệ điều hành Windows](#cài-đặt-cho-hệ-điều-hành-windows)
@@ -31,9 +29,6 @@ Dưới đây là đồ án môn học CS105.L21.KHTN (Đồ họa Máy tính) v
 - [Hướng dẫn điều khiển](#hướng-dẫn-điều-khiển)
 - [Luật chơi](#luật-chơi)
 - [Mô phỏng trạng thái game](#mô-phỏng-trạng-thái-game)
-
-</font>
-</details>
 
 ---
 
