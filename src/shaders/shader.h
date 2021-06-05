@@ -43,7 +43,7 @@ private:
 		if (!success)
 		{
 			glGetShaderInfoLog(shader, 512, NULL, infoLog);
-			std::cout << "ERROR cant load source\n" << filename << std::endl;
+			std::cout << "ERROR cant load source\n" << filename << std::endl << infoLog << std::endl;
 		}
 		src = "";
 		temp = "";

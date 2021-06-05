@@ -1,4 +1,6 @@
-#version 450 core
+#version 330
+
+precision mediump float;
 
 struct Material
 {
@@ -41,7 +43,7 @@ void main()
 	vec3 lightToPosDirVec = normalize(vs_position - lightPos0);
 	vec3 reflectDirVec = normalize(reflect(lightToPosDirVec, normalize(vs_normal)));
 	vec3 posToViewDirVec = normalize(camPosition - vs_position);
-	float specularConstant = pow(max(dot(posToViewDirVec, reflectDirVec), 0), 35);
+	float specularConstant = pow(max(dot(posToViewDirVec, reflectDirVec), 0.f), 35.f);
 	vec3 specularFinal = vec3(1.f, 1.f, 1.f) * specularConstant;
 
 	//Final light
