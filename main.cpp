@@ -94,12 +94,12 @@ int main()
     mesh.push_back(new Mesh(body.data(), body.size(), NULL, 0, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
     mesh.push_back(new Mesh(leg.data(), leg.size(), NULL, 0, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
     mesh.push_back(new Mesh(chair.data(), chair.size(), NULL, 0, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    mesh.push_back(new Mesh(chair.data(), chair.size(), NULL, 0, glm::vec3(4.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(chair.data(), chair.size(), NULL, 0, glm::vec3(6.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
     mesh.push_back(new Mesh(lightB.data(), lightB.size(), NULL, 0, glm::vec3(0.f, 1.f, 0.8f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
     mesh.push_back(new Mesh(lightW.data(), lightW.size(), NULL, 0, glm::vec3(0.f, 1.f, 0.8f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
 
-    mesh.push_back(new Mesh(&ball2, glm::vec3(0.f, 1.025f, 0.3f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(0.05f)));
-    mesh.push_back(new Mesh(&ball10, glm::vec3(0.f, 1.025f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(0.05f)));
+    mesh.push_back(new Mesh(&ball2, glm::vec3(0.f, 0.96f, 0.3f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(0.05f)));
+    mesh.push_back(new Mesh(&ball10, glm::vec3(0.f, 0.96f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(0.05f)));
 
     // load and create a texture 
     // -------------------------
@@ -107,9 +107,11 @@ int main()
     Texture texture1("res/texture/floor.jpg", GL_TEXTURE_2D, 1);
     Texture texture2("res/texture/door.jpg", GL_TEXTURE_2D, 2);
     Texture texture3("res/texture/pic.jpg", GL_TEXTURE_2D, 3);
-    Texture texture4("res/texture/face.jpg", GL_TEXTURE_2D, 4);
-    Texture texture5("res/texture/body.jpg", GL_TEXTURE_2D, 5);
-    Texture texture6("res/texture/leg.jpg", GL_TEXTURE_2D, 6);
+    // Texture texture4("res/texture/face.jpg", GL_TEXTURE_2D, 4);
+    // Texture texture5("res/texture/body.jpg", GL_TEXTURE_2D, 5);
+    Texture texture4("res/texture/green.jpg", GL_TEXTURE_2D, 4);
+    Texture texture5("res/texture/brown.jpg", GL_TEXTURE_2D, 5);
+    Texture texture6("res/texture/body_wood.jpg", GL_TEXTURE_2D, 6);
     Texture texture7("res/texture/light.jpg", GL_TEXTURE_2D, 7);
     Texture texture8("res/texture/white.jpg", GL_TEXTURE_2D, 8);
     Texture textureBall2("res/texture/ball2.jpg", GL_TEXTURE_2D, 9);
@@ -183,8 +185,8 @@ int main()
         ourShader.set_1i(texture4.getunit(), "_texture"); // face
         texture4.bind();
         mesh[4]->render(&ourShader);
-        ourShader.set_1i(texture5.getunit(), "_texture"); // body
-        texture5.bind();
+        ourShader.set_1i(texture6.getunit(), "_texture"); // body
+        texture6.bind();
         mesh[5]->render(&ourShader);
         ourShader.set_1i(texture6.getunit(), "_texture"); // leg
         texture6.bind();
