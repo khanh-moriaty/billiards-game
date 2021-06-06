@@ -189,7 +189,7 @@ public:
 				float zPos = std::sin(xSegment * 2.0f * PI) * std::sin(ySegment * PI);
 				glm::vec3 pos = glm::vec3(xPos, yPos, zPos);
 				glm::vec3 color = glm::vec3(0.f, 0.f, 0.f);
-				glm::vec2 tex = glm::vec2(xSegment, - ySegment);
+				glm::vec2 tex = glm::vec2( - xSegment, - ySegment);
 				glm::vec3 nor = glm::vec3(0.f, 0.f, 0.f);
 				Vertex temp;
 				temp.position = pos;
