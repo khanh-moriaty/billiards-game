@@ -71,7 +71,7 @@ int main()
     //create set of objs
     std::vector<Mesh*>mesh;
     //create obj
-    std::vector<Vertex> wall, floor, door, pic, face, body, leg, table, light, balls;
+    std::vector<Vertex> wall, floor, door, pic, face, body, leg, chair, lightB, lightW, balls;
     wall = loadOBJ("res/model/wall.obj");
     floor = loadOBJ("res/model/floor.obj");
     door = loadOBJ("res/model/door.obj");
@@ -79,7 +79,9 @@ int main()
     face = loadOBJ("res/model/face.obj");
     body = loadOBJ("res/model/body.obj");
     leg = loadOBJ("res/model/leg.obj");
-    light = loadOBJ("res/model/light.obj");
+    chair = loadOBJ("res/model/chair.obj");
+    lightB = loadOBJ("res/model/lightB.obj");
+    lightW = loadOBJ("res/model/lightW.obj");
     balls = loadOBJ("res/model/balls.obj");
 
     mesh.push_back(new Mesh(wall.data(), wall.size(), NULL, 0, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
@@ -89,8 +91,11 @@ int main()
     mesh.push_back(new Mesh(face.data(), face.size(), NULL, 0, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
     mesh.push_back(new Mesh(body.data(), body.size(), NULL, 0, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
     mesh.push_back(new Mesh(leg.data(), leg.size(), NULL, 0, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    mesh.push_back(new Mesh(light.data(), light.size(), NULL, 0, glm::vec3(0.f, 0.98f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    mesh.push_back(new Mesh(balls.data(), balls.size(), NULL, 0, glm::vec3(0.f, 0.98f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(chair.data(), chair.size(), NULL, 0, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(chair.data(), chair.size(), NULL, 0, glm::vec3(4.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(lightB.data(), lightB.size(), NULL, 0, glm::vec3(0.f, 1.f, 0.8f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(lightW.data(), lightW.size(), NULL, 0, glm::vec3(0.f, 1.f, 0.8f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(balls.data(), balls.size(), NULL, 0, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
 
     // load and create a texture 
     // -------------------------
@@ -102,7 +107,7 @@ int main()
     Texture texture5("res/texture/body.jpg", GL_TEXTURE_2D, 5);
     Texture texture6("res/texture/leg.jpg", GL_TEXTURE_2D, 6);
     Texture texture7("res/texture/light.jpg", GL_TEXTURE_2D, 7);
-
+    Texture texture8("res/texture/white.jpg", GL_TEXTURE_2D, 8);
 
     //init matrix
     glm::mat4 ModelMatrix(1.f);
@@ -157,32 +162,43 @@ int main()
         //     texture1.bind();
         //     i->render(&ourShader);            
         // }
-
-        ourShader.set_1i(texture0.getunit(), "_texture");
+wall, floor, door, pic, face, body, leg, chair, lightB, lightW, balls;
+        ourShader.set_1i(texture0.getunit(), "_texture"); // wall
         texture0.bind();
         mesh[0]->render(&ourShader);
-        ourShader.set_1i(texture1.getunit(), "_texture");
+        ourShader.set_1i(texture1.getunit(), "_texture"); // floor
         texture1.bind();
         mesh[1]->render(&ourShader);
-        ourShader.set_1i(texture2.getunit(), "_texture");
+        ourShader.set_1i(texture2.getunit(), "_texture"); // door
         texture2.bind();
         mesh[2]->render(&ourShader);
-        ourShader.set_1i(texture3.getunit(), "_texture");
+        ourShader.set_1i(texture3.getunit(), "_texture"); // pic
         texture3.bind();
         mesh[3]->render(&ourShader);
-        ourShader.set_1i(texture4.getunit(), "_texture");
+        ourShader.set_1i(texture4.getunit(), "_texture"); // face
         texture4.bind();
         mesh[4]->render(&ourShader);
-        ourShader.set_1i(texture5.getunit(), "_texture");
+        ourShader.set_1i(texture5.getunit(), "_texture"); // body
         texture5.bind();
         mesh[5]->render(&ourShader);
-        ourShader.set_1i(texture6.getunit(), "_texture");
+        ourShader.set_1i(texture6.getunit(), "_texture"); // leg
         texture6.bind();
         mesh[6]->render(&ourShader);
-        ourShader.set_1i(texture7.getunit(), "_texture");
+        ourShader.set_1i(texture7.getunit(), "_texture"); // chair 1
         texture7.bind();
         mesh[7]->render(&ourShader);
-        
+        ourShader.set_1i(texture7.getunit(), "_texture"); // chair 2
+        texture7.bind();
+        mesh[8]->render(&ourShader);
+        ourShader.set_1i(texture7.getunit(), "_texture"); // light black
+        texture7.bind();
+        mesh[9]->render(&ourShader);
+        ourShader.set_1i(texture8.getunit(), "_texture"); // light white
+        texture8.bind();
+        mesh[10]->render(&ourShader);
+        ourShader.set_1i(texture3.getunit(), "_texture"); // balls
+        texture3.bind();
+        mesh[11]->render(&ourShader);
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
