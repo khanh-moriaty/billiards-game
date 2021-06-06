@@ -90,7 +90,7 @@ int main()
     mesh.push_back(new Mesh(floor.data(), floor.size(), NULL, 0, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
     mesh.push_back(new Mesh(door.data(), door.size(), NULL, 0, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
     mesh.push_back(new Mesh(pic.data(), pic.size(), NULL, 0, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    mesh.push_back(new Mesh(face.data(), face.size(), NULL, 0, glm::vec3(0.f, 0.1f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(face.data(), face.size(), NULL, 0, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
     mesh.push_back(new Mesh(body.data(), body.size(), NULL, 0, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
     mesh.push_back(new Mesh(leg.data(), leg.size(), NULL, 0, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
     mesh.push_back(new Mesh(chair.data(), chair.size(), NULL, 0, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
@@ -183,8 +183,8 @@ int main()
         ourShader.set_1i(texture4.getunit(), "_texture"); // face
         texture4.bind();
         mesh[4]->render(&ourShader);
-        ourShader.set_1i(texture3.getunit(), "_texture"); // body
-        texture3.bind();
+        ourShader.set_1i(texture5.getunit(), "_texture"); // body
+        texture5.bind();
         mesh[5]->render(&ourShader);
         ourShader.set_1i(texture6.getunit(), "_texture"); // leg
         texture6.bind();
