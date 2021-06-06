@@ -71,7 +71,7 @@ int main()
     //create set of objs
     std::vector<Mesh*>mesh;
     //create obj
-    std::vector<Vertex> wall, floor, door, pic, face, body, leg, chair, lightB, lightW, balls;
+    std::vector<Vertex> wall, floor, door, pic, face, body, leg, chair, lightB, lightW;
     wall = loadOBJ("res/model/wall.obj");
     floor = loadOBJ("res/model/floor.obj");
     door = loadOBJ("res/model/door.obj");
@@ -82,7 +82,9 @@ int main()
     chair = loadOBJ("res/model/chair.obj");
     lightB = loadOBJ("res/model/lightB.obj");
     lightW = loadOBJ("res/model/lightW.obj");
-    balls = loadOBJ("res/model/balls.obj");
+
+    Sphere ball2 = Sphere();
+    Sphere ball10 = Sphere();
 
     mesh.push_back(new Mesh(wall.data(), wall.size(), NULL, 0, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
     mesh.push_back(new Mesh(floor.data(), floor.size(), NULL, 0, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
@@ -95,7 +97,9 @@ int main()
     mesh.push_back(new Mesh(chair.data(), chair.size(), NULL, 0, glm::vec3(4.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
     mesh.push_back(new Mesh(lightB.data(), lightB.size(), NULL, 0, glm::vec3(0.f, 1.f, 0.8f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
     mesh.push_back(new Mesh(lightW.data(), lightW.size(), NULL, 0, glm::vec3(0.f, 1.f, 0.8f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    mesh.push_back(new Mesh(balls.data(), balls.size(), NULL, 0, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+
+    mesh.push_back(new Mesh(&ball2, glm::vec3(0.f, 1.025f, 0.3f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(0.05f)));
+    mesh.push_back(new Mesh(&ball10, glm::vec3(0.f, 1.025f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(0.05f)));
 
     // load and create a texture 
     // -------------------------
@@ -108,7 +112,8 @@ int main()
     Texture texture6("res/texture/leg.jpg", GL_TEXTURE_2D, 6);
     Texture texture7("res/texture/light.jpg", GL_TEXTURE_2D, 7);
     Texture texture8("res/texture/white.jpg", GL_TEXTURE_2D, 8);
-
+    Texture textureBall2("res/texture/ball2.jpg", GL_TEXTURE_2D, 9);
+    Texture textureBall10("res/texture/ball10.jpg", GL_TEXTURE_2D, 10);
     //init matrix
     glm::mat4 ModelMatrix(1.f);
     glm::mat4 ViewMatrix(1.f);
@@ -162,7 +167,7 @@ int main()
         //     texture1.bind();
         //     i->render(&ourShader);            
         // }
-wall, floor, door, pic, face, body, leg, chair, lightB, lightW, balls;
+
         ourShader.set_1i(texture0.getunit(), "_texture"); // wall
         texture0.bind();
         mesh[0]->render(&ourShader);
@@ -196,9 +201,13 @@ wall, floor, door, pic, face, body, leg, chair, lightB, lightW, balls;
         ourShader.set_1i(texture8.getunit(), "_texture"); // light white
         texture8.bind();
         mesh[10]->render(&ourShader);
-        ourShader.set_1i(texture3.getunit(), "_texture"); // balls
-        texture3.bind();
+        ourShader.set_1i(textureBall2.getunit(), "_texture"); // ball2
+        textureBall2.bind();
         mesh[11]->render(&ourShader);
+        ourShader.set_1i(textureBall10.getunit(), "_texture"); // ball10
+        textureBall10.bind();
+        mesh[12]->render(&ourShader);
+
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
