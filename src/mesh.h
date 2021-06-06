@@ -16,6 +16,8 @@ private:
 	GLuint* indexArray;
 	unsigned nrOfIndices;
 
+	Texture* texture;
+
 	GLuint VAO;
 	GLuint VBO;
 	GLuint EBO;
@@ -86,6 +88,7 @@ public:
 		const unsigned& nrOfVertices,
 		GLuint* indexArray,
 		const unsigned& nrOfIndices,
+		Texture* texture,
 		glm::vec3 position = glm::vec3(0.f),
 		glm::vec3 origin = glm::vec3(0.f),
 		glm::vec3 rotation = glm::vec3(0.f),
@@ -95,6 +98,8 @@ public:
 		this->origin = origin;
 		this->rotation = rotation;
 		this->scale = scale;
+
+		this->texture = texture;
 
 		this->nrOfVertices = nrOfVertices;
 		this->nrOfIndices = nrOfIndices;
@@ -117,6 +122,7 @@ public:
 
 	Mesh(
 		Primitive* primitive,
+		Texture* texture,
 		glm::vec3 position = glm::vec3(0.f),
 		glm::vec3 origin = glm::vec3(0.f),
 		glm::vec3 rotation = glm::vec3(0.f),
@@ -126,6 +132,8 @@ public:
 		this->origin = origin;
 		this->rotation = rotation;
 		this->scale = scale;
+
+		this->texture = texture;
 
 		this->nrOfVertices = primitive->getNrOfVertices();
 		this->nrOfIndices = primitive->getNrOfIndices();
@@ -152,6 +160,8 @@ public:
 		this->origin = obj.origin;
 		this->rotation = obj.rotation;
 		this->scale = obj.scale;
+
+		this->texture = obj.texture;
 
 		this->nrOfVertices = obj.nrOfVertices;
 		this->nrOfIndices = obj.nrOfIndices;
@@ -233,6 +243,10 @@ public:
 
 	void render(Shader* shader)
 	{
+		// set texture
+		shader->set_1i(this->texture->getunit(), "_texture");
+		this->texture->bind();
+
 		//Update uniforms
 		this->updateModelMatrix();
 		this->updateUniforms(shader);

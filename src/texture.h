@@ -16,6 +16,8 @@ private:
 	GLint texture_unit;
 public:
 
+	Texture(){};
+
 	Texture(const char* fileName, GLenum type, GLint texture_unit)
 	{
 		this->type = type;
