@@ -1,4 +1,4 @@
-# Blender MTL File: 'chair.blend'
+# Blender MTL File: 'combine.blend'
 # Material Count: 2
 
 newmtl black_plastic
@@ -14,7 +14,7 @@ illum 2
 newmtl dark_wood
 Ns 225.000000
 Ka 1.000000 1.000000 1.000000
-Kd 0.262062 0.202091 0.115739
+Kd 0.010273 0.008558 0.005901
 Ks 0.290466 0.290466 0.290466
 Ke 0.000000 0.000000 0.000000
 Ni 1.000000

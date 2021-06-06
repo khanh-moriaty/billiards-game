@@ -15,8 +15,8 @@ void processInput(GLFWwindow* window);
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f)); 
 float yaw = -90.0f;
 float pitch = 0.0f;
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
+const unsigned int SCR_WIDTH = 1500;
+const unsigned int SCR_HEIGHT = 844;
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
@@ -71,18 +71,39 @@ int main()
     //create set of objs
     std::vector<Mesh*>mesh;
     //create obj
-    std::vector<Vertex> obj1;
-    std::vector<Vertex> obj2;
-    obj1 = loadOBJ("res/model/combine2.obj");
-    obj2 = loadOBJ("res/model/light.obj");
-    
-    mesh.push_back(new Mesh(obj1.data(), obj1.size(), NULL, 0, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    mesh.push_back(new Mesh(obj2.data(), obj2.size(), NULL, 0, glm::vec3(-0.5f, 2.f, -1.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    std::vector<Vertex> wall, floor, door, pic, face, body, leg, table, light, balls;
+    wall = loadOBJ("res/model/wall.obj");
+    floor = loadOBJ("res/model/floor.obj");
+    door = loadOBJ("res/model/door.obj");
+    pic = loadOBJ("res/model/pic.obj");
+    face = loadOBJ("res/model/face.obj");
+    body = loadOBJ("res/model/body.obj");
+    leg = loadOBJ("res/model/leg.obj");
+    light = loadOBJ("res/model/light.obj");
+    balls = loadOBJ("res/model/balls.obj");
+
+    mesh.push_back(new Mesh(wall.data(), wall.size(), NULL, 0, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(floor.data(), floor.size(), NULL, 0, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(door.data(), door.size(), NULL, 0, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(pic.data(), pic.size(), NULL, 0, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(face.data(), face.size(), NULL, 0, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(body.data(), body.size(), NULL, 0, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(leg.data(), leg.size(), NULL, 0, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(light.data(), light.size(), NULL, 0, glm::vec3(0.f, 0.98f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(balls.data(), balls.size(), NULL, 0, glm::vec3(0.f, 0.98f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+
     // load and create a texture 
     // -------------------------
-    Texture texture0("res/texture/pusheen.png", GL_TEXTURE_2D, 0);
-    Texture texture1("res/texture/container1.png", GL_TEXTURE_2D, 1);
-   
+    Texture texture0("res/texture/wall.jpg", GL_TEXTURE_2D, 0);
+    Texture texture1("res/texture/floor.jpg", GL_TEXTURE_2D, 1);
+    Texture texture2("res/texture/door.jpg", GL_TEXTURE_2D, 2);
+    Texture texture3("res/texture/pic.jpg", GL_TEXTURE_2D, 3);
+    Texture texture4("res/texture/face.jpg", GL_TEXTURE_2D, 4);
+    Texture texture5("res/texture/body.jpg", GL_TEXTURE_2D, 5);
+    Texture texture6("res/texture/leg.jpg", GL_TEXTURE_2D, 6);
+    Texture texture7("res/texture/light.jpg", GL_TEXTURE_2D, 7);
+
+
     //init matrix
     glm::mat4 ModelMatrix(1.f);
     glm::mat4 ViewMatrix(1.f);
@@ -117,11 +138,11 @@ int main()
         
         // render
         // ------
-        glClearColor(1.f, 1.f, 1.f, 1.0f);
+        glClearColor(0.f, 0.f, 0.f, 0.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT |GL_STENCIL_BUFFER_BIT);
 
         ourShader.use_Program();
-        ourShader.set_1i(texture1.getunit(), "_texture");
+        // ourShader.set_1i(texture1.getunit(), "_texture");
         ourShader.set_Mat4fv(ModelMatrix, "ModelMatrix");
         glfwGetFramebufferSize(window, &w_buffer, &h_buffer);
         ProjectionMatrix = glm::perspective(glm::radians(camera.Zoom), static_cast<float> (w_buffer) / h_buffer, nearPlane, farPlane);
@@ -129,20 +150,38 @@ int main()
         ViewMatrix = camera.GetViewMatrix();
         ourShader.set_Mat4fv(ViewMatrix, "ViewMatrix");
 
-        for (auto& i : mesh)
-        {
-            // bind Texture
-            //texture0.bind();
-            texture1.bind();
-            i->render(&ourShader);            
-        }
+        // for (auto& i : mesh)
+        // {
+        //     // bind Texture
+        //     texture0.bind();
+        //     texture1.bind();
+        //     i->render(&ourShader);            
+        // }
 
-        // ourShader.set_1i(texture1.getunit(), "_texture");
-        // texture1.bind();
-        // mesh[0]->render(&ourShader);
-        // texture0.bind();
-        // ourShader.set_1i(texture0.getunit(), "_texture");
-        // mesh[1]->render(&ourShader);
+        ourShader.set_1i(texture0.getunit(), "_texture");
+        texture0.bind();
+        mesh[0]->render(&ourShader);
+        ourShader.set_1i(texture1.getunit(), "_texture");
+        texture1.bind();
+        mesh[1]->render(&ourShader);
+        ourShader.set_1i(texture2.getunit(), "_texture");
+        texture2.bind();
+        mesh[2]->render(&ourShader);
+        ourShader.set_1i(texture3.getunit(), "_texture");
+        texture3.bind();
+        mesh[3]->render(&ourShader);
+        ourShader.set_1i(texture4.getunit(), "_texture");
+        texture4.bind();
+        mesh[4]->render(&ourShader);
+        ourShader.set_1i(texture5.getunit(), "_texture");
+        texture5.bind();
+        mesh[5]->render(&ourShader);
+        ourShader.set_1i(texture6.getunit(), "_texture");
+        texture6.bind();
+        mesh[6]->render(&ourShader);
+        ourShader.set_1i(texture7.getunit(), "_texture");
+        texture7.bind();
+        mesh[7]->render(&ourShader);
         
         glfwSwapBuffers(window);
         glfwPollEvents();
