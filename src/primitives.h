@@ -6,11 +6,11 @@
 #include "vertex.h"
 class Primitive
 {
-private:
+public:
+
 	std::vector<Vertex> vertices;
 	std::vector<GLuint> indices;
 
-public:
 	Primitive() {}
 	virtual ~Primitive() {}
 
@@ -162,5 +162,59 @@ public:
 		unsigned nrOfIndices = sizeof(indices) / sizeof(GLuint);
 
 		this->set(vertices, nrOfVertices, indices, nrOfIndices);
+	}
+};
+
+class Sphere : public Primitive
+{
+public:
+	Sphere()
+		: Primitive()
+	{
+		const GLfloat PI = 3.14159265358979323846f;
+		const int Y_SEGMENTS = 50;
+		const int X_SEGMENTS = 50;
+
+		std::vector<Vertex> Vertices;
+		std::vector<GLuint> Indices;
+
+		for (int y = 0; y <= Y_SEGMENTS; y++)
+		{
+			for (int x = 0; x <= X_SEGMENTS; x++)
+			{
+				float xSegment = (float)x / (float)X_SEGMENTS;
+				float ySegment = (float)y / (float)Y_SEGMENTS;
+				float xPos = std::cos(xSegment * 2.0f * PI) * std::sin(ySegment * PI);
+				float yPos = std::cos(ySegment * PI);
+				float zPos = std::sin(xSegment * 2.0f * PI) * std::sin(ySegment * PI);
+				glm::vec3 pos = glm::vec3(xPos, yPos, zPos);
+				glm::vec3 color = glm::vec3(0.f, 0.f, 0.f);
+				glm::vec2 tex = glm::vec2(xSegment, ySegment);
+				glm::vec3 nor = glm::vec3(0.f, 0.f, 0.f);
+				Vertex temp;
+				temp.position = pos;
+				temp.color = color;
+				temp.texcoord = tex;
+				temp.normal = nor;
+				Vertices.push_back(temp);
+			}
+		}
+		unsigned nrOfVertices = sizeof(Vertices) / sizeof(Vertex);
+		//Indices that generate the ball
+		for (int i = 0; i < Y_SEGMENTS; i++)
+		{
+			for (int j = 0; j < X_SEGMENTS; j++)
+			{
+				Indices.push_back(i * (X_SEGMENTS + 1) + j);
+				Indices.push_back((i + 1) * (X_SEGMENTS + 1) + j);
+				Indices.push_back((i + 1) * (X_SEGMENTS + 1) + j + 1);
+				Indices.push_back(i * (X_SEGMENTS + 1) + j);
+				Indices.push_back((i + 1) * (X_SEGMENTS + 1) + j + 1);
+				Indices.push_back(i * (X_SEGMENTS + 1) + j + 1);
+			}
+		}
+		unsigned nrOfIndices = sizeof(Indices) / sizeof(GLuint);
+		this->vertices = Vertices;
+		this->indices = Indices;
 	}
 };
