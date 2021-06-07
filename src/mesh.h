@@ -1,11 +1,8 @@
 #pragma once
-#include<iostream>
-#include<vector>
 #include "vertex.h"
 #include "primitives.h"
 #include "shaders/shader.h"
 #include "texture.h"
-#include "material.h"
 
 class Mesh
 {
@@ -28,9 +25,9 @@ private:
 
 	glm::mat4 ModelMatrix;
 
-	void initVAO();
+	void updateUniforms(Shader* shader) {shader->set_Mat4fv(this->ModelMatrix, "ModelMatrix");}
 
-	void updateUniforms(Shader* shader);
+	void initVAO();
 
 	void updateModelMatrix();
 
@@ -41,131 +38,38 @@ public:
 		GLuint* indexArray,
 		const unsigned& nrOfIndices,
 		Texture* texture,
-		glm::vec3 position = glm::vec3(0.f),
-		glm::vec3 origin = glm::vec3(0.f),
-		glm::vec3 rotation = glm::vec3(0.f),
-		glm::vec3 scale = glm::vec3(1.f))
-	{
-		this->position = position;
-		this->origin = origin;
-		this->rotation = rotation;
-		this->scale = scale;
-
-		this->texture = texture;
-
-		this->nrOfVertices = nrOfVertices;
-		this->nrOfIndices = nrOfIndices;
-
-		this->vertexArray = new Vertex[this->nrOfVertices];
-		for (size_t i = 0; i < nrOfVertices; i++)
-		{
-			this->vertexArray[i] = vertexArray[i];
-		}
-
-		this->indexArray = new GLuint[this->nrOfIndices];
-		for (size_t i = 0; i < nrOfIndices; i++)
-		{
-			this->indexArray[i] = indexArray[i];
-		}
-
-		this->initVAO();
-		this->updateModelMatrix();
-	}
+		glm::vec3 position,
+		glm::vec3 origin,
+		glm::vec3 rotation,
+		glm::vec3 scale);
 
 	Mesh(
 		Primitive* primitive,
 		Texture* texture,
-		glm::vec3 position = glm::vec3(0.f),
-		glm::vec3 origin = glm::vec3(0.f),
-		glm::vec3 rotation = glm::vec3(0.f),
-		glm::vec3 scale = glm::vec3(1.f))
-	{
-		this->position = position;
-		this->origin = origin;
-		this->rotation = rotation;
-		this->scale = scale;
+		glm::vec3 position,
+		glm::vec3 origin,
+		glm::vec3 rotation,
+		glm::vec3 scale);
 
-		this->texture = texture;
+	Mesh(const Mesh& obj);
 
-		this->nrOfVertices = primitive->getNrOfVertices();
-		this->nrOfIndices = primitive->getNrOfIndices();
+	~Mesh();
 
-		this->vertexArray = new Vertex[this->nrOfVertices];
-		for (size_t i = 0; i < this->nrOfVertices; i++)
-		{
-			this->vertexArray[i] = primitive->getVertices()[i];
-		}
-
-		this->indexArray = new GLuint[this->nrOfIndices];
-		for (size_t i = 0; i < this->nrOfIndices; i++)
-		{
-			this->indexArray[i] = primitive->getIndices()[i];
-		}
-
-		this->initVAO();
-		this->updateModelMatrix();
-	}
-
-	Mesh(const Mesh& obj)
-	{
-		this->position = obj.position;
-		this->origin = obj.origin;
-		this->rotation = obj.rotation;
-		this->scale = obj.scale;
-
-		this->texture = obj.texture;
-
-		this->nrOfVertices = obj.nrOfVertices;
-		this->nrOfIndices = obj.nrOfIndices;
-
-		this->vertexArray = new Vertex[this->nrOfVertices];
-		for (size_t i = 0; i < this->nrOfVertices; i++)
-		{
-			this->vertexArray[i] = obj.vertexArray[i];
-		}
-
-		this->indexArray = new GLuint[this->nrOfIndices];
-		for (size_t i = 0; i < this->nrOfIndices; i++)
-		{
-			this->indexArray[i] = obj.indexArray[i];
-		}
-
-		this->initVAO();
-		this->updateModelMatrix();
-	}
-
-	~Mesh()
-	{
-		glDeleteVertexArrays(1, &this->VAO);
-		glDeleteBuffers(1, &this->VBO);
-
-		if (this->nrOfIndices > 0)
-		{
-			glDeleteBuffers(1, &this->EBO);
-		}
-
-		delete[] this->vertexArray;
-		delete[] this->indexArray;
-	}
+	void render(Shader* shader);
 
 	//Accessors
 
 	//Modifiers
-	void setPosition(const glm::vec3 position);
-
-	void setOrigin(const glm::vec3 origin);
-
-	void setRotation(const glm::vec3 rotation);
-
-	void setScale(const glm::vec3 setScale);
+	void setPosition(const glm::vec3 position) {this->position = position;}
+	void setOrigin(const glm::vec3 origin) {this->origin = origin;}
+	void setRotation(const glm::vec3 rotation) {this->rotation = rotation;}
+	void setScale(const glm::vec3 scale) {this->scale = scale;}
 
 	//Functions
 
-	void move(const glm::vec3 position);
-	void rotate(const glm::vec3 rotation);
-	void scaleUp(const glm::vec3 scale);
+	void move(const glm::vec3 position) {this->position += position;}
+	void rotate(const glm::vec3 rotation) {this->rotation += rotation;}
+	void scaleUp(const glm::vec3 scale) {this->scale += scale;}
 
-	void update();
-
-	void render(Shader* shader);
+	void update() {}
 };
