@@ -1,12 +1,45 @@
-# Blender MTL File: 'table.blend'
-# Material Count: 1
+# Blender MTL File: 'combine.blend'
+# Material Count: 4
 
-newmtl None
-Ns 500.000001
+newmtl black.002
+Ns 225.000000
 Ka 1.000000 1.000000 1.000000
-Kd 0.800000 0.800000 0.800000
-Ks 0.800000 0.800000 0.800000
+Kd 0.000000 0.000000 0.000000
+Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
+
+newmtl leg
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd C:\\Users\\MINHPHUONG\\billiards-game\\res\\texture\\leg.jpg
+
+newmtl mat
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd C:\\Users\\MINHPHUONG\\billiards-game\\res\\texture\\green.jpg
+
+newmtl ngoai
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.058110 0.032559 0.006694
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd C:\\Users\\MINHPHUONG\\billiards-game\\res\\texture\\body_wood.jpg
