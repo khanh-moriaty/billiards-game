@@ -13,7 +13,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 
 //create camera at position
-Camera camera(glm::vec3(0.0f, 0.0f, 0.0f)); 
+Camera camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), YAW, PITCH); 
 float yaw = -90.0f;
 float pitch = 0.0f;
 const unsigned int SCR_WIDTH = 1500;
