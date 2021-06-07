@@ -72,7 +72,7 @@ int main()
     //create set of objs
     std::vector<Mesh*>mesh;
     //create obj
-    std::vector<Vertex> wall, floor, door, pic, face, body, leg, chair, lightB, lightW;
+    std::vector<Vertex> wall, floor, door, pic, face, body, leg, chair, lightB, lightW, ball;
     wall = loadOBJ("res/model/wall.obj");
     floor = loadOBJ("res/model/floor.obj");
     door = loadOBJ("res/model/door.obj");
@@ -83,9 +83,7 @@ int main()
     chair = loadOBJ("res/model/chair.obj");
     lightB = loadOBJ("res/model/lightB.obj");
     lightW = loadOBJ("res/model/lightW.obj");
-
-    Sphere ball2 = Sphere();
-    Sphere ball10 = Sphere();
+    ball = loadOBJ("res/model/ball.obj");
 
     // load and create a texture 
     // -------------------------
@@ -93,8 +91,6 @@ int main()
     Texture texture1("res/texture/floor.png", GL_TEXTURE_2D, 1);
     Texture texture2("res/texture/door.jpg", GL_TEXTURE_2D, 2);
     Texture texture3("res/texture/pic.jpg", GL_TEXTURE_2D, 3);
-    // Texture texture4("res/texture/face.jpg", GL_TEXTURE_2D, 4);
-    // Texture texture5("res/texture/body.jpg", GL_TEXTURE_2D, 5);
     Texture texture4("res/texture/green.jpg", GL_TEXTURE_2D, 4);
     Texture texture5("res/texture/body_wood.jpg", GL_TEXTURE_2D, 5);
     Texture texture6("res/texture/leg.jpg", GL_TEXTURE_2D, 6);
@@ -114,10 +110,8 @@ int main()
     mesh.push_back(new Mesh(chair.data(), chair.size(), NULL, 0, &texture7, glm::vec3(6.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
     mesh.push_back(new Mesh(lightB.data(), lightB.size(), NULL, 0, &texture7, glm::vec3(0.f, 1.f, 0.8f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
     mesh.push_back(new Mesh(lightW.data(), lightW.size(), NULL, 0, &texture8, glm::vec3(0.f, 1.f, 0.8f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-
-    mesh.push_back(new Mesh(&ball2, &textureBall2, glm::vec3(0.f, 0.96f, 0.3f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(0.05f)));
-    mesh.push_back(new Mesh(&ball10, &textureBall10, glm::vec3(0.f, 0.96f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(0.05f)));
-
+    mesh.push_back(new Mesh(ball.data(), ball.size(), NULL, 0, &textureBall2, glm::vec3(0.f, 0.04f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(ball.data(), ball.size(), NULL, 0, &textureBall10, glm::vec3(0.f, 0.04f, 0.3f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
 
     //init matrix
     glm::mat4 ModelMatrix(1.f);
