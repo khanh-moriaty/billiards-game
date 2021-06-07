@@ -89,7 +89,7 @@ int main()
     // load and create a texture 
     // -------------------------
     Texture texture0("res/texture/wall.jpg", GL_TEXTURE_2D, 0);
-    Texture texture1("res/texture/floor.jpg", GL_TEXTURE_2D, 1);
+    Texture texture1("res/texture/floor.png", GL_TEXTURE_2D, 1);
     Texture texture2("res/texture/door.jpg", GL_TEXTURE_2D, 2);
     Texture texture3("res/texture/pic.jpg", GL_TEXTURE_2D, 3);
     // Texture texture4("res/texture/face.jpg", GL_TEXTURE_2D, 4);
