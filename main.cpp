@@ -1,3 +1,4 @@
+#pragma once
 #include "shaders/shader.h"
 #include "texture.h"
 #include "vertex.h"
@@ -169,47 +170,6 @@ int main()
             // bind Texture
             i->render(&ourShader);            
         }
-
-        // ourShader.set_1i(texture0.getunit(), "_texture"); // wall
-        // texture0.bind();
-        // mesh[0]->render(&ourShader);
-        // ourShader.set_1i(texture1.getunit(), "_texture"); // floor
-        // texture1.bind();
-        // mesh[1]->render(&ourShader);
-        // ourShader.set_1i(texture2.getunit(), "_texture"); // door
-        // texture2.bind();
-        // mesh[2]->render(&ourShader);
-        // ourShader.set_1i(texture3.getunit(), "_texture"); // pic
-        // texture3.bind();
-        // mesh[3]->render(&ourShader);
-        // ourShader.set_1i(texture4.getunit(), "_texture"); // face
-        // texture4.bind();
-        // mesh[4]->render(&ourShader);
-        // ourShader.set_1i(texture6.getunit(), "_texture"); // body
-        // texture6.bind();
-        // mesh[5]->render(&ourShader);
-        // ourShader.set_1i(texture6.getunit(), "_texture"); // leg
-        // texture6.bind();
-        // mesh[6]->render(&ourShader);
-        // ourShader.set_1i(texture7.getunit(), "_texture"); // chair 1
-        // texture7.bind();
-        // mesh[7]->render(&ourShader);
-        // ourShader.set_1i(texture7.getunit(), "_texture"); // chair 2
-        // texture7.bind();
-        // mesh[8]->render(&ourShader);
-        // ourShader.set_1i(texture7.getunit(), "_texture"); // light black
-        // texture7.bind();
-        // mesh[9]->render(&ourShader);
-        // ourShader.set_1i(texture8.getunit(), "_texture"); // light white
-        // texture8.bind();
-        // mesh[10]->render(&ourShader);
-        // ourShader.set_1i(textureBall2.getunit(), "_texture"); // ball2
-        // textureBall2.bind();
-        // mesh[11]->render(&ourShader);
-        // ourShader.set_1i(textureBall10.getunit(), "_texture"); // ball10
-        // textureBall10.bind();
-        // mesh[12]->render(&ourShader);
-
         glfwSwapBuffers(window);
         glfwPollEvents();
     }

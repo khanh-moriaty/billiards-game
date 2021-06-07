@@ -1,15 +1,14 @@
 #pragma once
 
 #include <GL/glew.h>
-#include <GLFW/glfw3.h>
 #include <vector>
 #include "vertex.h"
 class Primitive
 {
 public:
-
 	std::vector<Vertex> vertices;
 	std::vector<GLuint> indices;
+
 
 	Primitive() {}
 	virtual ~Primitive() {}
@@ -18,23 +17,13 @@ public:
 	void set(const Vertex* vertices,
 		const unsigned nrOfVertices,
 		const GLuint* indices,
-		const unsigned nrOfIndices)
-	{
-		for (size_t i = 0; i < nrOfVertices; i++)
-		{
-			this->vertices.push_back(vertices[i]);
-		}
+		const unsigned nrOfIndices);
+	
 
-		for (size_t i = 0; i < nrOfIndices; i++)
-		{
-			this->indices.push_back(indices[i]);
-		}
-	}
-
-	inline Vertex* getVertices() { return this->vertices.data(); }
-	inline GLuint* getIndices() { return this->indices.data(); }
-	inline const unsigned getNrOfVertices() { return this->vertices.size(); }
-	inline const unsigned getNrOfIndices() { return this->indices.size(); }
+	Vertex* getVertices();
+	GLuint* getIndices();
+	const unsigned getNrOfVertices();
+	const unsigned getNrOfIndices();
 };
 
 class Triangle : public Primitive
@@ -190,7 +179,7 @@ public:
 				glm::vec3 pos = glm::vec3(xPos, yPos, zPos);
 				glm::vec3 color = glm::vec3(0.f, 0.f, 0.f);
 				glm::vec2 tex = glm::vec2(xSegment, - ySegment);
-				glm::vec3 nor = glm::vec3(0.f, 0.f, 0.f);
+				glm::vec3 nor = glm::vec3(xPos, yPos, zPos);
 				Vertex temp;
 				temp.position = pos;
 				temp.color = color;
