@@ -95,8 +95,8 @@ int main()
     // Texture texture4("res/texture/face.jpg", GL_TEXTURE_2D, 4);
     // Texture texture5("res/texture/body.jpg", GL_TEXTURE_2D, 5);
     Texture texture4("res/texture/green.jpg", GL_TEXTURE_2D, 4);
-    Texture texture5("res/texture/brown.jpg", GL_TEXTURE_2D, 5);
-    Texture texture6("res/texture/body_wood.jpg", GL_TEXTURE_2D, 6);
+    Texture texture5("res/texture/body_wood.jpg", GL_TEXTURE_2D, 5);
+    Texture texture6("res/texture/leg.jpg", GL_TEXTURE_2D, 6);
     Texture texture7("res/texture/light.jpg", GL_TEXTURE_2D, 7);
     Texture texture8("res/texture/white.jpg", GL_TEXTURE_2D, 8);
     Texture textureBall2("res/texture/ball2.jpg", GL_TEXTURE_2D, 9);
@@ -107,7 +107,7 @@ int main()
     mesh.push_back(new Mesh(door.data(), door.size(), NULL, 0, &texture2, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
     mesh.push_back(new Mesh(pic.data(), pic.size(), NULL, 0, &texture3, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
     mesh.push_back(new Mesh(face.data(), face.size(), NULL, 0, &texture4, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    mesh.push_back(new Mesh(body.data(), body.size(), NULL, 0,  &texture6, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(body.data(), body.size(), NULL, 0,  &texture5, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
     mesh.push_back(new Mesh(leg.data(), leg.size(), NULL, 0, &texture6, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
     mesh.push_back(new Mesh(chair.data(), chair.size(), NULL, 0, &texture7, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
     mesh.push_back(new Mesh(chair.data(), chair.size(), NULL, 0, &texture7, glm::vec3(6.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
