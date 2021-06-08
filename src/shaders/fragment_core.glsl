@@ -30,20 +30,23 @@ void main()
 	//fs_color = mix(texture(_texture, vs_texcoord), texture(_texture, vs_texcoord), 1);
 
 	//ambient light
-	vec3 ambientLight = vec3(1.f, 1.f, 1.f);
+	vec3 ambientLight = vec3(.75f, .75f, .75f);
 
 	//diffuse light
 	vec3 posToLightDirVec = normalize(lightPos0 - vs_position);
-	vec3 diffuseColor = vec3(1.f, 1.f, 1.f);
+	vec3 diffuseColor = vec3(.75f, .75f, .75f);
 	float diffuse = max(dot(posToLightDirVec, vs_normal), 0.0);
 	vec3 diffuseFinal = diffuseColor * diffuse;
 
 	//Specular light
-	vec3 lightToPosDirVec = normalize(vs_position - lightPos0);
-	vec3 reflectDirVec = normalize(reflect(lightToPosDirVec, normalize(vs_normal)));
-	vec3 posToViewDirVec = normalize(camPosition - vs_position);
-	float specularConstant = pow(max(dot(posToViewDirVec, reflectDirVec), 0.f), 35.f);
-	vec3 specularFinal = vec3(1.f, 1.f, 1.f) * specularConstant;
+	vec3 specularFinal = vec3(0.f, 0.f, 0.f);
+	if (diffuse != 0.0) {
+		vec3 lightToPosDirVec = normalize(vs_position - lightPos0);
+		vec3 reflectDirVec = normalize(reflect(lightToPosDirVec, normalize(vs_normal)));
+		vec3 posToViewDirVec = normalize(camPosition - vs_position);
+		float specularConstant = pow(max(dot(posToViewDirVec, reflectDirVec), 0.f), 8.f);
+		specularFinal = vec3(.75f, .75f, .75f) * specularConstant;
+	}
 
 	//Final light
 	fs_color = texture(_texture, vs_texcoord) * (vec4(ambientLight, 1.f) + vec4(diffuseFinal, 1.f) + vec4(specularFinal, 1.f));

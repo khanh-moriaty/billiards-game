@@ -76,7 +76,7 @@ std::vector<Vertex> loadOBJ(const char* file_name)
         else if (prefix == "vn")
         {
             ss >> temp_vec3.x >> temp_vec3.y >> temp_vec3.z;
-            vertex_normals.push_back(temp_vec3);
+            vertex_normals.push_back(glm::normalize(temp_vec3));
         }
         else if (prefix == "f")
         {
