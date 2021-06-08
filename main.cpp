@@ -66,9 +66,6 @@ int main()
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
 
-    //Quad temp = Quad();
-    //Mesh test(&temp, glm::vec3(0.f), glm::vec3(0.f), glm::vec3(0.f));
-    
     //create set of objs
     std::vector<Mesh*>mesh;
     //create obj
@@ -83,7 +80,6 @@ int main()
     chair = loadOBJ("res/model/chair.obj");
     lightB = loadOBJ("res/model/lightB.obj");
     lightW = loadOBJ("res/model/lightW.obj");
-    ball = loadOBJ("res/model/ball.obj");
 
     // load and create a texture 
     // -------------------------
@@ -125,23 +121,27 @@ int main()
     mesh.push_back(new Mesh(chair.data(), chair.size(), NULL, 0, &texture7, glm::vec3(6.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
     mesh.push_back(new Mesh(lightB.data(), lightB.size(), NULL, 0, &texture7, glm::vec3(0.f, 1.f, 0.8f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
     mesh.push_back(new Mesh(lightW.data(), lightW.size(), NULL, 0, &texture8, glm::vec3(0.f, 1.f, 0.8f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    
-    mesh.push_back(new Mesh(ball.data(), ball.size(), NULL, 0, &textureBall0, glm::vec3(0.f, 0.04f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    mesh.push_back(new Mesh(ball.data(), ball.size(), NULL, 0, &textureBall1, glm::vec3(0.f, 0.04f, 0.1f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    mesh.push_back(new Mesh(ball.data(), ball.size(), NULL, 0, &textureBall2, glm::vec3(0.f, 0.04f, 0.2f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    mesh.push_back(new Mesh(ball.data(), ball.size(), NULL, 0, &textureBall3, glm::vec3(0.f, 0.04f, 0.3f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    mesh.push_back(new Mesh(ball.data(), ball.size(), NULL, 0, &textureBall4, glm::vec3(0.1f, 0.04f, 0.0f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    mesh.push_back(new Mesh(ball.data(), ball.size(), NULL, 0, &textureBall5, glm::vec3(0.2f, 0.04f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    mesh.push_back(new Mesh(ball.data(), ball.size(), NULL, 0, &textureBall6, glm::vec3(0.3f, 0.04f, 0.0f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    mesh.push_back(new Mesh(ball.data(), ball.size(), NULL, 0, &textureBall7, glm::vec3(0.1f, 0.04f, 0.1f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    mesh.push_back(new Mesh(ball.data(), ball.size(), NULL, 0, &textureBall8, glm::vec3(0.2f, 0.04f, 0.2f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    mesh.push_back(new Mesh(ball.data(), ball.size(), NULL, 0, &textureBall9, glm::vec3(0.3f, 0.04f, 0.3f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    mesh.push_back(new Mesh(ball.data(), ball.size(), NULL, 0, &textureBall10, glm::vec3(0.2f, 0.04f, 0.3f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    mesh.push_back(new Mesh(ball.data(), ball.size(), NULL, 0, &textureBall11, glm::vec3(0.3f, 0.04f, 0.2f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    mesh.push_back(new Mesh(ball.data(), ball.size(), NULL, 0, &textureBall12, glm::vec3(0.1f, 0.04f, 0.2f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    mesh.push_back(new Mesh(ball.data(), ball.size(), NULL, 0, &textureBall13, glm::vec3(0.2f, 0.04f, 0.1f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    mesh.push_back(new Mesh(ball.data(), ball.size(), NULL, 0, &textureBall14, glm::vec3(0.1f, 0.04f, 0.3f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    mesh.push_back(new Mesh(ball.data(), ball.size(), NULL, 0, &textureBall15, glm::vec3(0.3f, 0.04f, 0.1f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+
+    Primitive* ball_primitive = new Sphere();
+
+    mesh.push_back(new Mesh(ball_primitive, &textureBall0, glm::vec3(0.f, 1.0f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(ball_primitive, &textureBall1, glm::vec3(0.f, 1.0f, 0.1f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(ball_primitive, &textureBall2, glm::vec3(0.f, 1.0f, 0.2f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(ball_primitive, &textureBall3, glm::vec3(0.f, 1.0f, 0.3f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(ball_primitive, &textureBall4, glm::vec3(0.1f, 1.0f, 0.0f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(ball_primitive, &textureBall5, glm::vec3(0.2f, 1.0f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(ball_primitive, &textureBall6, glm::vec3(0.3f, 1.0f, 0.0f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(ball_primitive, &textureBall7, glm::vec3(0.1f, 1.0f, 0.1f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(ball_primitive, &textureBall8, glm::vec3(0.2f, 1.0f, 0.2f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(ball_primitive, &textureBall9, glm::vec3(0.3f, 1.0f, 0.3f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(ball_primitive, &textureBall10, glm::vec3(0.2f, 1.0f, 0.3f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(ball_primitive, &textureBall11, glm::vec3(0.3f, 1.0f, 0.2f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(ball_primitive, &textureBall12, glm::vec3(0.1f, 1.0f, 0.2f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(ball_primitive, &textureBall13, glm::vec3(0.2f, 1.0f, 0.1f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(ball_primitive, &textureBall14, glm::vec3(0.1f, 1.0f, 0.3f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    mesh.push_back(new Mesh(ball_primitive, &textureBall15, glm::vec3(0.3f, 1.0f, 0.1f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+
+    delete ball_primitive;
 
     //init matrix
     glm::mat4 ModelMatrix(1.f);
@@ -152,7 +152,7 @@ int main()
     float nearPlane = 0.1f;
     float farPlane = 1000.f;
     glm::mat4 ProjectionMatrix(1.f);
-    glm::vec3 lightPos0(0.f, 0.f, 0.f);
+    glm::vec3 lightPos0(0.f, 8.f, 0.f);
     ProjectionMatrix = glm::perspective(glm::radians(fov), static_cast<float> (w_buffer)/ h_buffer, nearPlane, farPlane);
     ourShader.use_Program();
  

@@ -40,13 +40,13 @@ void main()
 
 	//Specular light
 	vec3 specularFinal = vec3(0.f, 0.f, 0.f);
-	if (diffuse != 0.0) {
+	// if (diffuse != 0.0) {
 		vec3 lightToPosDirVec = normalize(vs_position - lightPos0);
 		vec3 reflectDirVec = normalize(reflect(lightToPosDirVec, normalize(vs_normal)));
 		vec3 posToViewDirVec = normalize(camPosition - vs_position);
-		float specularConstant = pow(max(dot(posToViewDirVec, reflectDirVec), 0.f), 8.f);
-		specularFinal = vec3(.75f, .75f, .75f) * specularConstant;
-	}
+		float specularConstant = pow(max(dot(posToViewDirVec, reflectDirVec), 0.f), 4.f);
+		specularFinal = vec3(.1f, .1f, .1f) * specularConstant;
+	// }
 
 	//Final light
 	fs_color = texture(_texture, vs_texcoord) * (vec4(ambientLight, 1.f) + vec4(diffuseFinal, 1.f) + vec4(specularFinal, 1.f));
