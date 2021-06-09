@@ -10,6 +10,10 @@
 class GameManager
 {
 private:
+
+    // singleton
+    static GameManager* gameManager;
+
     //game screen
     GLFWwindow* window;
     const unsigned int SCR_WIDTH;
@@ -26,10 +30,6 @@ private:
     bool firstMouse;
     float lastX;
     float lastY;
-    double xpos; 
-    double ypos;
-    float xoffset;
-    float yoffset;
 
     //camera
     Camera camera;
@@ -66,7 +66,7 @@ private:
     void initLight();
     void initUniform();
     void updateUniform();
-public:
+
     //contructor and detructor
     GameManager(const unsigned int SCR_WIDTH, const unsigned int SCR_HEIGHT):
     SCR_WIDTH(SCR_WIDTH),
@@ -90,10 +90,6 @@ public:
         this->firstMouse = true;
         this->lastX = this->SCR_WIDTH/2.0f;
         this->lastY = this->SCR_HEIGHT/2.0f;
-        this->xpos = 0.0; 
-        this->ypos = 0.0;
-        this->xoffset = 0.0;
-        this->yoffset = 0.0;
         this->initWindow();
         this->initGlew();
         this->initOptions();
@@ -106,16 +102,38 @@ public:
         this->initUniform();
         this->shaders.unuse_Program();
     }
+
+public:
+
+    static GameManager* getInstance();
+
     ~GameManager();
+
     int getWindowShouldClose();
 
     void setWindowShouldClose();
 
     void updateDt();
     void updateMouseInput();
-    void scroll_callback();
     void updateKeyboardInput();
     void updateInput();
     void update();
     void render();
+
+    float getLastX() {return this->lastX;}
+    float getLastY() {return this->lastY;}
+
+    void setMouseXY(float lastX, float lastY){
+        this->lastX = lastX;
+        this->lastY = lastY;
+    }
+
+    bool isFirstMouse() {return this->firstMouse;}
+    void setFirstMouse(bool firstMouse) {this->firstMouse = firstMouse;}
+
+    Camera* getCamera() {return &this->camera;}
+
+
+    static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+    static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 };

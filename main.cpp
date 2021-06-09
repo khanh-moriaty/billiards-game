@@ -252,17 +252,21 @@
 //     // height will be significantly larger than specified on retina displays.
 //     glViewport(0, 0, width, height);
 // }
+
+
 #include "game.h"
 
 //ZOOOOOOOOOOOM IN BEFORE RECORDING!
 
 int main()
 {
-	GameManager game(800, 600);
-	while (!game.getWindowShouldClose())
+	GameManager* gameManager = GameManager::getInstance();
+	while (!gameManager->getWindowShouldClose())
 	{
-		game.update();
-		game.render();	
+		gameManager->update();
+		gameManager->render();	
 	}
+
+    gameManager->~GameManager();
 
 }
