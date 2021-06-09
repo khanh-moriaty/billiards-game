@@ -39,6 +39,7 @@ public:
     float MouseSensitivity;
     float Zoom;
 
+
     // constructor with vectors
     Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch);
 

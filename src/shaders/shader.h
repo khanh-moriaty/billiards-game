@@ -73,6 +73,12 @@ private:
 	}
 
 public:
+	Shader(){}
+	Shader(const Shader &a)
+	{
+		Shader temp;
+		temp.id = a.id;
+	}
 	Shader(const char* vertex_file, const char* fragment_file, const char* geometry_file = nullptr)
 	{
 		unsigned int vertexShader = 0;
@@ -91,11 +97,12 @@ public:
 		if (geometry_file != nullptr)
 			glDeleteShader(geometryShader);
 	}
-
+	
 	~Shader()
 	{
 		glDeleteProgram(this->id);
 	}
+
 	GLint getid()
 	{
 		return this->id;
