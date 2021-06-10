@@ -1,5 +1,8 @@
 #pragma once
 #include "texture.h"
+#include <iostream>
+#include <string>
+#include <SOIL2.h>
 
 Texture::Texture(const char* fileName, GLenum type, GLint texture_unit)
 {

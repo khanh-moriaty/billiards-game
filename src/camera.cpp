@@ -1,12 +1,6 @@
 #pragma once
-#include "Camera.h"
-#include <GLFW/glfw3.h>
-#include <glm/glm.hpp>
-#include <glm/vec3.hpp>
-#include <glm/vec4.hpp>
-#include <glm/mat4x4.hpp>
+#include "camera.h"
 #include <glm/gtc/matrix_transform.hpp> 
-#include <iostream>
 
 Camera::Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
 {

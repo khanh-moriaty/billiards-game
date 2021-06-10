@@ -1,10 +1,6 @@
 #pragma once
 #include "Mesh.h"
-#include "vertex.h"
-#include "primitives.h"
-#include "shaders/shader.h"
-#include "texture.h"
-#include "material.h"
+#include <glm/gtc/matrix_transform.hpp>
 
 Mesh::Mesh(
 	Vertex* vertexArray,
