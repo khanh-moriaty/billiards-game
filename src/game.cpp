@@ -18,8 +18,8 @@ GameManager::GameManager(const int SCR_WIDTH, const int SCR_HEIGHT)
 {
     this->SCR_WIDTH = SCR_WIDTH;
     this->SCR_HEIGHT = SCR_HEIGHT;
-    this->lastX = SCR_WIDTH / 2.0f;
-    this->lastY = SCR_HEIGHT / 2.0f;
+    this->lastX = -1;
+    this->lastY = -1;
     this->camera = new Camera(glm::vec3(2.0f, 3.0f, 2.0f), glm::vec3(0.0f, 1.0f, 0.0f), yaw, pitch);
 
     this->running = true;
@@ -231,6 +231,10 @@ void GameManager::processInput(GLFWwindow* window)
 void GameManager::mouse_callback(GLFWwindow *window, double xpos, double ypos)
 {
     GameManager *gameManager = GameManager::getInstance();
+
+    if (gameManager->lastX == -1){
+        gameManager->setMouseXY(xpos, ypos);
+    }
 
     float xoffset = xpos - gameManager->getLastX();
     float yoffset = gameManager->getLastY() - ypos; // reversed since y-coordinates go from bottom to top
