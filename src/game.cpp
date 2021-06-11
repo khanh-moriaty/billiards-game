@@ -22,12 +22,14 @@ GameManager::GameManager(const int SCR_WIDTH, const int SCR_HEIGHT)
     this->lastY = SCR_HEIGHT / 2.0f;
     this->camera = new Camera(glm::vec3(2.0f, 3.0f, 2.0f), glm::vec3(0.0f, 1.0f, 0.0f), yaw, pitch);
 
-    init();
-    initMatrices();
-    createObjects();
+    this->running = true;
 
+    init();
     this->shader = new Shader("src/shaders/vertex_core.glsl", "src/shaders/fragment_core.glsl");
     this->shader->use_Program();
+
+    initMatrices();
+    createObjects();
 }
 
 GameManager::~GameManager()
@@ -56,7 +58,7 @@ void GameManager::init()
     if (this->window == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
-        glfwTerminate();
+        this->running = false;
         return;
     }
     
@@ -67,8 +69,11 @@ void GameManager::init()
     glfwSetScrollCallback(this->window, scroll_callback);
     glfwMakeContextCurrent(this->window);
     glewExperimental = GL_TRUE;
-    if (glewInit() != GLEW_OK)
+    if (glewInit() != GLEW_OK){
         printf("Error\n");
+        this->running = false;
+        return;
+    }
     glEnable(GL_DEPTH_TEST);
 }
 
@@ -170,41 +175,42 @@ void GameManager::initMatrices()
     this->shader->set_3fv(this->camera->GetPos(), "camPosition");
 }
 
-int GameManager::main()
+bool GameManager::isRunning()
 {
-    // render loop
-    // -----------
-    while (!glfwWindowShouldClose(this->window))
+    return this->running && !glfwWindowShouldClose(this->window);
+}
+
+void GameManager::update()
+{
+    float currentFrame = glfwGetTime();
+    this->deltaTime = currentFrame - this->lastFrame;
+    this->lastFrame = currentFrame;
+    // input
+    // -----
+    this->processInput(this->window);
+    
+    // render
+    // ------
+    glClearColor(0.f, 0.f, 0.f, 0.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT |GL_STENCIL_BUFFER_BIT);
+
+    this->shader->set_Mat4fv(this->ModelMatrix, "ModelMatrix");
+    glfwGetFramebufferSize(this->window, &w_buffer, &h_buffer);
+    this->ProjectionMatrix = glm::perspective(glm::radians(this->camera->Zoom), static_cast<float> (w_buffer) / h_buffer, nearPlane, farPlane);
+    this->shader->set_Mat4fv(this->ProjectionMatrix, "ProjectionMatrix");
+    this->ViewMatrix = this->camera->GetViewMatrix();
+    this->shader->set_Mat4fv(this->ViewMatrix, "ViewMatrix");
+}
+
+void GameManager::render()
+{
+    for (auto& i : this->mesh)
     {
-        float currentFrame = glfwGetTime();
-        this->deltaTime = currentFrame - this->lastFrame;
-        this->lastFrame = currentFrame;
-        // input
-        // -----
-        this->processInput(this->window);
-        
-        // render
-        // ------
-        glClearColor(0.f, 0.f, 0.f, 0.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT |GL_STENCIL_BUFFER_BIT);
-
-        this->shader->set_Mat4fv(this->ModelMatrix, "ModelMatrix");
-        glfwGetFramebufferSize(this->window, &w_buffer, &h_buffer);
-        this->ProjectionMatrix = glm::perspective(glm::radians(this->camera->Zoom), static_cast<float> (w_buffer) / h_buffer, nearPlane, farPlane);
-        this->shader->set_Mat4fv(this->ProjectionMatrix, "ProjectionMatrix");
-        this->ViewMatrix = this->camera->GetViewMatrix();
-        this->shader->set_Mat4fv(this->ViewMatrix, "ViewMatrix");
-
-        for (auto& i : this->mesh)
-        {
-            // bind Texture
-            i->render(this->shader);            
-        }
-        glfwSwapBuffers(this->window);
-        glfwPollEvents();
+        // bind Texture
+        i->render(this->shader);            
     }
- 
-    return 0;
+    glfwSwapBuffers(this->window);
+    glfwPollEvents();
 }
 
 void GameManager::processInput(GLFWwindow* window)

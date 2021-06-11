@@ -265,6 +265,12 @@ int main()
 {
 	GameManager* gameManager = GameManager::getInstance();
 	
-    gameManager->main();
+    // Game loop
+    while (gameManager->isRunning()){
+        gameManager->update();
+        gameManager->render();
+    }
+
+    delete gameManager;
 
 }

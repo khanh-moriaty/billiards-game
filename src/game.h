@@ -17,6 +17,7 @@ private:
     static GameManager* gameManager;
 
     GLFWwindow* window;
+    bool running = false;
 
     int SCR_WIDTH, SCR_HEIGHT;
     int w_buffer, h_buffer;
@@ -53,7 +54,9 @@ public:
 
     ~GameManager();
 
-    int main();
+    bool isRunning();
+    void update();
+    void render();
 
     float getLastX() {return this->lastX;}
     float getLastY() {return this->lastY;}
