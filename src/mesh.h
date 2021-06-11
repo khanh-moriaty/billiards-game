@@ -12,7 +12,7 @@ private:
 	GLuint* indexArray;
 	unsigned nrOfIndices;
 
-	Texture* texture;
+	Texture texture;
 
 	GLuint VAO;
 	GLuint VBO;
@@ -37,7 +37,7 @@ public:
 		const unsigned& nrOfVertices,
 		GLuint* indexArray,
 		const unsigned& nrOfIndices,
-		Texture* texture,
+		const Texture& texture,
 		glm::vec3 position,
 		glm::vec3 origin,
 		glm::vec3 rotation,
@@ -45,7 +45,7 @@ public:
 
 	Mesh(
 		Primitive* primitive,
-		Texture* texture,
+		const Texture& texture,
 		glm::vec3 position,
 		glm::vec3 origin,
 		glm::vec3 rotation,

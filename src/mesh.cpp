@@ -7,7 +7,7 @@ Mesh::Mesh(
 	const unsigned& nrOfVertices,
 	GLuint* indexArray,
 	const unsigned& nrOfIndices,
-	Texture* texture,
+	const Texture& texture,
 	glm::vec3 position = glm::vec3(0.f),
 	glm::vec3 origin = glm::vec3(0.f),
 	glm::vec3 rotation = glm::vec3(0.f),
@@ -41,7 +41,7 @@ Mesh::Mesh(
 
 Mesh::Mesh(
 	Primitive* primitive,
-	Texture* texture,
+	const Texture& texture,
 	glm::vec3 position = glm::vec3(0.f),
 	glm::vec3 origin = glm::vec3(0.f),
 	glm::vec3 rotation = glm::vec3(0.f),
@@ -166,14 +166,12 @@ void Mesh::updateModelMatrix()
 void Mesh::render(Shader* shader)
 {
 	// set texture
-	shader->set_1i(this->texture->getunit(), "_texture");
-	this->texture->bind();
+	shader->set_1i(this->texture.getunit(), "_texture");
+	this->texture.bind();
 
 	//Update uniforms
 	this->updateModelMatrix();
 	this->updateUniforms(shader);
-
-	shader->use_Program();
 
 	//Bind VAO
 	glBindVertexArray(this->VAO);
@@ -185,8 +183,8 @@ void Mesh::render(Shader* shader)
 		glDrawElements(GL_TRIANGLES, this->nrOfIndices, GL_UNSIGNED_INT, 0);
 
 	//Cleanup
-	glBindVertexArray(0);
-	glUseProgram(0);
-	glActiveTexture(0);
-	glBindTexture(GL_TEXTURE_2D, 0);
+	// glBindVertexArray(0);
+	// glUseProgram(0);
+	// glActiveTexture(0);
+	// glBindTexture(GL_TEXTURE_2D, 0);
 }

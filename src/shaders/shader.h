@@ -17,12 +17,13 @@ public:
 	Shader(){}
 	Shader(const Shader &a)
 	{
-		Shader temp;
-		temp.id = a.id;
+		this->id = a.id;
 	}
 	Shader(const char* vertex_file, const char* fragment_file, const char* geometry_file = nullptr);
 	
 	~Shader();
+
+	void operator=(const Shader& a) {this->id = a.id;}
 
 	GLint getid()
 	{

@@ -264,12 +264,7 @@
 int main()
 {
 	GameManager* gameManager = GameManager::getInstance();
-	while (!gameManager->getWindowShouldClose())
-	{
-		gameManager->update();
-		gameManager->render();	
-	}
-
-    gameManager->~GameManager();
+	
+    gameManager->main();
 
 }

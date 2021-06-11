@@ -45,7 +45,6 @@ GLuint Shader::load_Shader(GLenum type,const char* filename)
     }
     input_file.close();
 
-
     GLint success;
     char infoLog[512];
     GLuint shader;
@@ -100,63 +99,63 @@ void Shader::unuse_Program()
 //set uniform function
 void Shader::set_1i(GLint value, const GLchar* name)
 {
-    this->use_Program();
+    // this->use_Program();
 
     glUniform1i(glGetUniformLocation(this->id, name), value);
 
-    this->unuse_Program();
+    // this->unuse_Program();
 }
 
 void Shader::set_1f(GLfloat value, const GLchar* name)
 {
-    this->use_Program();
+    // this->use_Program();
 
     glUniform1f(glGetUniformLocation(this->id, name), value);
 
-    this->unuse_Program();
+    // this->unuse_Program();
 }
 
 void Shader::set_2fv(glm::fvec2 value, const GLchar* name)
 {
-    this->use_Program();
+    // this->use_Program();
 
     glUniform2fv(glGetUniformLocation(this->id, name), 1, glm::value_ptr(value));
 
-    this->unuse_Program();
+    // this->unuse_Program();
 }
 
 void Shader::set_3fv(glm::fvec3 value, const GLchar* name)
 {
-    this->use_Program();
+    // this->use_Program();
 
     glUniform3fv(glGetUniformLocation(this->id, name), 1, glm::value_ptr(value));
 
-    this->unuse_Program();
+    // this->unuse_Program();
 }
 
 void Shader::set_4fv(glm::fvec4 value, const GLchar* name)
 {
-    this->use_Program();
+    // this->use_Program();
 
     glUniform4fv(glGetUniformLocation(this->id, name), 1, glm::value_ptr(value));
 
-    this->unuse_Program();
+    // this->unuse_Program();
 }
 
 void Shader::set_Mat3fv(glm::mat3 value, const GLchar* name, GLboolean transpose)
 {
-    this->use_Program();
+    // this->use_Program();
 
     glUniformMatrix3fv(glGetUniformLocation(this->id, name), 1, transpose, glm::value_ptr(value));
 
-    this->unuse_Program();
+    // this->unuse_Program();
 }
 
 void Shader::set_Mat4fv(glm::mat4 value, const GLchar* name, GLboolean transpose)
 {
-    this->use_Program();
+    // this->use_Program();
 
     glUniformMatrix4fv(glGetUniformLocation(this->id, name), 1, transpose, glm::value_ptr(value));
 
-    this->unuse_Program();
+    // this->unuse_Program();
 }
