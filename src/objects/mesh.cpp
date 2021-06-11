@@ -1,5 +1,5 @@
 #pragma once
-#include "Mesh.h"
+#include "mesh.h"
 #include <glm/gtc/matrix_transform.hpp>
 
 Mesh::Mesh(

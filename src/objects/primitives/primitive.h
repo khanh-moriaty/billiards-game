@@ -2,7 +2,7 @@
 
 #include <GL/glew.h>
 #include <vector>
-#include "vertex.h"
+#include <objects/vertex.h>
 class Primitive
 {
 public:

@@ -1,5 +1,5 @@
-#pragma once
-#include "Primitives.h"
+#include "primitive.h"
+
 #include <iostream>
 
 Sphere::Sphere():Primitive()

@@ -1,5 +1,5 @@
-#pragma once
 #include "texture.h"
+
 #include <iostream>
 #include <string>
 #include <SOIL2.h>

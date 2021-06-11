@@ -1,6 +1,7 @@
-#include "texture.h"
 #include <unordered_map>
 #include <string>
+
+#include "texture.h"
 
 class TextureManager
 {

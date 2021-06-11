@@ -4,7 +4,6 @@
 #include <glm/glm.hpp>
 #include <glm/vec3.hpp>
 #include <glm/mat4x4.hpp>
-#include <iostream>
 
 enum Camera_Movement {
     FORWARD,

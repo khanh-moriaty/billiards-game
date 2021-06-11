@@ -1,3 +1,5 @@
+#include "loader.h"
+
 #include <string>
 #include <fstream>
 #include <sstream>
@@ -6,8 +8,6 @@
 #include <GL/glew.h>
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
-
-#include "loader.h"
 
 std::vector<Vertex> loadOBJ(const char* file_name)
 {

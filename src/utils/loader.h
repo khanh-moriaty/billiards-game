@@ -1,4 +1,4 @@
 #include <vector>
-#include "vertex.h"
+#include <objects/vertex.h>
 
 std::vector<Vertex> loadOBJ(const char* file_name);

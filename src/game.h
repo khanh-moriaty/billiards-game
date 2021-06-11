@@ -1,14 +1,14 @@
 #pragma once
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "shaders/shader.h"
-#include "texture.h"
-#include "vertex.h"
-#include "primitives.h"
-#include "mesh.h"
-#include "camera.h"
-#include "utils/loader.h"
-#include "texture_manager.h"
+#include <shaders/shader.h>
+#include <objects/vertex.h>
+#include <objects/primitives/primitive.h>
+#include <texture/texture.h>
+#include <texture/texture_manager.h>
+#include <objects/mesh.h>
+#include <utils/loader.h>
+#include <camera.h>
 
 class GameManager
 {
