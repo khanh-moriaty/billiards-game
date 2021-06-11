@@ -18,7 +18,7 @@ void TextureManager::addTexture2D(const char *name, const char *fileName)
     this->textureList[name] = texture;
 }
 
-Texture* TextureManager::get(const char *name)
+Texture* TextureManager::operator[](const char *name)
 {
     return this->textureList[name];
 }

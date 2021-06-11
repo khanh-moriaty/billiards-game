@@ -13,5 +13,5 @@ public:
     ~TextureManager();
 
     void addTexture2D(const char* name, const char* fileName);
-    Texture* get(const char* name);
+    Texture* operator[](const char* name);
 };
