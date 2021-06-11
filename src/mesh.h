@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 #include "vertex.h"
 #include "primitives.h"
 #include "shaders/shader.h"
@@ -52,6 +53,15 @@ public:
 		glm::vec3 scale = glm::vec3(1.f));
 
 	Mesh(const Mesh& obj);
+
+	Mesh(
+		std::vector<Vertex> vertexArray,
+		Texture* texture,
+		glm::vec3 position,
+		glm::vec3 origin = glm::vec3(0.f),
+		glm::vec3 rotation = glm::vec3(0.f),
+		glm::vec3 scale = glm::vec3(1.f)
+	): Mesh(vertexArray.data(), vertexArray.size(), NULL, 0, texture, position, origin, rotation, scale) {}
 
 	~Mesh();
 

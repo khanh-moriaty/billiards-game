@@ -124,17 +124,17 @@ void GameManager::createObjects()
     textureManager.addTexture2D("ball14", "res/texture/ball14.jpg");
     textureManager.addTexture2D("ball15", "res/texture/ball15.jpg");
 
-    this->mesh.push_back(new Mesh(wall.data(), wall.size(), NULL, 0, textureManager["wall"], glm::vec3(0.f, 0.f, 0.f)));
-    this->mesh.push_back(new Mesh(floor.data(), floor.size(), NULL, 0, textureManager["floor"], glm::vec3(0.f, 0.f, 0.f)));
-    this->mesh.push_back(new Mesh(door.data(), door.size(), NULL, 0, textureManager["door"], glm::vec3(0.f, 0.f, 0.f)));
-    this->mesh.push_back(new Mesh(pic.data(), pic.size(), NULL, 0, textureManager["pic"], glm::vec3(0.f, 0.f, 0.f)));
-    this->mesh.push_back(new Mesh(face.data(), face.size(), NULL, 0, textureManager["green"], glm::vec3(0.f, 0.f, 0.f)));
-    this->mesh.push_back(new Mesh(body.data(), body.size(), NULL, 0,  textureManager["body_wood"], glm::vec3(0.f, 0.f, 0.f)));
-    this->mesh.push_back(new Mesh(leg.data(), leg.size(), NULL, 0, textureManager["leg"], glm::vec3(0.f, 0.f, 0.f)));
-    this->mesh.push_back(new Mesh(chair.data(), chair.size(), NULL, 0, textureManager["body_wood"], glm::vec3(0.f, 0.f, 0.f)));
-    this->mesh.push_back(new Mesh(chair.data(), chair.size(), NULL, 0, textureManager["body_wood"], glm::vec3(6.f, 0.f, 0.f)));
-    this->mesh.push_back(new Mesh(lightB.data(), lightB.size(), NULL, 0, textureManager["light"], glm::vec3(0.f, 1.f, 0.8f)));
-    this->mesh.push_back(new Mesh(lightW.data(), lightW.size(), NULL, 0, textureManager["white"], glm::vec3(0.f, 1.f, 0.8f)));
+    this->mesh.push_back(new Mesh(wall, textureManager["wall"], glm::vec3(0.f, 0.f, 0.f)));
+    this->mesh.push_back(new Mesh(floor, textureManager["floor"], glm::vec3(0.f, 0.f, 0.f)));
+    this->mesh.push_back(new Mesh(door, textureManager["door"], glm::vec3(0.f, 0.f, 0.f)));
+    this->mesh.push_back(new Mesh(pic, textureManager["pic"], glm::vec3(0.f, 0.f, 0.f)));
+    this->mesh.push_back(new Mesh(face, textureManager["green"], glm::vec3(0.f, 0.f, 0.f)));
+    this->mesh.push_back(new Mesh(body, textureManager["body_wood"], glm::vec3(0.f, 0.f, 0.f)));
+    this->mesh.push_back(new Mesh(leg, textureManager["leg"], glm::vec3(0.f, 0.f, 0.f)));
+    this->mesh.push_back(new Mesh(chair, textureManager["body_wood"], glm::vec3(0.f, 0.f, 0.f)));
+    this->mesh.push_back(new Mesh(chair, textureManager["body_wood"], glm::vec3(6.f, 0.f, 0.f)));
+    this->mesh.push_back(new Mesh(lightB, textureManager["light"], glm::vec3(0.f, 1.f, 0.8f)));
+    this->mesh.push_back(new Mesh(lightW, textureManager["white"], glm::vec3(0.f, 1.f, 0.8f)));
 
     Primitive* ball_primitive = new Sphere();
 
