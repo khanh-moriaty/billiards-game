@@ -3,16 +3,21 @@
 
 #include "texture.h"
 
+#include <GL/glew.h>
+
 class TextureManager
 {
 private:
     std::unordered_map<std::string, Texture*> textureList;
-    int textureCount;
+    GLint textureCount;
 
 public:
     TextureManager();
     ~TextureManager();
 
-    void addTexture2D(const char* name, const char* fileName);
-    Texture* operator[](const char* name);
+    void initTexture();
+
+    void addTexture2D(std::string name, const char* fileName);
+    Texture* get(std::string name);
+    Texture* operator[](std::string name) {return this->get(name);}
 };

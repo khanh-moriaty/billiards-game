@@ -2,12 +2,12 @@
 
 #include <iostream>
 
-Sphere::Sphere():Primitive()
+Sphere::Sphere(float radius):Primitive()
 {
 	const GLfloat PI = 3.14159265358979323846f;
 	const int Y_SEGMENTS = 50;
 	const int X_SEGMENTS = 50;
-	const float SCALE = 0.05f;
+	const float SCALE = radius;
 
 	std::vector<Vertex> Vertices;
 	std::vector<GLuint> Indices;

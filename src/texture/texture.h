@@ -12,8 +12,6 @@ private:
 	GLint texture_unit;
 
 public:
-	Texture(){};
-
 	Texture(const char *fileName, GLenum type, GLint texture_unit);
 
 	~Texture() { glDeleteTextures(1, &this->id); }

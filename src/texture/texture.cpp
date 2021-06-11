@@ -10,7 +10,6 @@ Texture::Texture(const char* fileName, GLenum type, GLint texture_unit)
 	this->texture_unit = texture_unit;
 
 	unsigned char* image = SOIL_load_image(fileName, &this->width, &this->height, NULL, SOIL_LOAD_RGBA);
-
 	glGenTextures(1, &this->id);
 	glBindTexture(type, this->id);
 

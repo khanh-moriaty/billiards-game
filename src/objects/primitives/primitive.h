@@ -29,5 +29,5 @@ public:
 class Sphere : public Primitive
 {
 public:
-	Sphere();
+	Sphere(float radius);
 };

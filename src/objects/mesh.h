@@ -81,5 +81,4 @@ public:
 	void rotate(const glm::vec3 rotation) {this->rotation += rotation;}
 	void scaleUp(const glm::vec3 scale) {this->scale += scale;}
 
-	void update() {}
 };

@@ -7,8 +7,11 @@
 #include <texture/texture.h>
 #include <texture/texture_manager.h>
 #include <objects/mesh.h>
+#include <objects/object_manager.h>
 #include <utils/loader.h>
 #include <camera.h>
+
+class ObjectManager;
 
 class GameManager
 {
@@ -35,7 +38,8 @@ private:
     Shader* shader;
     std::vector<Mesh*> mesh;
 
-    TextureManager textureManager;
+    ObjectManager* objectManager;
+    TextureManager* textureManager;
 
     glm::mat4 ModelMatrix;
     glm::mat4 ViewMatrix; 
@@ -46,7 +50,6 @@ private:
     float farPlane = 1000.f;
 
     void init();
-    void createObjects();
     void initMatrices();
 
     GameManager(const int SCR_WIDTH, const int SCR_HEIGHT);
@@ -60,6 +63,8 @@ public:
     bool isRunning();
     void update();
     void render();
+
+    Texture* getTexture(std::string name) {return this->textureManager->operator[](name);}
 
     float getLastX() {return this->lastX;}
     float getLastY() {return this->lastY;}
