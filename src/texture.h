@@ -17,7 +17,7 @@ public:
 
 	Texture(const char *fileName, GLenum type, GLint texture_unit);
 
-	// ~Texture() { glDeleteTextures(1, &this->id); }
+	~Texture() { glDeleteTextures(1, &this->id); }
 
 	inline GLuint getID() const { return this->id; }
 	GLint getunit() { return this->texture_unit; }

@@ -8,6 +8,7 @@
 #include "mesh.h"
 #include "camera.h"
 #include "utils/loader.h"
+#include "texture_manager.h"
 
 class GameManager
 {
@@ -33,6 +34,8 @@ private:
 
     Shader* shader;
     std::vector<Mesh*> mesh;
+
+    TextureManager textureManager;
 
     glm::mat4 ModelMatrix;
     glm::mat4 ViewMatrix; 

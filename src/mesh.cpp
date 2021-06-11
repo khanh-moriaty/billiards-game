@@ -7,7 +7,7 @@ Mesh::Mesh(
 	const unsigned& nrOfVertices,
 	GLuint* indexArray,
 	const unsigned& nrOfIndices,
-	const Texture& texture,
+	Texture* texture,
 	glm::vec3 position = glm::vec3(0.f),
 	glm::vec3 origin = glm::vec3(0.f),
 	glm::vec3 rotation = glm::vec3(0.f),
@@ -41,7 +41,7 @@ Mesh::Mesh(
 
 Mesh::Mesh(
 	Primitive* primitive,
-	const Texture& texture,
+	Texture* texture,
 	glm::vec3 position = glm::vec3(0.f),
 	glm::vec3 origin = glm::vec3(0.f),
 	glm::vec3 rotation = glm::vec3(0.f),
@@ -166,8 +166,8 @@ void Mesh::updateModelMatrix()
 void Mesh::render(Shader* shader)
 {
 	// set texture
-	shader->set_1i(this->texture.getunit(), "_texture");
-	this->texture.bind();
+	shader->set_1i(this->texture->getunit(), "_texture");
+	this->texture->bind();
 
 	//Update uniforms
 	this->updateModelMatrix();

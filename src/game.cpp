@@ -96,63 +96,64 @@ void GameManager::createObjects()
 
     // load and create a texture 
     // -------------------------
-    Texture texture0("res/texture/wall.jpg", GL_TEXTURE_2D, 0);
-    Texture texture1("res/texture/floor.png", GL_TEXTURE_2D, 1);
-    Texture texture2("res/texture/door.jpg", GL_TEXTURE_2D, 2);
-    Texture texture3("res/texture/pic.jpg", GL_TEXTURE_2D, 3);
-    Texture texture4("res/texture/green.jpg", GL_TEXTURE_2D, 4);
-    Texture texture5("res/texture/body_wood.jpg", GL_TEXTURE_2D, 5);
-    Texture texture6("res/texture/leg.jpg", GL_TEXTURE_2D, 6);
-    Texture texture7("res/texture/light.jpg", GL_TEXTURE_2D, 7);
-    Texture texture8("res/texture/white.jpg", GL_TEXTURE_2D, 8);
-    
-    Texture textureBall0("res/texture/ball0.jpg", GL_TEXTURE_2D, 9);
-    Texture textureBall1("res/texture/ball1.jpg", GL_TEXTURE_2D, 9);
-    Texture textureBall2("res/texture/ball2.jpg", GL_TEXTURE_2D, 9);
-    Texture textureBall3("res/texture/ball3.jpg", GL_TEXTURE_2D, 9);
-    Texture textureBall4("res/texture/ball4.jpg", GL_TEXTURE_2D, 9);
-    Texture textureBall5("res/texture/ball5.jpg", GL_TEXTURE_2D, 9);
-    Texture textureBall6("res/texture/ball6.jpg", GL_TEXTURE_2D, 9);
-    Texture textureBall7("res/texture/ball7.jpg", GL_TEXTURE_2D, 9);
-    Texture textureBall8("res/texture/ball8.jpg", GL_TEXTURE_2D, 9);
-    Texture textureBall9("res/texture/ball9.jpg", GL_TEXTURE_2D, 9);
-    Texture textureBall10("res/texture/ball10.jpg", GL_TEXTURE_2D, 9);
-    Texture textureBall11("res/texture/ball11.jpg", GL_TEXTURE_2D, 9);
-    Texture textureBall12("res/texture/ball12.jpg", GL_TEXTURE_2D, 9);
-    Texture textureBall13("res/texture/ball13.jpg", GL_TEXTURE_2D, 9);
-    Texture textureBall14("res/texture/ball14.jpg", GL_TEXTURE_2D, 9);
-    Texture textureBall15("res/texture/ball15.jpg", GL_TEXTURE_2D, 10);
 
-    this->mesh.push_back(new Mesh(wall.data(), wall.size(), NULL, 0, texture0, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    this->mesh.push_back(new Mesh(floor.data(), floor.size(), NULL, 0, texture1, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    this->mesh.push_back(new Mesh(door.data(), door.size(), NULL, 0, texture2, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    this->mesh.push_back(new Mesh(pic.data(), pic.size(), NULL, 0, texture3, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    this->mesh.push_back(new Mesh(face.data(), face.size(), NULL, 0, texture4, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    this->mesh.push_back(new Mesh(body.data(), body.size(), NULL, 0,  texture5, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    this->mesh.push_back(new Mesh(leg.data(), leg.size(), NULL, 0, texture6, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    this->mesh.push_back(new Mesh(chair.data(), chair.size(), NULL, 0, texture7, glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    this->mesh.push_back(new Mesh(chair.data(), chair.size(), NULL, 0, texture7, glm::vec3(6.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    this->mesh.push_back(new Mesh(lightB.data(), lightB.size(), NULL, 0, texture7, glm::vec3(0.f, 1.f, 0.8f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    this->mesh.push_back(new Mesh(lightW.data(), lightW.size(), NULL, 0, texture8, glm::vec3(0.f, 1.f, 0.8f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    textureManager.addTexture2D("wall", "res/texture/wall.jpg");
+    textureManager.addTexture2D("floor", "res/texture/floor.png");
+    textureManager.addTexture2D("door", "res/texture/door.jpg");
+    textureManager.addTexture2D("pic", "res/texture/pic.jpg");
+    textureManager.addTexture2D("green", "res/texture/green.jpg");
+    textureManager.addTexture2D("body_wood", "res/texture/body_wood.jpg");
+    textureManager.addTexture2D("leg", "res/texture/leg.jpg");
+    textureManager.addTexture2D("light", "res/texture/light.jpg");
+    textureManager.addTexture2D("white", "res/texture/white.jpg");
+
+    textureManager.addTexture2D("ball0", "res/texture/ball0.jpg");
+    textureManager.addTexture2D("ball1", "res/texture/ball1.jpg");
+    textureManager.addTexture2D("ball2", "res/texture/ball2.jpg");
+    textureManager.addTexture2D("ball3", "res/texture/ball3.jpg");
+    textureManager.addTexture2D("ball4", "res/texture/ball4.jpg");
+    textureManager.addTexture2D("ball5", "res/texture/ball5.jpg");
+    textureManager.addTexture2D("ball6", "res/texture/ball6.jpg");
+    textureManager.addTexture2D("ball7", "res/texture/ball7.jpg");
+    textureManager.addTexture2D("ball8", "res/texture/ball8.jpg");
+    textureManager.addTexture2D("ball9", "res/texture/ball9.jpg");
+    textureManager.addTexture2D("ball10", "res/texture/ball10.jpg");
+    textureManager.addTexture2D("ball11", "res/texture/ball11.jpg");
+    textureManager.addTexture2D("ball12", "res/texture/ball12.jpg");
+    textureManager.addTexture2D("ball13", "res/texture/ball13.jpg");
+    textureManager.addTexture2D("ball14", "res/texture/ball14.jpg");
+    textureManager.addTexture2D("ball15", "res/texture/ball15.jpg");
+
+    this->mesh.push_back(new Mesh(wall.data(), wall.size(), NULL, 0, textureManager.get("wall"), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    this->mesh.push_back(new Mesh(floor.data(), floor.size(), NULL, 0, textureManager.get("floor"), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    this->mesh.push_back(new Mesh(door.data(), door.size(), NULL, 0, textureManager.get("door"), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    this->mesh.push_back(new Mesh(pic.data(), pic.size(), NULL, 0, textureManager.get("pic"), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    this->mesh.push_back(new Mesh(face.data(), face.size(), NULL, 0, textureManager.get("green"), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    this->mesh.push_back(new Mesh(body.data(), body.size(), NULL, 0,  textureManager.get("body_wood"), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    this->mesh.push_back(new Mesh(leg.data(), leg.size(), NULL, 0, textureManager.get("leg"), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    this->mesh.push_back(new Mesh(chair.data(), chair.size(), NULL, 0, textureManager.get("body_wood"), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    this->mesh.push_back(new Mesh(chair.data(), chair.size(), NULL, 0, textureManager.get("body_wood"), glm::vec3(6.f, 0.f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    this->mesh.push_back(new Mesh(lightB.data(), lightB.size(), NULL, 0, textureManager.get("light"), glm::vec3(0.f, 1.f, 0.8f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    this->mesh.push_back(new Mesh(lightW.data(), lightW.size(), NULL, 0, textureManager.get("white"), glm::vec3(0.f, 1.f, 0.8f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
 
     Primitive* ball_primitive = new Sphere();
 
-    this->mesh.push_back(new Mesh(ball_primitive, textureBall0, glm::vec3(0.f, 1.0f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    this->mesh.push_back(new Mesh(ball_primitive, textureBall1, glm::vec3(0.f, 1.0f, 0.1f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    this->mesh.push_back(new Mesh(ball_primitive, textureBall2, glm::vec3(0.f, 1.0f, 0.2f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    this->mesh.push_back(new Mesh(ball_primitive, textureBall3, glm::vec3(0.f, 1.0f, 0.3f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    this->mesh.push_back(new Mesh(ball_primitive, textureBall4, glm::vec3(0.1f, 1.0f, 0.0f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    this->mesh.push_back(new Mesh(ball_primitive, textureBall5, glm::vec3(0.2f, 1.0f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    this->mesh.push_back(new Mesh(ball_primitive, textureBall6, glm::vec3(0.3f, 1.0f, 0.0f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    this->mesh.push_back(new Mesh(ball_primitive, textureBall7, glm::vec3(0.1f, 1.0f, 0.1f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    this->mesh.push_back(new Mesh(ball_primitive, textureBall8, glm::vec3(0.2f, 1.0f, 0.2f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    this->mesh.push_back(new Mesh(ball_primitive, textureBall9, glm::vec3(0.3f, 1.0f, 0.3f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    this->mesh.push_back(new Mesh(ball_primitive, textureBall10, glm::vec3(0.2f, 1.0f, 0.3f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    this->mesh.push_back(new Mesh(ball_primitive, textureBall11, glm::vec3(0.3f, 1.0f, 0.2f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    this->mesh.push_back(new Mesh(ball_primitive, textureBall12, glm::vec3(0.1f, 1.0f, 0.2f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    this->mesh.push_back(new Mesh(ball_primitive, textureBall13, glm::vec3(0.2f, 1.0f, 0.1f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    this->mesh.push_back(new Mesh(ball_primitive, textureBall14, glm::vec3(0.1f, 1.0f, 0.3f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
-    this->mesh.push_back(new Mesh(ball_primitive, textureBall15, glm::vec3(0.3f, 1.0f, 0.1f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    this->mesh.push_back(new Mesh(ball_primitive, textureManager.get("ball0"), glm::vec3(0.f, 1.0f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    this->mesh.push_back(new Mesh(ball_primitive, textureManager.get("ball1"), glm::vec3(0.f, 1.0f, 0.1f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    this->mesh.push_back(new Mesh(ball_primitive, textureManager.get("ball2"), glm::vec3(0.f, 1.0f, 0.2f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    this->mesh.push_back(new Mesh(ball_primitive, textureManager.get("ball3"), glm::vec3(0.f, 1.0f, 0.3f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    this->mesh.push_back(new Mesh(ball_primitive, textureManager.get("ball4"), glm::vec3(0.1f, 1.0f, 0.0f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    this->mesh.push_back(new Mesh(ball_primitive, textureManager.get("ball5"), glm::vec3(0.2f, 1.0f, 0.f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    this->mesh.push_back(new Mesh(ball_primitive, textureManager.get("ball6"), glm::vec3(0.3f, 1.0f, 0.0f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    this->mesh.push_back(new Mesh(ball_primitive, textureManager.get("ball7"), glm::vec3(0.1f, 1.0f, 0.1f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    this->mesh.push_back(new Mesh(ball_primitive, textureManager.get("ball8"), glm::vec3(0.2f, 1.0f, 0.2f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    this->mesh.push_back(new Mesh(ball_primitive, textureManager.get("ball9"), glm::vec3(0.3f, 1.0f, 0.3f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    this->mesh.push_back(new Mesh(ball_primitive, textureManager.get("ball10"), glm::vec3(0.2f, 1.0f, 0.3f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    this->mesh.push_back(new Mesh(ball_primitive, textureManager.get("ball11"), glm::vec3(0.3f, 1.0f, 0.2f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    this->mesh.push_back(new Mesh(ball_primitive, textureManager.get("ball12"), glm::vec3(0.1f, 1.0f, 0.2f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    this->mesh.push_back(new Mesh(ball_primitive, textureManager.get("ball13"), glm::vec3(0.2f, 1.0f, 0.1f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    this->mesh.push_back(new Mesh(ball_primitive, textureManager.get("ball14"), glm::vec3(0.1f, 1.0f, 0.3f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
+    this->mesh.push_back(new Mesh(ball_primitive, textureManager.get("ball15"), glm::vec3(0.3f, 1.0f, 0.1f), glm::vec3(0.f), glm::vec3(0.f), glm::vec3(1.f)));
 
     delete ball_primitive;
 }
