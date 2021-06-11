@@ -8,10 +8,10 @@ Mesh::Mesh(
 	GLuint* indexArray,
 	const unsigned& nrOfIndices,
 	Texture* texture,
-	glm::vec3 position = glm::vec3(0.f),
-	glm::vec3 origin = glm::vec3(0.f),
-	glm::vec3 rotation = glm::vec3(0.f),
-	glm::vec3 scale = glm::vec3(1.f))
+	glm::vec3 position,
+	glm::vec3 origin,
+	glm::vec3 rotation,
+	glm::vec3 scale)
 {
 	this->position = position;
 	this->origin = origin;
@@ -42,10 +42,10 @@ Mesh::Mesh(
 Mesh::Mesh(
 	Primitive* primitive,
 	Texture* texture,
-	glm::vec3 position = glm::vec3(0.f),
-	glm::vec3 origin = glm::vec3(0.f),
-	glm::vec3 rotation = glm::vec3(0.f),
-	glm::vec3 scale = glm::vec3(1.f))
+	glm::vec3 position,
+	glm::vec3 origin,
+	glm::vec3 rotation,
+	glm::vec3 scale)
 {
 	this->position = position;
 	this->origin = origin;
