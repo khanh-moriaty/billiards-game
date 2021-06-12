@@ -2,12 +2,14 @@
 #include "mesh.h"
 #include <glm/gtc/matrix_transform.hpp>
 
+const GLfloat Mesh::SHININESS = 1.f;
+
 Mesh::Mesh(
-	Vertex* vertexArray,
-	const unsigned& nrOfVertices,
-	GLuint* indexArray,
-	const unsigned& nrOfIndices,
-	Texture* texture,
+	Vertex *vertexArray,
+	const unsigned &nrOfVertices,
+	GLuint *indexArray,
+	const unsigned &nrOfIndices,
+	Texture *texture,
 	glm::vec3 position,
 	glm::vec3 origin,
 	glm::vec3 rotation,
@@ -19,6 +21,7 @@ Mesh::Mesh(
 	this->scale = scale;
 
 	this->texture = texture;
+	this->shininess = SHININESS;
 
 	this->nrOfVertices = nrOfVertices;
 	this->nrOfIndices = nrOfIndices;
@@ -40,8 +43,8 @@ Mesh::Mesh(
 }
 
 Mesh::Mesh(
-	Primitive* primitive,
-	Texture* texture,
+	Primitive *primitive,
+	Texture *texture,
 	glm::vec3 position,
 	glm::vec3 origin,
 	glm::vec3 rotation,
@@ -53,6 +56,7 @@ Mesh::Mesh(
 	this->scale = scale;
 
 	this->texture = texture;
+	this->shininess = SHININESS;
 
 	this->nrOfVertices = primitive->getNrOfVertices();
 	this->nrOfIndices = primitive->getNrOfIndices();
@@ -73,7 +77,7 @@ Mesh::Mesh(
 	this->updateModelMatrix();
 }
 
-Mesh::Mesh(const Mesh& obj)
+Mesh::Mesh(const Mesh &obj)
 {
 	this->position = obj.position;
 	this->origin = obj.origin;
@@ -81,6 +85,7 @@ Mesh::Mesh(const Mesh& obj)
 	this->scale = obj.scale;
 
 	this->texture = obj.texture;
+	this->shininess = SHININESS;
 
 	this->nrOfVertices = obj.nrOfVertices;
 	this->nrOfIndices = obj.nrOfIndices;
@@ -115,6 +120,12 @@ Mesh::~Mesh()
 	delete[] this->indexArray;
 }
 
+void Mesh::updateUniforms(Shader *shader)
+{
+	shader->set_Mat4fv(this->ModelMatrix, "ModelMatrix");
+	shader->set_1f(this->shininess, "shininess");
+}
+
 void Mesh::initVAO()
 {
 	//Create VAO
@@ -136,16 +147,16 @@ void Mesh::initVAO()
 
 	//SET VERTEXATTRIBPOINTERS AND ENABLE (INPUT ASSEMBLY)
 	//Position
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, position));
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, position));
 	glEnableVertexAttribArray(0);
 	//Color
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, color));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, color));
 	glEnableVertexAttribArray(1);
 	//Texcoord
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, texcoord));
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, texcoord));
 	glEnableVertexAttribArray(2);
 	//Normal
-	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, normal));
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, normal));
 	glEnableVertexAttribArray(3);
 
 	//BIND VAO 0
@@ -163,7 +174,7 @@ void Mesh::updateModelMatrix()
 	this->ModelMatrix = glm::scale(this->ModelMatrix, this->scale);
 }
 
-void Mesh::render(Shader* shader)
+void Mesh::render(Shader *shader)
 {
 	// set texture
 	shader->set_1i(this->texture->getunit(), "_texture");

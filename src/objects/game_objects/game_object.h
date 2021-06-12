@@ -17,6 +17,6 @@ public:
 
     ~GameObject() {delete mesh;}
 
-    void update() {}
+    virtual void update() {}
     void render(Shader* shader) {this->mesh->render(shader);}
 };

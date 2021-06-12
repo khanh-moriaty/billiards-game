@@ -14,6 +14,7 @@ void ObjectManager::addBall(int number, glm::vec3 position)
     std::string textureName = "ball" + std::to_string(number);
     Texture *texture = gameManager->getTexture(textureName);
     Mesh *mesh = new Mesh(ball, texture, position);
+    mesh->setShininess(30.0f);
     delete ball;
 
     this->objectList.push_back(new Ball(number, mesh));

@@ -15,6 +15,9 @@ private:
 
 	Texture* texture;
 
+	GLfloat shininess;
+	static const GLfloat SHININESS;
+
 	GLuint VAO;
 	GLuint VBO;
 	GLuint EBO;
@@ -26,7 +29,7 @@ private:
 
 	glm::mat4 ModelMatrix;
 
-	void updateUniforms(Shader* shader) {shader->set_Mat4fv(this->ModelMatrix, "ModelMatrix");}
+	void updateUniforms(Shader* shader);
 
 	void initVAO();
 
@@ -74,6 +77,7 @@ public:
 	void setOrigin(const glm::vec3 origin) {this->origin = origin;}
 	void setRotation(const glm::vec3 rotation) {this->rotation = rotation;}
 	void setScale(const glm::vec3 scale) {this->scale = scale;}
+	void setShininess(const GLfloat shininess) {this->shininess = shininess;}
 
 	//Functions
 
