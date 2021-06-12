@@ -81,8 +81,8 @@ public:
 
 	//Functions
 
-	void move(const glm::vec3 position) {this->position += position;}
-	void rotate(const glm::vec3 rotation) {this->rotation += rotation;}
-	void scaleUp(const glm::vec3 scale) {this->scale += scale;}
+	void move(const glm::vec3 displacement);
+	void rotate(const glm::vec3 rotation);
+	void scaleUp(const glm::vec3 scale);
 
 };

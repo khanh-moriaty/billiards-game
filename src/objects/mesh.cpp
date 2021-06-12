@@ -163,14 +163,41 @@ void Mesh::initVAO()
 	glBindVertexArray(0);
 }
 
+void Mesh::move(const glm::vec3 displacement)
+{
+	this->position += displacement;
+	// this->origin += displacement;
+}
+void Mesh::rotate(const glm::vec3 rotation)
+{
+	this->rotation += rotation;
+}
+void Mesh::scaleUp(const glm::vec3 scale)
+{
+	this->scale += scale;
+}
+
+#include <stdio.h>
 void Mesh::updateModelMatrix()
 {
 	this->ModelMatrix = glm::mat4(1.f);
 	this->ModelMatrix = glm::translate(this->ModelMatrix, this->origin);
-	this->ModelMatrix = glm::rotate(this->ModelMatrix, glm::radians(this->rotation.x), glm::vec3(1.f, 0.f, 0.f));
-	this->ModelMatrix = glm::rotate(this->ModelMatrix, glm::radians(this->rotation.y), glm::vec3(0.f, 1.f, 0.f));
-	this->ModelMatrix = glm::rotate(this->ModelMatrix, glm::radians(this->rotation.z), glm::vec3(0.f, 0.f, 1.f));
 	this->ModelMatrix = glm::translate(this->ModelMatrix, this->position - this->origin);
+
+	// Calculate orthogonal unit vector (Rx, Ry, Rz)
+    glm::vec3 R(1.f);
+	if (glm::length(this->rotation) > 0){
+		R = glm::cross(this->rotation, glm::vec3(0.f, 1.f, 0.f));
+		R = glm::normalize(R);
+	}
+
+	// Calculate theta
+	float theta = -glm::length(this->rotation);
+	float cos = std::cos(theta);
+	float sin = std::sin(theta);
+
+	this->ModelMatrix = glm::rotate(this->ModelMatrix, theta, R);
+
 	this->ModelMatrix = glm::scale(this->ModelMatrix, this->scale);
 }
 
