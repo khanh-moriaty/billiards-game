@@ -11,7 +11,7 @@ else
 	TARGET		= BilliardsGame
 endif
 
-CPPSOURCES		= main.cpp $(wildcard src/*.cpp) $(wildcard src/*/*.cpp) $(wildcard src/*/*/*.cpp)
+CPPSOURCES		= $(wildcard src/*.cpp) $(wildcard src/*/*.cpp) $(wildcard src/*/*/*.cpp)
 CSOURCES		= $(wildcard src/*.c) $(wildcard src/*/*.c) $(wildcard src/*/*/*.c)
 CPPDEPS			= dependencies/GLM/include/glm/detail/glm.cpp
 CDEPS	 		= dependencies/SOIL2/include/SOIL2.c dependencies/SOIL2/include/image_DXT.c \
