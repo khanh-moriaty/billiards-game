@@ -6,6 +6,10 @@
 class Primitive
 {
 public:
+	static const GLfloat PI;
+	static const int X_SEGMENTS;
+	static const int Y_SEGMENTS;
+
 	std::vector<Vertex> vertices;
 	std::vector<GLuint> indices;
 
