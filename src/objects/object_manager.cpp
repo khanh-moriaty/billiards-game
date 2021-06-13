@@ -6,13 +6,6 @@
 ObjectManager::ObjectManager(GameManager* gameManager)
 {
     this->gameManager = gameManager;
-
-    Primitive *ball = new Cone(0.5f, 0.5f);
-    Texture *texture = gameManager->getTexture("light");
-    Mesh *mesh = new Mesh(ball, texture, glm::vec3(0.f, 2.f, 0.f));
-    delete ball;
-
-    this->objectList.push_back(new GameObject(mesh));
 }
 
 void ObjectManager::addBall(int number, glm::vec3 position)

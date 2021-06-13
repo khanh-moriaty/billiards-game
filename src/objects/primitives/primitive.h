@@ -42,7 +42,7 @@ class Cone : public Primitive
 private:
 	static const int X_SEGMENTS;
 	static const int Y_SEGMENTS;
-	void generateConeLayer(float radius, float height);
+	void generateConeLayer(float radius, float height, bool outer=true);
 	void generateIndices(int offset);
 public:
 	Cone(float radius, float height);

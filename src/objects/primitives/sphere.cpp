@@ -1,7 +1,7 @@
 #include "primitive.h"
 
-const int Sphere::X_SEGMENTS = 50;
-const int Sphere::Y_SEGMENTS = 50;
+const int Sphere::X_SEGMENTS = 100;
+const int Sphere::Y_SEGMENTS = 100;
 
 Sphere::Sphere(float radius):Primitive()
 {
@@ -31,12 +31,12 @@ Sphere::Sphere(float radius):Primitive()
 	{
 		for (int j = 0; j < X_SEGMENTS; j++)
 		{
-			this->indices.push_back(i * (X_SEGMENTS + 1) + j);
-			this->indices.push_back((i + 1) * (X_SEGMENTS + 1) + j);
-			this->indices.push_back((i + 1) * (X_SEGMENTS + 1) + j + 1);
-			this->indices.push_back(i * (X_SEGMENTS + 1) + j);
-			this->indices.push_back((i + 1) * (X_SEGMENTS + 1) + j + 1);
-			this->indices.push_back(i * (X_SEGMENTS + 1) + j + 1);
+			this->indices.push_back(i * X_SEGMENTS + j);
+			this->indices.push_back((i + 1) * X_SEGMENTS + j);
+			this->indices.push_back((i + 1) * X_SEGMENTS + j + 1);
+			this->indices.push_back(i * X_SEGMENTS + j);
+			this->indices.push_back((i + 1) * X_SEGMENTS + j + 1);
+			this->indices.push_back(i * X_SEGMENTS + j + 1);
 		}
 	}
 }

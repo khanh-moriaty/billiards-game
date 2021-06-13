@@ -1,7 +1,7 @@
 #include "primitive.h"
 
 const int Cone::X_SEGMENTS = 500;
-const int Cone::Y_SEGMENTS = 5;
+const int Cone::Y_SEGMENTS = 2;
 
 Cone::Cone(float radius, float height)
 {
@@ -9,21 +9,22 @@ Cone::Cone(float radius, float height)
     generateConeLayer(radius, height);
     generateIndices(0);
     // inner layer
-    generateConeLayer(radius * 0.95, height * 0.95);
-    generateIndices(X_SEGMENTS * Y_SEGMENTS);
+    // generateConeLayer(radius * 0.95, height * 0.95, false);
+    // generateIndices(X_SEGMENTS * Y_SEGMENTS);
 
-    // connect 2 layers together
-    for (int i = 0; i < X_SEGMENTS-1; i++){
-        this->indices.push_back(i);
-        this->indices.push_back(i+1);
-        this->indices.push_back(X_SEGMENTS * Y_SEGMENTS + i+1);
-        this->indices.push_back(i);
-        this->indices.push_back(X_SEGMENTS * Y_SEGMENTS + i);
-        this->indices.push_back(X_SEGMENTS * Y_SEGMENTS + i+1);
-    }
+    // // connect 2 layers together
+    // for (int i = 0; i < X_SEGMENTS - 1; i++)
+    // {
+    //     this->indices.push_back(i);
+    //     this->indices.push_back(i + 1);
+    //     this->indices.push_back(X_SEGMENTS * Y_SEGMENTS + i + 1);
+    //     this->indices.push_back(i);
+    //     this->indices.push_back(X_SEGMENTS * Y_SEGMENTS + i);
+    //     this->indices.push_back(X_SEGMENTS * Y_SEGMENTS + i + 1);
+    // }
 }
 
-void Cone::generateConeLayer(float radius, float height)
+void Cone::generateConeLayer(float radius, float height, bool outer)
 {
     for (int y = 0; y < Y_SEGMENTS; y++)
     {
@@ -37,7 +38,12 @@ void Cone::generateConeLayer(float radius, float height)
             glm::vec3 pos = glm::vec3(xPos, yPos, zPos);
             glm::vec3 color = glm::vec3(0.f, 0.f, 0.f);
             glm::vec2 tex = glm::vec2(-xSegment, -ySegment);
-            glm::vec3 nor = glm::normalize(glm::vec3(xPos, yPos, zPos));
+            if (!outer)
+                outer = -1;
+            glm::vec3 nor = glm::normalize(glm::vec3(
+                                        outer * std::cos(xSegment * 2.0f * PI),
+                                        outer * height * height / (radius * radius),
+                                        outer * std::sin(xSegment * 2.0f * PI)));
             Vertex temp;
             temp.position = pos;
             temp.color = color;
@@ -50,9 +56,9 @@ void Cone::generateConeLayer(float radius, float height)
 
 void Cone::generateIndices(int offset)
 {
-    for (int i = 0; i < Y_SEGMENTS; i++)
+    for (int i = 0; i < Y_SEGMENTS - 1; i++)
     {
-        for (int j = 0; j < X_SEGMENTS; j++)
+        for (int j = 0; j < X_SEGMENTS - 1; j++)
         {
             this->indices.push_back(offset + i * X_SEGMENTS + j);
             this->indices.push_back(offset + (i + 1) * X_SEGMENTS + j);
