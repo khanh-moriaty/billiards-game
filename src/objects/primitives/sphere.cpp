@@ -2,12 +2,12 @@
 
 Sphere::Sphere(float radius):Primitive()
 {
-	for (int y = 0; y <= Y_SEGMENTS; y++)
+	for (int y = 0; y < Y_SEGMENTS; y++)
 	{
-		for (int x = 0; x <= X_SEGMENTS; x++)
+		for (int x = 0; x < X_SEGMENTS; x++)
 		{
-			float xSegment = (float)x / (float)X_SEGMENTS;
-			float ySegment = (float)y / (float)Y_SEGMENTS;
+			float xSegment = (float)x / (float)(X_SEGMENTS-1);
+			float ySegment = (float)y / (float)(Y_SEGMENTS-1);
 			float xPos = std::cos(xSegment * 2.0f * PI) * std::sin(ySegment * PI) * radius;
 			float yPos = std::cos(ySegment * PI) * radius;
 			float zPos = std::sin(xSegment * 2.0f * PI) * std::sin(ySegment * PI) * radius;

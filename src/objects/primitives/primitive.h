@@ -37,3 +37,11 @@ class Sphere : public Primitive
 public:
 	Sphere(float radius);
 };
+
+class Cone : public Primitive
+{
+private:
+	void generateConeLayer(float radius, float height);
+public:
+	Cone(float radius, float height);
+};
