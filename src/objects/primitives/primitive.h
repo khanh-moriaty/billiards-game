@@ -5,6 +5,8 @@
 #include <objects/vertex.h>
 class Primitive
 {
+protected:
+	virtual void generateIndices(int offset=0);
 public:
 	static const GLfloat PI;
 	static const int X_SEGMENTS;

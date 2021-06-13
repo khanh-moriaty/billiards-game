@@ -4,6 +4,21 @@ const GLfloat Primitive::PI = 3.14159265358979323846f;
 const int Primitive::X_SEGMENTS = 50;
 const int Primitive::Y_SEGMENTS = 50;
 
+void Primitive::generateIndices(int offset){
+	for (int i = 0; i < Y_SEGMENTS; i++)
+	{
+		for (int j = 0; j < X_SEGMENTS; j++)
+		{
+			this->indices.push_back(offset + i * (X_SEGMENTS + 1) + j);
+			this->indices.push_back(offset + (i + 1) * (X_SEGMENTS + 1) + j);
+			this->indices.push_back(offset + (i + 1) * (X_SEGMENTS + 1) + j + 1);
+			this->indices.push_back(offset + i * (X_SEGMENTS + 1) + j);
+			this->indices.push_back(offset + (i + 1) * (X_SEGMENTS + 1) + j + 1);
+			this->indices.push_back(offset + i * (X_SEGMENTS + 1) + j + 1);
+		}
+	}
+}
+
 void Primitive::set(const Vertex* vertices,
 	const unsigned nrOfVertices,
 	const GLuint* indices,
