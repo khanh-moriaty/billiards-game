@@ -7,8 +7,6 @@ class Primitive
 {
 public:
 	static const GLfloat PI;
-	static const int X_SEGMENTS;
-	static const int Y_SEGMENTS;
 
 	std::vector<Vertex> vertices;
 	std::vector<GLuint> indices;
@@ -32,6 +30,9 @@ public:
 
 class Sphere : public Primitive
 {
+private:
+	static const int X_SEGMENTS;
+	static const int Y_SEGMENTS;
 public:
 	Sphere(float radius);
 };
@@ -39,7 +40,10 @@ public:
 class Cone : public Primitive
 {
 private:
+	static const int X_SEGMENTS;
+	static const int Y_SEGMENTS;
 	void generateConeLayer(float radius, float height);
+	void generateIndices(int offset);
 public:
 	Cone(float radius, float height);
 };

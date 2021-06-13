@@ -1,8 +1,6 @@
 #include "primitive.h"
 
 const GLfloat Primitive::PI = 3.14159265358979323846f;
-const int Primitive::X_SEGMENTS = 50;
-const int Primitive::Y_SEGMENTS = 50;
 
 void Primitive::set(const Vertex* vertices,
 	const unsigned nrOfVertices,
