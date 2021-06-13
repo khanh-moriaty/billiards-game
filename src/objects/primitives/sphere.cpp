@@ -24,5 +24,16 @@ Sphere::Sphere(float radius):Primitive()
 		}
 	}
 	//Indices that generate the ball
-	generateIndices();
+	for (int i = 0; i < Y_SEGMENTS; i++)
+	{
+		for (int j = 0; j < X_SEGMENTS; j++)
+		{
+			this->indices.push_back(i * (X_SEGMENTS + 1) + j);
+			this->indices.push_back((i + 1) * (X_SEGMENTS + 1) + j);
+			this->indices.push_back((i + 1) * (X_SEGMENTS + 1) + j + 1);
+			this->indices.push_back(i * (X_SEGMENTS + 1) + j);
+			this->indices.push_back((i + 1) * (X_SEGMENTS + 1) + j + 1);
+			this->indices.push_back(i * (X_SEGMENTS + 1) + j + 1);
+		}
+	}
 }
