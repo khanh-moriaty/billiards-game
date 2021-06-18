@@ -71,8 +71,12 @@ void ObjectManager::initRoom()
 }
 
 void ObjectManager::update() {
-    for (auto x: this->objectList){
-        x->update();
+    int n = objectList.size();
+    for (int x = n-1; x > n-17; x--){
+        for(int y = x-1; y>n-17; y--){
+            objectList[x]->collide(objectList[y]);
+        }
+        objectList[x]->update();
     }
 }
 
