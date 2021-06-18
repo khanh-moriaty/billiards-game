@@ -3,21 +3,21 @@
 
 #include <utils/loader.h>
 
-ObjectManager::ObjectManager(GameManager* gameManager)
+ObjectManager::ObjectManager(TextureManager* textureManager)
 {
-    this->gameManager = gameManager;
+    this->textureManager = textureManager;
 }
 
-void ObjectManager::addBall(int number, glm::vec3 position)
+void ObjectManager::addBall(int number, glm::vec3 position, glm::vec3 veSliding)
 {
     Primitive *ball = new Sphere(Ball::RADIUS);
     std::string textureName = "ball" + std::to_string(number);
-    Texture *texture = gameManager->getTexture(textureName);
+    Texture *texture = textureManager->get(textureName);
     Mesh *mesh = new Mesh(ball, texture, position);
     mesh->setShininess(30.0f);
     delete ball;
 
-    this->objectList.push_back(new Ball(number, mesh));
+    this->objectList.push_back(new Ball(number, mesh, veSliding));
 }
 
 void ObjectManager::initRoom()
@@ -36,46 +36,50 @@ void ObjectManager::initRoom()
 
     Mesh *mesh;
 
-    mesh = new Mesh(wall, gameManager->getTexture("wall"), glm::vec3(0.f, 0.f, 0.f));
+    mesh = new Mesh(wall, textureManager->get("wall"), glm::vec3(0.f, 0.f, 0.f));
     this->objectList.push_back(new GameObject(mesh));
 
-    mesh = new Mesh(floor, gameManager->getTexture("floor"), glm::vec3(0.f, 0.f, 0.f));
+    mesh = new Mesh(floor, textureManager->get("floor"), glm::vec3(0.f, 0.f, 0.f));
     this->objectList.push_back(new GameObject(mesh));
 
-    mesh = new Mesh(door, gameManager->getTexture("door"), glm::vec3(0.f, 0.f, 0.f));
+    mesh = new Mesh(door, textureManager->get("door"), glm::vec3(0.f, 0.f, 0.f));
     this->objectList.push_back(new GameObject(mesh));
 
-    mesh = new Mesh(pic, gameManager->getTexture("pic"), glm::vec3(0.f, 0.f, 0.f));
+    mesh = new Mesh(pic, textureManager->get("pic"), glm::vec3(0.f, 0.f, 0.f));
     this->objectList.push_back(new GameObject(mesh));
 
-    mesh = new Mesh(face, gameManager->getTexture("green"), glm::vec3(0.f, 0.f, 0.f));
+    mesh = new Mesh(face, textureManager->get("green"), glm::vec3(0.f, 0.f, 0.f));
     this->objectList.push_back(new GameObject(mesh));
 
-    mesh = new Mesh(body, gameManager->getTexture("body_wood"), glm::vec3(0.f, 0.f, 0.f));
+    mesh = new Mesh(body, textureManager->get("body_wood"), glm::vec3(0.f, 0.f, 0.f));
     this->objectList.push_back(new GameObject(mesh));
 
-    mesh = new Mesh(leg, gameManager->getTexture("leg"), glm::vec3(0.f, 0.f, 0.f));
+    mesh = new Mesh(leg, textureManager->get("leg"), glm::vec3(0.f, 0.f, 0.f));
     this->objectList.push_back(new GameObject(mesh));
 
-    mesh = new Mesh(chair, gameManager->getTexture("body_wood"), glm::vec3(0.f, 0.f, 0.f));
+    mesh = new Mesh(chair, textureManager->get("body_wood"), glm::vec3(0.f, 0.f, 0.f));
     this->objectList.push_back(new GameObject(mesh));
 
-    mesh = new Mesh(chair, gameManager->getTexture("body_wood"), glm::vec3(6.f, 0.f, 0.f));
+    mesh = new Mesh(chair, textureManager->get("body_wood"), glm::vec3(6.f, 0.f, 0.f));
     this->objectList.push_back(new GameObject(mesh));
 
-    mesh = new Mesh(lightB, gameManager->getTexture("light"), glm::vec3(0.f, 1.f, 0.8f));
+    mesh = new Mesh(lightB, textureManager->get("light"), glm::vec3(0.f, 1.f, 0.8f));
     this->objectList.push_back(new GameObject(mesh));
 
-    mesh = new Mesh(lightW, gameManager->getTexture("white"), glm::vec3(0.f, 1.f, 0.8f));
+    mesh = new Mesh(lightW, textureManager->get("white"), glm::vec3(0.f, 1.f, 0.8f));
     this->objectList.push_back(new GameObject(mesh));
 }
 
 void ObjectManager::update() {
     int n = objectList.size();
-    for (int x = n-1; x > n-17; x--){
-        for(int y = x-1; y>n-17; y--){
-            objectList[x]->collide(objectList[y]);
+    for (int x = 0; x < n; x++){
+        // Check ball collision
+        for(int y = x+1; y < n; y++){
+            if (objectList[x]->isBall() && objectList[y]->isBall()) {
+                objectList[x]->collide(objectList[y]);
+            }
         }
+
         objectList[x]->update();
     }
 }

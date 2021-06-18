@@ -2,6 +2,7 @@
 
 #include "game_object.h"
 #include "stick.h"
+#include "ball_movement.h"
 #include <glm/vec3.hpp>
 
 class Ball : public GameObject
@@ -18,24 +19,34 @@ private:
     int number;
     bool isMove;
     bool isInHole;
-    glm::vec3 veSliding; //include direction and power
-    glm::vec3 veRolling;
-    glm::vec3 acSliding;
-    glm::vec3 acRolling;
+    std::vector<BallMovement*> ballMovements;
+
+    glm::vec3 velocityVector;
+    float velocity;
 
 public:
-    Ball(int number, Mesh* mesh);
+    // Ball(int number, Mesh* mesh);
+    Ball(int number, Mesh* mesh, glm::vec3 v = glm::vec3(0.f));
 
     void update();
-    void collide(Ball* gameobj);
+    void collide(GameObject* gameobj);
     void stickHitBall(glm::vec3 direction, float power);
-    float timeSliding();
-    float timeRolling();
+
+    void updateRolling();
+
     bool isHitBall(Ball* ball);
     void resifhitball(Ball* ball);
+
+    int timeSliding(glm::vec3 velocity);
+    int timeRolling(glm::vec3 velocity);
+
     void ballSliding();
     void ballRolling();
     void ballHitPool();
+
     void isBallInHole();
+
+    glm::vec3 getVelocity();
     int getNumber() { return this->number; }
+    bool isBall() {return true;}
 };
