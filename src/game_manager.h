@@ -50,6 +50,7 @@ private:
 
     void init();
     void initMatrices();
+    int blockCam;
 
     GameManager(const int SCR_WIDTH, const int SCR_HEIGHT);
 
@@ -74,8 +75,8 @@ public:
     }
 
     Camera* getCamera() {return this->camera;}
-
-    void processInput(GLFWwindow* window);
+    void reset();
+    void processInput(GLFWwindow* window);//, glm::vec3* direction, float* power);
 
     static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
     static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);

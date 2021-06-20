@@ -39,4 +39,9 @@ public:
 
     // Get position of i-th mesh
     glm::vec3 getPosition(int i=0) {return this->mesh[i]->getPosition();}
+    glm::vec3 getPos(){return this->mesh[0]->getPosition();}
+    virtual bool inHole() {return false;}
+    virtual bool isBall() {return false;}
+    virtual bool isStick() {return false;}
+    virtual void collide(GameObject* gameobj) {};
 };

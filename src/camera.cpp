@@ -28,6 +28,15 @@ glm::vec3 Camera::GetPos()
 {
     return Position;
 }
+void Camera::setPos(glm::vec3 position, glm::vec3 up, float yaw, float pitch)
+{
+    this->Position = position;
+    WorldUp = up;
+    Yaw = yaw;
+    Pitch = pitch;
+    updateCameraVectors();
+}
+
 void Camera::ProcessKeyboard(Camera_Movement direction, float deltaTime)
 {
     float velocity = MovementSpeed * deltaTime;
@@ -41,7 +50,7 @@ void Camera::ProcessKeyboard(Camera_Movement direction, float deltaTime)
         Position += Right * velocity;
 }
 
-void Camera::ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch)
+void Camera::ProcessMouseMovement(float xoffset, float yoffset, bool constrainPitch)
 {
     xoffset *= MouseSensitivity;
     yoffset *= MouseSensitivity;
@@ -60,6 +69,15 @@ void Camera::ProcessMouseMovement(float xoffset, float yoffset, GLboolean constr
     updateCameraVectors();
 }
 
+void Camera::setViewMat(glm::vec3 eye, float yaw, float pitch)
+{
+    this->Position = eye;
+    this->Yaw = yaw;
+    this->Pitch = pitch;
+    updateCameraVectors();
+
+
+}
 void Camera::ProcessMouseScroll(float yoffset)
 {
     Zoom -= (float)yoffset;

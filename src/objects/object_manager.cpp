@@ -15,9 +15,9 @@ ObjectManager::ObjectManager(TextureManager* textureManager)
     this->objectList.push_back(this->objectFactory->createPic());
 }
 
-void ObjectManager::addBall(int number, glm::vec3 position)
+void ObjectManager::addBall(int number, glm::vec3 position, glm::vec3 direction, float power)
 {
-    this->objectList.push_back(objectFactory->createBall(number, position));
+    this->objectList.push_back(objectFactory->createBall(number, mesh, direction, power));
 }
 
 void ObjectManager::addLight(int i, glm::vec3 position){
@@ -26,6 +26,21 @@ void ObjectManager::addLight(int i, glm::vec3 position){
     this->lights[i] = light;
 }
 
+void ObjectManager::addStick()
+{
+    //
+
+
+    //
+    this->objectList.push_back(new Stick());
+}
+#include <iostream>
+void ObjectManager::removeBalls()
+{
+    this->objectList.pop_back();
+    this->objectList.pop_back();
+    this->objectList.pop_back();
+}
 void ObjectManager::initRoom()
 {
     std::vector<Vertex> wall, floor, door, pic, face, body, leg, chair, lightB, lightW, ball;
@@ -74,17 +89,24 @@ void ObjectManager::initRoom()
 
     // mesh = new Mesh(lightW, textureManager->get("white"), glm::vec3(0.f, 1.f, 0.8f));
     // this->objectList.push_back(new GameObject(mesh));
-
 }
 
 void ObjectManager::update() {
-    for (auto x: this->objectList){
-        x->update();
+    int n = objectList.size();
+    for (int x = 0; x < n; x++){
+        for(int y = x+1; y < n; y++){
+            if (objectList[x]->isBall() && objectList[y]->isBall()) {
+                objectList[x]->collide(objectList[y]);
+            }
+        }
+
+        objectList[x]->update();
     }
 }
 
 void ObjectManager::render(Shader* shader) {
     for (auto x: this->objectList){
-        x->render(shader);
+        if(!x->inHole())
+            x->render(shader);
     }
 }

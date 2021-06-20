@@ -4,6 +4,7 @@
 
 #include "game_objects/game_object.h"
 #include "game_objects/object_factory.h"
+#include <texture/texture_manager.h>
 
 class ObjectManager
 {
@@ -15,8 +16,7 @@ private:
 
     std::vector<GameObject *> objectList;
     GameObject* lights[3];
-
-public:
+  
     ObjectManager(TextureManager* textureManager);
 
     ~ObjectManager()
@@ -27,9 +27,10 @@ public:
     }
 
     void initRoom();
-    void addBall(int number, glm::vec3 position);
-    void addLight(int i, glm::vec3 position);
 
+    void addBall(int number, glm::vec3 position = glm::vec3(0.f), glm::vec3 direction = glm::vec3(0.f), float power = 0.f);
+    void removeBalls();
+    void addStick();
     void update();
     void render(Shader* shader);
 

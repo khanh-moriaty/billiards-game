@@ -1,4 +1,5 @@
 #pragma once
+
 #include <vector>
 #include "vertex.h"
 #include "primitives/primitive.h"
@@ -87,5 +88,8 @@ public:
 	void move(const glm::vec3 displacement);
 	void rotate(const glm::vec3 rotation);
 	void scaleUp(const glm::vec3 scale);
-
+	glm::vec3 getPos()
+	{
+		return this->position;
+	}
 };
