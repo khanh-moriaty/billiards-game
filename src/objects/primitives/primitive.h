@@ -64,3 +64,15 @@ private:
 public:
 	Cylinder(float radius, float height);
 };
+
+class Plane : public Primitive
+{
+private:
+	static const int X_SEGMENTS;
+	static const int Y_SEGMENTS;
+
+	void generateFace(float width, float height, float z);
+	void generateIndices(int offset);
+public:
+	Plane(float width, float height, float depth);
+};

@@ -27,9 +27,9 @@ Cylinder::Cylinder(float radius, float height) : Primitive()
         }
     }
     //Indices that generate the ball
-    for (int i = 0; i < Y_SEGMENTS; i++)
+    for (int i = 0; i < Y_SEGMENTS - 1; i++)
     {
-        for (int j = 0; j < X_SEGMENTS; j++)
+        for (int j = 0; j < X_SEGMENTS - 1; j++)
         {
             this->indices.push_back(i * X_SEGMENTS + j);
             this->indices.push_back((i + 1) * X_SEGMENTS + j);

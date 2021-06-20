@@ -19,8 +19,8 @@ uniform vec3 lightPos2;
 uniform float shininess;
 
 const vec3 ambientColor = vec3(.75f, .75f, .75f);
-const vec3 diffuseColor = vec3(.35f, .35f, .35f);
-const vec3 specularColor = vec3(.15f, .15f, .15f);
+const vec3 diffuseColor = vec3(.05f, .05f, .05f);
+const vec3 specularColor = vec3(.1f, .1f, .1f);
 
 // diffuse light
 vec3 diffuseLight(vec3 lightPos){

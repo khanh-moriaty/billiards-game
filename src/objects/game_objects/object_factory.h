@@ -6,7 +6,15 @@
 class ObjectFactory
 {
 private:
+    static const float PI;
+
+    static const float ROOM_WIDTH;
     static const float ROOM_HEIGHT;
+    static const float WALL_DEPTH;
+    static const float DOOR_WIDTH;
+    static const float DOOR_HEIGHT;
+    static const float PIC_WIDTH;
+    static const float PIC_HEIGHT;
     static const float LIGHT_RADIUS;
     static const float LIGHT_HEIGHT;
 
@@ -16,4 +24,9 @@ public:
     ObjectFactory(TextureManager *textureManager);
     GameObject *createBall(int number, glm::vec3 position);
     GameObject *createLight(glm::vec3 position);
+    GameObject *createWallLeft();
+    GameObject *createWallRight();
+    GameObject *createFloor();
+    GameObject *createDoor();
+    GameObject *createPic();
 };
