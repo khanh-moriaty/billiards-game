@@ -1,4 +1,5 @@
 #include "primitive.h"
+#include "cylinder.h"
 
 const int Cylinder::X_SEGMENTS = 50;
 const int Cylinder::Y_SEGMENTS = 2;
@@ -11,9 +12,8 @@ Cylinder::Cylinder(float radius, float height) : Primitive()
         {
             float xSegment = (float)x / (float)(X_SEGMENTS - 1);
             float ySegment = (float)y / (float)(Y_SEGMENTS - 1);
-            float xPos = std::cos(xSegment * 2.0f * PI) * radius;
-            float yPos = ySegment * height;
-            float zPos = std::sin(xSegment * 2.0f * PI) * radius;
+            float xPos, yPos, zPos;
+            getCoordinate(xPos, yPos, zPos, xSegment, ySegment, radius, height);
             glm::vec3 pos = glm::vec3(xPos, yPos, zPos);
             glm::vec3 color = glm::vec3(0.f, 0.f, 0.f);
             glm::vec2 tex = glm::vec2(-xSegment, -ySegment);
@@ -39,4 +39,11 @@ Cylinder::Cylinder(float radius, float height) : Primitive()
             this->indices.push_back(i * X_SEGMENTS + j + 1);
         }
     }
+}
+
+void Cylinder::getCoordinate(float &xPos, float &yPos, float &zPos, float xSegment, float ySegment, float radius, float height)
+{
+    xPos = std::cos(xSegment * 2.0f * PI) * radius;
+    yPos = ySegment * height;
+    zPos = std::sin(xSegment * 2.0f * PI) * radius;
 }

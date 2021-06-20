@@ -56,15 +56,6 @@ public:
 	Cone(float radius, float height);
 };
 
-class Cylinder : public Primitive
-{
-private:
-	static const int X_SEGMENTS;
-	static const int Y_SEGMENTS;
-public:
-	Cylinder(float radius, float height);
-};
-
 class Plane : public Primitive
 {
 private:
