@@ -110,6 +110,8 @@ void GameManager::initMatrices()
     this->shader->set_Mat4fv(this->ViewMatrix, "ViewMatrix");
     this->shader->set_Mat4fv(this->ProjectionMatrix, "ProjectionMatrix");
     this->shader->set_3fv(this->objectManager->getLight0(), "lightPos0");
+    this->shader->set_3fv(this->objectManager->getLight1(), "lightPos1");
+    this->shader->set_3fv(this->objectManager->getLight2(), "lightPos2");
     this->shader->set_3fv(this->camera->GetPos(), "camPosition");
 }
 
