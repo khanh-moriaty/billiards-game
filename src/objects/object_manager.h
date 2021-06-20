@@ -3,14 +3,16 @@
 #include <vector>
 
 #include "game_objects/game_object.h"
-#include <texture/texture_manager.h>
+#include "game_objects/object_factory.h"
 
 class ObjectManager
 {
 private:
     static const float ROOM_HEIGHT;
 
+    ObjectFactory* objectFactory;
     TextureManager* textureManager;
+
     std::vector<GameObject *> objectList;
     GameObject* lights[3];
 
@@ -19,19 +21,14 @@ public:
 
     ~ObjectManager()
     {
+        delete objectFactory;
         for (auto x : this->objectList)
             delete x;
-
-        // for (auto x : this->lights){
-        //     delete x.bulb;
-        //     delete x.cover;
-        //     delete x.string;
-        // }
     }
 
     void initRoom();
-    void addBall(int number, glm::vec3 position = glm::vec3(0.f));
-    void addLight(int i, glm::vec3 position = glm::vec3(0.f));
+    void addBall(int number, glm::vec3 position);
+    void addLight(int i, glm::vec3 position);
 
     void update();
     void render(Shader* shader);
