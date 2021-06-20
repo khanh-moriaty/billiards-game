@@ -3,6 +3,8 @@
 
 #include <utils/loader.h>
 
+const float ObjectManager::ROOM_HEIGHT = 6.f;
+
 ObjectManager::ObjectManager(TextureManager* textureManager)
 {
     this->textureManager = textureManager;
@@ -20,33 +22,35 @@ void ObjectManager::addBall(int number, glm::vec3 position)
     this->objectList.push_back(new Ball(number, mesh));
 }
 
-#include <iostream>
-void ObjectManager::addLight(glm::vec3 position){
+void ObjectManager::addLight(int i, glm::vec3 position){
     Primitive *primitive;
     std::string textureName;
     Texture *texture;
     Mesh *mesh;
     glm::vec3 meshPosition;
+    Light light;
 
     const float LIGHT_RADIUS = 0.2f;
     const float LIGHT_HEIGHT = 0.15f;
+
+    glm::vec3 meshOrigin = glm::vec3(position.x, ROOM_HEIGHT, position.z);
 
     // Create light
     primitive = new Cone(LIGHT_RADIUS, LIGHT_HEIGHT);
     textureName = "light";
     texture = textureManager->get(textureName);
     meshPosition = position;
-    mesh = new Mesh(primitive, texture, meshPosition);
-    std::cout << primitive->getNrOfIndices() << std::endl;
+    mesh = new Mesh(primitive, texture, meshPosition, meshOrigin);
+    light.cover = mesh;
     this->objectList.push_back(new GameObject(mesh));
 
     // Create string
-    primitive = new Cylinder(0.02f * LIGHT_RADIUS, 4.f - (position.y + LIGHT_HEIGHT));
+    primitive = new Cylinder(0.02f * LIGHT_RADIUS, ROOM_HEIGHT - (position.y + LIGHT_HEIGHT));
     textureName = "light";
     texture = textureManager->get(textureName);
     meshPosition = glm::vec3(position.x, position.y + LIGHT_HEIGHT, position.z);
-    mesh = new Mesh(primitive, texture, meshPosition);
-    std::cout << primitive->getNrOfIndices() << std::endl;
+    mesh = new Mesh(primitive, texture, meshPosition, meshOrigin);
+    light.string = mesh;
     this->objectList.push_back(new GameObject(mesh));
 
     // Create light bulb
@@ -54,9 +58,12 @@ void ObjectManager::addLight(glm::vec3 position){
     textureName = "white";
     texture = textureManager->get(textureName);
     meshPosition = glm::vec3(position.x, position.y + 0.25f * LIGHT_HEIGHT, position.z);
-    mesh = new Mesh(primitive, texture, meshPosition);
-    std::cout << primitive->getNrOfIndices() << std::endl;
+    mesh = new Mesh(primitive, texture, meshPosition, meshOrigin);
+    light.bulb = mesh;
     this->objectList.push_back(new GameObject(mesh));
+
+    light.position = meshPosition;
+    lights[i] = light;
 
 }
 
@@ -103,11 +110,11 @@ void ObjectManager::initRoom()
     mesh = new Mesh(chair, textureManager->get("body_wood"), glm::vec3(6.f, 0.f, 0.f));
     this->objectList.push_back(new GameObject(mesh));
 
-    mesh = new Mesh(lightB, textureManager->get("light"), glm::vec3(0.f, 1.f, 0.8f));
-    this->objectList.push_back(new GameObject(mesh));
+    // mesh = new Mesh(lightB, textureManager->get("light"), glm::vec3(0.f, 1.f, 0.8f));
+    // this->objectList.push_back(new GameObject(mesh));
 
-    mesh = new Mesh(lightW, textureManager->get("white"), glm::vec3(0.f, 1.f, 0.8f));
-    this->objectList.push_back(new GameObject(mesh));
+    // mesh = new Mesh(lightW, textureManager->get("white"), glm::vec3(0.f, 1.f, 0.8f));
+    // this->objectList.push_back(new GameObject(mesh));
 }
 
 void ObjectManager::update() {

@@ -26,9 +26,6 @@ GameManager::GameManager(const int SCR_WIDTH, const int SCR_HEIGHT)
     this->running = true;
 
     init();
-    this->shader = new Shader("src/shaders/vertex_core.glsl", "src/shaders/fragment_core.glsl");
-    this->shader->use_Program();
-    initMatrices();
 
     this->textureManager = new TextureManager();
     this->textureManager->initTexture();
@@ -39,7 +36,14 @@ GameManager::GameManager(const int SCR_WIDTH, const int SCR_HEIGHT)
     {
         this->objectManager->addBall(i, glm::vec3(0.2f * (i/4), 1.f, 0.2f * (i%4)));
     }
-    this->objectManager->addLight(glm::vec3(0.f, 3.f, 0.f));
+
+    this->objectManager->addLight(0, glm::vec3(0.f, 3.f, 0.f));
+    this->objectManager->addLight(1, glm::vec3(-.5f, 3.f, 0.f));
+    this->objectManager->addLight(2, glm::vec3(+.5f, 3.f, 0.f));
+
+    this->shader = new Shader("src/shaders/vertex_core.glsl", "src/shaders/fragment_core.glsl");
+    this->shader->use_Program();
+    initMatrices();
 }
 
 GameManager::~GameManager()
@@ -102,12 +106,10 @@ void GameManager::initMatrices()
     float fov = 90.f;
     this->ProjectionMatrix = glm::perspective(glm::radians(fov), static_cast<float>(w_buffer) / h_buffer, nearPlane, farPlane);
 
-    this->lightPos0 = glm::vec3(0.f, 8.f, 0.f);
-
     this->shader->set_Mat4fv(this->ModelMatrix, "ModelMatrix");
     this->shader->set_Mat4fv(this->ViewMatrix, "ViewMatrix");
     this->shader->set_Mat4fv(this->ProjectionMatrix, "ProjectionMatrix");
-    this->shader->set_3fv(this->lightPos0, "lightPos0");
+    this->shader->set_3fv(this->objectManager->getLight0(), "lightPos0");
     this->shader->set_3fv(this->camera->GetPos(), "camPosition");
 }
 
