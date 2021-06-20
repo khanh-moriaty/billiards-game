@@ -1,5 +1,7 @@
 #include "object_manager.h"
 #include <texture/texture_manager.h>
+#include "game_objects/stick.h"
+#include "game_objects/ball.h"
 
 #include <utils/loader.h>
 
@@ -17,7 +19,7 @@ ObjectManager::ObjectManager(TextureManager* textureManager)
 
 void ObjectManager::addBall(int number, glm::vec3 position, glm::vec3 direction, float power)
 {
-    this->objectList.push_back(objectFactory->createBall(number, mesh, direction, power));
+    this->objectList.push_back(objectFactory->createBall(number, position, direction, power));
 }
 
 void ObjectManager::addLight(int i, glm::vec3 position){
@@ -34,13 +36,45 @@ void ObjectManager::addStick()
     //
     this->objectList.push_back(new Stick());
 }
-#include <iostream>
+
 void ObjectManager::removeBalls()
 {
-    this->objectList.pop_back();
-    this->objectList.pop_back();
-    this->objectList.pop_back();
+    std::vector<GameObject*>::iterator rm = std::end(this->objectList);
+    for(std::vector<GameObject*>::iterator it = std::begin(this->objectList); it != std::end(this->objectList); ++it) {
+        if ((*it)->isBall()) {
+            rm = it;
+            break;
+        }
+    }
+    if (rm != std::end(this->objectList)) {
+        this->objectList.erase(rm, std::end(this->objectList));
+    }
 }
+
+#include <iostream>
+GameObject* ObjectManager::getBall(int number){
+    for(auto x: this->objectList){
+        if (!x->isBall()) continue;
+        if (((Ball*)x)->getNumber() == number) {
+            return x;
+        }
+    }
+    return NULL;
+}
+
+void ObjectManager::removeBall(int number){
+    std::vector<GameObject*>::iterator rm = std::end(this->objectList);
+    for(std::vector<GameObject*>::iterator it = std::begin(this->objectList); it != std::end(this->objectList); ++it) {
+        if ((*it)->isBall() && ((Ball*)(*it))->getNumber() == number) {
+            rm = it;
+            break;
+        }
+    }
+    if (rm != std::end(this->objectList)) {
+        this->objectList.erase(rm);
+    }
+}
+
 void ObjectManager::initRoom()
 {
     std::vector<Vertex> wall, floor, door, pic, face, body, leg, chair, lightB, lightW, ball;

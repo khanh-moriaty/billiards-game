@@ -22,7 +22,7 @@ private:
 
 public:
     ObjectFactory(TextureManager *textureManager);
-    GameObject *createBall(int number, glm::vec3 position);
+    GameObject *createBall(int number, glm::vec3 position, glm::vec3 direction, float power);
     GameObject *createLight(glm::vec3 position);
     GameObject *createWallLeft();
     GameObject *createWallRight();

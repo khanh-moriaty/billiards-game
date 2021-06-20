@@ -46,7 +46,7 @@ GameManager::GameManager(const int SCR_WIDTH, const int SCR_HEIGHT)
     initMatrices();
 }
 
-}
+
 void GameManager::reset()
 {
     this->objectManager->removeBalls();
@@ -189,7 +189,7 @@ void GameManager::processInput(GLFWwindow *window)//, glm::vec3* direction, floa
             float camZ   = cos(glfwGetTime()) * radius;
             float yaw = this->camera->Yaw;
             float pitch = this->camera->Pitch;
-            glm::vec3 pos = this->objectManager->objectList.back()->getPos();
+            glm::vec3 pos = this->objectManager->getBall(0)->getPos();
             glm::vec3 dir = glm::vec3(cos(glm::radians(yaw)) * cos(glm::radians(pitch)), 
                                         sin(glm::radians(pitch)),
                                         sin(glm::radians(yaw)) * cos(glm::radians(pitch)));
@@ -201,9 +201,9 @@ void GameManager::processInput(GLFWwindow *window)//, glm::vec3* direction, floa
     if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
     {
         glm::vec3 direction = glm::vec3(this->camera->Front.x, 0, this->camera->Front.z);
-        float power = 0.1f;
-        glm::vec3 pos = this->objectManager->objectList.back()->getPos();
-        this->objectManager->objectList.pop_back();
+        float power = 0.05f;
+        glm::vec3 pos = this->objectManager->getBall(0)->getPos();
+        this->objectManager->removeBall(0);
         this->objectManager->addBall(0, pos, direction, power);
         this->blockCam = 0;
 
@@ -237,7 +237,7 @@ void GameManager::mouse_callback(GLFWwindow *window, double xpos, double ypos)
         float camZ   = cos(glfwGetTime()) * radius;
         float yaw = gameManager->camera->Yaw + xoffset*0.1f;
         float pitch = gameManager->camera->Pitch;
-        glm::vec3 pos = gameManager->objectManager->objectList.back()->getPos();
+        glm::vec3 pos = gameManager->objectManager->getBall(0)->getPos();
         glm::vec3 dir = glm::vec3(cos(glm::radians(yaw)) * cos(glm::radians(pitch)), 
                                     sin(glm::radians(pitch)),
                                     sin(glm::radians(yaw)) * cos(glm::radians(pitch)));

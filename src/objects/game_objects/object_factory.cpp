@@ -22,7 +22,7 @@ ObjectFactory::ObjectFactory(TextureManager *textureManager){
     this->textureManager = textureManager;
 }
 
-GameObject* ObjectFactory::createBall(int number, glm::vec3 position)
+GameObject* ObjectFactory::createBall(int number, glm::vec3 position, glm::vec3 direction, float power)
 {
     Primitive *ball = new Sphere(Ball::RADIUS);
     std::string textureName = "ball" + std::to_string(number);
@@ -31,7 +31,7 @@ GameObject* ObjectFactory::createBall(int number, glm::vec3 position)
     mesh->setShininess(30.0f);
     delete ball;
 
-    GameObject* obj = new Ball(number, mesh);
+    GameObject* obj = new Ball(number, mesh, direction, power);
     return obj;
 }
 

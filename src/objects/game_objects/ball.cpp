@@ -10,6 +10,7 @@ const float Ball::SLIDING = 0.2f;
 
 Ball::Ball(int number, Mesh *mesh, glm::vec3 direction, float power)
 {
+    this->number = number;
     this->mesh.push_back(mesh);
     this->mass = MASS;
     this->isMove = false;
@@ -59,7 +60,7 @@ glm::vec3 Ball::getSlidingVelocity() {
 
 bool Ball::isHitBall(Ball *ball)
 {
-    float dis = glm::length(this->mesh->getPos() - ball->mesh->getPos());
+    float dis = glm::length(this->mesh[0]->getPos() - ball->mesh[0]->getPos());
     if(dis < 2*RADIUS)
         return true;
     return false;
@@ -78,15 +79,15 @@ bool Ball::isHitBall(Ball *ball)
 void Ball::ballSliding()
 {
     glm::vec3 S = this->getSlidingVelocity();
-    this->mesh->move(S);
+    // this->mesh[0]->move(S);
     //std::cout<<"move";
 }
 
 void Ball::ballRolling()
 {
     glm::vec3 S = this->getRollingVelocity();
-    this->mesh->move(S);
-    this->mesh->rotate(S/RADIUS);
+    this->mesh[0]->move(S/2.f);
+    this->mesh[0]->rotate(S/RADIUS);
 }
 
 void Ball::resifhitball(Ball* ball)
@@ -96,10 +97,10 @@ void Ball::resifhitball(Ball* ball)
         glm::vec3 velocity1 = this->getRollingVelocity();
         glm::vec3 velocity2 = ball->getRollingVelocity();
         
-        float temp = glm::dot(velocity1 - velocity2, this->mesh->getPos() - ball->mesh->getPos());
-        float dis = glm::length(this->mesh->getPos() - ball->mesh->getPos());
+        float temp = glm::dot(velocity1 - velocity2, this->mesh[0]->getPos() - ball->mesh[0]->getPos());
+        float dis = glm::length(this->mesh[0]->getPos() - ball->mesh[0]->getPos());
 
-        glm::vec3 velocity = temp * (this->mesh->getPos() - ball->mesh->getPos())/(dis * dis);
+        glm::vec3 velocity = temp * (this->mesh[0]->getPos() - ball->mesh[0]->getPos())/(dis * dis);
 
         velocity1 -= velocity;
         if (glm::length(velocity1) == 0) {
@@ -127,29 +128,29 @@ void Ball::collide(GameObject* gameobj)
 void Ball::ballHitPool()
 {
     //cham ben phai
-    if(this->mesh->getPos().x + RADIUS > 2){
+    if(this->mesh[0]->getPos().x + RADIUS > 2){
         this->velocityVector.x = - this->velocityVector.x;
-        this->mesh->setPosition(glm::vec3(2 - RADIUS,this->mesh->getPos().y,this->mesh->getPos().z));
+        // this->mesh[0]->setPosition(glm::vec3(2 - RADIUS,this->mesh[0]->getPos().y,this->mesh[0]->getPos().z));
         //std::cout<<"cham phai"<<std::endl;
     }else
     //cham ben trai
-    if(this->mesh->getPos().x - RADIUS < -2){
+    if(this->mesh[0]->getPos().x - RADIUS < -2){
         this->velocityVector.x = - this->velocityVector.x;
-        this->mesh->setPosition(glm::vec3(-2 + RADIUS,this->mesh->getPos().y,this->mesh->getPos().z));
+        // this->mesh[0]->setPosition(glm::vec3(-2 + RADIUS,this->mesh[0]->getPos().y,this->mesh[0]->getPos().z));
         //std::cout<<"cham trai"<<std::endl;
 
     }
     //cham ben tren
-    if(this->mesh->getPos().z + RADIUS > 1){
+    if(this->mesh[0]->getPos().z + RADIUS > 1){
         this->velocityVector.z = - this->velocityVector.z;
-        this->mesh->setPosition(glm::vec3(this->mesh->getPos().x,this->mesh->getPos().y,1 - RADIUS));
+        // this->mesh[0]->setPosition(glm::vec3(this->mesh[0]->getPos().x,this->mesh[0]->getPos().y,1 - RADIUS));
         //std::cout<<"cham tren"<<std::endl;
 
     }else
     //cham ben duoi
-    if(this->mesh->getPos().z + RADIUS < -1){
+    if(this->mesh[0]->getPos().z + RADIUS < -1){
         this->velocityVector.z = - this->velocityVector.z;
-        this->mesh->setPosition(glm::vec3(this->mesh->getPos().x,this->mesh->getPos().y,-1 + RADIUS));
+        // this->mesh[0]->setPosition(glm::vec3(this->mesh[0]->getPos().x,this->mesh[0]->getPos().y,-1 + RADIUS));
         //std::cout<<"cham duoi"<<std::endl;
 
     }
@@ -158,37 +159,37 @@ void Ball::ballHitPool()
 void Ball::isBallInHole()
 {
     //lo phai tren
-    if(glm::length(glm::vec2(this->mesh->getPos().x,this->mesh->getPos().z) - glm::vec2(2.f,1.f)) < RADIUS+RADIUS_HOLE){
+    if(glm::length(glm::vec2(this->mesh[0]->getPos().x,this->mesh[0]->getPos().z) - glm::vec2(2.f,1.f)) < RADIUS+RADIUS_HOLE){
         this->isInHole = true;
         this->RollingVelocity = 0.f;
         this->SlidingVelocity = 0.f;
     }else
     //lo giua tren
-    if(glm::length(glm::vec2(this->mesh->getPos().x,this->mesh->getPos().z) - glm::vec2(0.f,1.f)) < RADIUS+RADIUS_HOLE){
+    if(glm::length(glm::vec2(this->mesh[0]->getPos().x,this->mesh[0]->getPos().z) - glm::vec2(0.f,1.f)) < RADIUS+RADIUS_HOLE){
         this->isInHole = true;
         this->RollingVelocity = 0.f;
         this->SlidingVelocity = 0.f;
     }else
     //lo trai tren
-    if(glm::length(glm::vec2(this->mesh->getPos().x,this->mesh->getPos().z) - glm::vec2(-2.f,1.f)) < RADIUS+RADIUS_HOLE){
+    if(glm::length(glm::vec2(this->mesh[0]->getPos().x,this->mesh[0]->getPos().z) - glm::vec2(-2.f,1.f)) < RADIUS+RADIUS_HOLE){
         this->isInHole = true;
         this->RollingVelocity = 0.f;
         this->SlidingVelocity = 0.f;
     }else
     //lo trai duoi
-    if(glm::length(glm::vec2(this->mesh->getPos().x,this->mesh->getPos().z) - glm::vec2(-2.f,-1.f)) < RADIUS+RADIUS_HOLE){
+    if(glm::length(glm::vec2(this->mesh[0]->getPos().x,this->mesh[0]->getPos().z) - glm::vec2(-2.f,-1.f)) < RADIUS+RADIUS_HOLE){
         this->isInHole = true;
         this->RollingVelocity = 0.f;
         this->SlidingVelocity = 0.f;
     }else
     //lo giua duoi
-    if(glm::length(glm::vec2(this->mesh->getPos().x,this->mesh->getPos().z) - glm::vec2(0.f,-1.f)) < RADIUS+RADIUS_HOLE){
+    if(glm::length(glm::vec2(this->mesh[0]->getPos().x,this->mesh[0]->getPos().z) - glm::vec2(0.f,-1.f)) < RADIUS+RADIUS_HOLE){
         this->isInHole = true;
         this->RollingVelocity = 0.f;
         this->SlidingVelocity = 0.f;
     }else
     //lo phai duoi
-    if(glm::length(glm::vec2(this->mesh->getPos().x,this->mesh->getPos().z) - glm::vec2(2.f,-1.f)) < RADIUS+RADIUS_HOLE){
+    if(glm::length(glm::vec2(this->mesh[0]->getPos().x,this->mesh[0]->getPos().z) - glm::vec2(2.f,-1.f)) < RADIUS+RADIUS_HOLE){
         this->isInHole = true;
         this->RollingVelocity = 0.f;
         this->SlidingVelocity = 0.f;

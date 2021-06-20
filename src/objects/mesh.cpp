@@ -200,9 +200,11 @@ void Mesh::updateModelMatrix()
 		}
 	}
 	//Calculate theta
-	float theta = - glm::length(this->rotation);
+	float theta;
+	theta = - glm::length(this->rotation);
+
 	this->ModelMatrix = glm::rotate(this->ModelMatrix, theta, R);
-	glm::rotate(this->ModelMatrix, glm::radians(90.0f), this->rotation);
+	// glm::rotate(this->ModelMatrix, glm::radians(90.0f), this->rotation);
 }
 
 void Mesh::render(Shader *shader)
