@@ -18,9 +18,9 @@ uniform vec3 lightPos2;
 
 uniform float shininess;
 
-const vec3 ambientColor = vec3(.6f, .6f, .6f);
+const vec3 ambientColor = vec3(.75f, .75f, .75f);
 const vec3 diffuseColor = vec3(.35f, .35f, .35f);
-const vec3 specularColor = vec3(.6f, .6f, .6f);
+const vec3 specularColor = vec3(.15f, .15f, .15f);
 
 // diffuse light
 vec3 diffuseLight(vec3 lightPos){
@@ -33,13 +33,13 @@ vec3 diffuseLight(vec3 lightPos){
 // specular light
 vec3 specularLight(vec3 lightPos, vec3 diffuseFinal){
 	vec3 specularFinal = vec3(0.f);
-	if (length(diffuseFinal) > 0) {
+	// if (length(diffuseFinal) > 0) {
 		vec3 lightToPosDirVec = normalize(vs_position - lightPos);
 		vec3 reflectDirVec = normalize(reflect(lightToPosDirVec, normalize(vs_normal)));
 		vec3 posToViewDirVec = normalize(camPosition - vs_position);
 		float specularConstant = pow(max(dot(posToViewDirVec, reflectDirVec), 0.f), shininess);
 		specularFinal = specularColor * specularConstant;
-	}
+	// }
 	return specularFinal;
 }
 
@@ -56,7 +56,7 @@ void main()
 	vec3 specular1 = specularLight(lightPos1, diffuse1);
 	vec3 specular2 = specularLight(lightPos2, diffuse2);
 
-	vec3 diffuseFinal = diffuse0   + diffuse1 + diffuse2;
+	vec3 diffuseFinal = diffuse0   + diffuse1  + diffuse2;
 	vec3 specularFinal = specular0 + specular1 + specular2;
 
 	//Final light

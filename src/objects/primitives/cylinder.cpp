@@ -1,7 +1,7 @@
 #include "primitive.h"
 
-const int Cylinder::X_SEGMENTS = 100;
-const int Cylinder::Y_SEGMENTS = 10;
+const int Cylinder::X_SEGMENTS = 50;
+const int Cylinder::Y_SEGMENTS = 2;
 
 Cylinder::Cylinder(float radius, float height) : Primitive()
 {
