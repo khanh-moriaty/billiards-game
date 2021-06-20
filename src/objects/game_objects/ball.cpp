@@ -5,7 +5,7 @@ const float Ball::MASS = 1.f;
 
 Ball::Ball(int number, Mesh *mesh)
 {
-    this->mesh = mesh;
+    this->mesh.push_back(mesh);
     this->mass = MASS;
     this->velocity = glm::vec3(0.f);
     this->acceleration = glm::vec3(0.f);

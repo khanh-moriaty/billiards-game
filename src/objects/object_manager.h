@@ -5,13 +5,6 @@
 #include "game_objects/game_object.h"
 #include <texture/texture_manager.h>
 
-struct Light {
-    Mesh *cover;
-    Mesh *string;
-    Mesh *bulb;
-    glm::vec3 position;
-};
-
 class ObjectManager
 {
 private:
@@ -19,7 +12,7 @@ private:
 
     TextureManager* textureManager;
     std::vector<GameObject *> objectList;
-    Light lights[3];
+    GameObject* lights[3];
 
 public:
     ObjectManager(TextureManager* textureManager);
@@ -29,11 +22,11 @@ public:
         for (auto x : this->objectList)
             delete x;
 
-        for (auto x : this->lights){
-            delete x.bulb;
-            delete x.cover;
-            delete x.string;
-        }
+        // for (auto x : this->lights){
+        //     delete x.bulb;
+        //     delete x.cover;
+        //     delete x.string;
+        // }
     }
 
     void initRoom();
@@ -43,7 +36,7 @@ public:
     void update();
     void render(Shader* shader);
 
-    const glm::vec3 getLight0() {return lights[0].position;}
-    const glm::vec3 getLight1() {return lights[1].position;}
-    const glm::vec3 getLight2() {return lights[2].position;}
+    const glm::vec3 getLight0() {return lights[0]->getPosition();}
+    const glm::vec3 getLight1() {return lights[1]->getPosition();}
+    const glm::vec3 getLight2() {return lights[2]->getPosition();}
 };

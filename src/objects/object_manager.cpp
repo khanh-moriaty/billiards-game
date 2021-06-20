@@ -26,9 +26,8 @@ void ObjectManager::addLight(int i, glm::vec3 position){
     Primitive *primitive;
     std::string textureName;
     Texture *texture;
-    Mesh *mesh;
+    Mesh **mesh = new Mesh*[3];
     glm::vec3 meshPosition;
-    Light light;
 
     const float LIGHT_RADIUS = 0.2f;
     const float LIGHT_HEIGHT = 0.15f;
@@ -40,30 +39,27 @@ void ObjectManager::addLight(int i, glm::vec3 position){
     textureName = "light";
     texture = textureManager->get(textureName);
     meshPosition = position;
-    mesh = new Mesh(primitive, texture, meshPosition, meshOrigin);
-    light.cover = mesh;
-    this->objectList.push_back(new GameObject(mesh));
+    mesh[0] = new Mesh(primitive, texture, meshPosition, meshOrigin);
 
     // Create string
     primitive = new Cylinder(0.02f * LIGHT_RADIUS, ROOM_HEIGHT - (position.y + LIGHT_HEIGHT));
     textureName = "light";
     texture = textureManager->get(textureName);
     meshPosition = glm::vec3(position.x, position.y + LIGHT_HEIGHT, position.z);
-    mesh = new Mesh(primitive, texture, meshPosition, meshOrigin);
-    light.string = mesh;
-    this->objectList.push_back(new GameObject(mesh));
+    mesh[1] = new Mesh(primitive, texture, meshPosition, meshOrigin);
 
     // Create light bulb
     primitive = new Sphere(0.25f * LIGHT_RADIUS);
     textureName = "white";
     texture = textureManager->get(textureName);
     meshPosition = glm::vec3(position.x, position.y + 0.25f * LIGHT_HEIGHT, position.z);
-    mesh = new Mesh(primitive, texture, meshPosition, meshOrigin);
-    light.bulb = mesh;
-    this->objectList.push_back(new GameObject(mesh));
+    mesh[2] = new Mesh(primitive, texture, meshPosition, meshOrigin);
 
-    light.position = meshPosition;
-    lights[i] = light;
+    // Add 3 meshes to object list
+    GameObject* light = new GameObject(mesh, 1.0f, 3);
+    this->objectList.push_back(light);
+    this->lights[i] = light;
+    
 
 }
 
@@ -81,40 +77,42 @@ void ObjectManager::initRoom()
     lightB = loadOBJ("res/model/lightB.obj");
     lightW = loadOBJ("res/model/lightW.obj");
 
-    Mesh *mesh;
+    Mesh **mesh = new Mesh*[1];
 
-    mesh = new Mesh(wall, textureManager->get("wall"), glm::vec3(0.f, 0.f, 0.f));
+    mesh[0] = new Mesh(wall, textureManager->get("wall"), glm::vec3(0.f, 0.f, 0.f));
     this->objectList.push_back(new GameObject(mesh));
 
-    mesh = new Mesh(floor, textureManager->get("floor"), glm::vec3(0.f, 0.f, 0.f));
+    mesh[0] = new Mesh(floor, textureManager->get("floor"), glm::vec3(0.f, 0.f, 0.f));
     this->objectList.push_back(new GameObject(mesh));
 
-    mesh = new Mesh(door, textureManager->get("door"), glm::vec3(0.f, 0.f, 0.f));
+    mesh[0] = new Mesh(door, textureManager->get("door"), glm::vec3(0.f, 0.f, 0.f));
     this->objectList.push_back(new GameObject(mesh));
 
-    mesh = new Mesh(pic, textureManager->get("pic"), glm::vec3(0.f, 0.f, 0.f));
+    mesh[0] = new Mesh(pic, textureManager->get("pic"), glm::vec3(0.f, 0.f, 0.f));
     this->objectList.push_back(new GameObject(mesh));
 
-    mesh = new Mesh(face, textureManager->get("green"), glm::vec3(0.f, 0.f, 0.f));
+    mesh[0] = new Mesh(face, textureManager->get("green"), glm::vec3(0.f, 0.f, 0.f));
     this->objectList.push_back(new GameObject(mesh));
 
-    mesh = new Mesh(body, textureManager->get("body_wood"), glm::vec3(0.f, 0.f, 0.f));
+    mesh[0] = new Mesh(body, textureManager->get("body_wood"), glm::vec3(0.f, 0.f, 0.f));
     this->objectList.push_back(new GameObject(mesh));
 
-    mesh = new Mesh(leg, textureManager->get("leg"), glm::vec3(0.f, 0.f, 0.f));
+    mesh[0] = new Mesh(leg, textureManager->get("leg"), glm::vec3(0.f, 0.f, 0.f));
     this->objectList.push_back(new GameObject(mesh));
 
-    mesh = new Mesh(chair, textureManager->get("body_wood"), glm::vec3(0.f, 0.f, 0.f));
+    mesh[0] = new Mesh(chair, textureManager->get("body_wood"), glm::vec3(0.f, 0.f, 0.f));
     this->objectList.push_back(new GameObject(mesh));
 
-    mesh = new Mesh(chair, textureManager->get("body_wood"), glm::vec3(6.f, 0.f, 0.f));
+    mesh[0] = new Mesh(chair, textureManager->get("body_wood"), glm::vec3(6.f, 0.f, 0.f));
     this->objectList.push_back(new GameObject(mesh));
 
-    // mesh = new Mesh(lightB, textureManager->get("light"), glm::vec3(0.f, 1.f, 0.8f));
+    // mesh[0] = new Mesh(lightB, textureManager->get("light"), glm::vec3(0.f, 1.f, 0.8f));
     // this->objectList.push_back(new GameObject(mesh));
 
-    // mesh = new Mesh(lightW, textureManager->get("white"), glm::vec3(0.f, 1.f, 0.8f));
+    // mesh[0] = new Mesh(lightW, textureManager->get("white"), glm::vec3(0.f, 1.f, 0.8f));
     // this->objectList.push_back(new GameObject(mesh));
+
+    delete [] mesh;
 }
 
 void ObjectManager::update() {
