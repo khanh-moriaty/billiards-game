@@ -33,12 +33,13 @@ GameManager::GameManager(const int SCR_WIDTH, const int SCR_HEIGHT)
     this->textureManager = new TextureManager();
     this->textureManager->initTexture();
 
-    this->objectManager = new ObjectManager(this);
+    this->objectManager = new ObjectManager(this->textureManager);
     this->objectManager->initRoom();
     for (int i = 0; i < 16; i++)
     {
         this->objectManager->addBall(i, glm::vec3(0.2f * (i/4), 1.f, 0.2f * (i%4)));
     }
+    this->objectManager->addLight(glm::vec3(0.f, 3.f, 0.f));
 }
 
 GameManager::~GameManager()

@@ -1,7 +1,7 @@
 #include "primitive.h"
 
-const int Sphere::X_SEGMENTS = 100;
-const int Sphere::Y_SEGMENTS = 100;
+const int Sphere::X_SEGMENTS = 50;
+const int Sphere::Y_SEGMENTS = 50;
 
 Sphere::Sphere(float radius):Primitive()
 {

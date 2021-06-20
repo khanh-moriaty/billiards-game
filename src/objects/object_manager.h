@@ -3,18 +3,16 @@
 #include <vector>
 
 #include "game_objects/game_object.h"
-#include <game_manager.h>
-
-class GameManager;
+#include <texture/texture_manager.h>
 
 class ObjectManager
 {
 private:
-    GameManager* gameManager;
+    TextureManager* textureManager;
     std::vector<GameObject *> objectList;
 
 public:
-    ObjectManager(GameManager* gameManager);
+    ObjectManager(TextureManager* textureManager);
 
     ~ObjectManager()
     {
@@ -24,6 +22,7 @@ public:
 
     void initRoom();
     void addBall(int number, glm::vec3 position = glm::vec3(0.f));
+    void addLight(glm::vec3 position = glm::vec3(0.f));
 
     void update();
     void render(Shader* shader);

@@ -42,8 +42,25 @@ class Cone : public Primitive
 private:
 	static const int X_SEGMENTS;
 	static const int Y_SEGMENTS;
-	void generateConeLayer(float radius, float height, bool outer=true);
+	static const float TOP_RATIO; // TOP_RATIO = p/h
+
+	float radius;
+	float height;
+	float fullHeight;
+	float top;
+	float sphereRadius;
+
+	void generateConeLayer();
 	void generateIndices(int offset);
 public:
 	Cone(float radius, float height);
+};
+
+class Cylinder : public Primitive
+{
+private:
+	static const int X_SEGMENTS;
+	static const int Y_SEGMENTS;
+public:
+	Cylinder(float radius, float height);
 };
