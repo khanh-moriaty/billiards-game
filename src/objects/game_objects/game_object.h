@@ -13,8 +13,13 @@ protected:
 public:
     GameObject() {}
 
-    GameObject(Mesh** mesh, float mass = 1.f, int n=1) {
+    GameObject(Mesh** mesh, int n, float mass = 1.f) {
         this->mesh = std::vector<Mesh*>(mesh, mesh+n);
+        this->mass = mass;
+    }
+
+    GameObject(Mesh* mesh, float mass = 1.f) {
+        this->mesh.push_back(mesh);
         this->mass = mass;
     }
 
