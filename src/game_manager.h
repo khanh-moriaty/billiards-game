@@ -44,7 +44,6 @@ private:
     glm::mat4 ModelMatrix;
     glm::mat4 ViewMatrix; 
     glm::mat4 ProjectionMatrix;
-    glm::vec3 lightPos0;
 
     float nearPlane = 0.1f;
     float farPlane = 1000.f;

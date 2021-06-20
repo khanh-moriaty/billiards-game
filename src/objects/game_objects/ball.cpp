@@ -10,7 +10,7 @@ const float Ball::SLIDING = 0.2f;
 
 Ball::Ball(int number, Mesh *mesh, glm::vec3 direction, float power)
 {
-    this->mesh = mesh;
+    this->mesh.push_back(mesh);
     this->mass = MASS;
     this->isMove = false;
     this->isInHole = false;

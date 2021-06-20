@@ -6,6 +6,8 @@
 class Primitive
 {
 public:
+	static const GLfloat PI;
+
 	std::vector<Vertex> vertices;
 	std::vector<GLuint> indices;
 
@@ -28,6 +30,40 @@ public:
 
 class Sphere : public Primitive
 {
+private:
+	static const int X_SEGMENTS;
+	static const int Y_SEGMENTS;
 public:
 	Sphere(float radius);
+};
+
+class Cone : public Primitive
+{
+private:
+	static const int X_SEGMENTS;
+	static const int Y_SEGMENTS;
+	static const float TOP_RATIO; // TOP_RATIO = p/h
+
+	float radius;
+	float height;
+	float fullHeight;
+	float top;
+	float sphereRadius;
+
+	void generateConeLayer();
+	void generateIndices(int offset);
+public:
+	Cone(float radius, float height);
+};
+
+class Plane : public Primitive
+{
+private:
+	static const int X_SEGMENTS;
+	static const int Y_SEGMENTS;
+
+	void generateFace(float width, float height, float z);
+	void generateIndices(int offset);
+public:
+	Plane(float width, float height, float depth);
 };

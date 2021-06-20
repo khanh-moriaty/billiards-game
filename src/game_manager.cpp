@@ -26,23 +26,25 @@ GameManager::GameManager(const int SCR_WIDTH, const int SCR_HEIGHT)
     this->running = true;
     this->blockCam = 0;
     init();
-    this->shader = new Shader("src/shaders/vertex_core.glsl", "src/shaders/fragment_core.glsl");
-    this->shader->use_Program();
-    initMatrices();
 
     this->textureManager = new TextureManager();
     this->textureManager->initTexture();
 
     this->objectManager = new ObjectManager(this->textureManager);
     this->objectManager->initRoom();
-    // for (int i = 0; i < 16; i++)
-    // {
-    //     this->objectManager->addBall(i, glm::vec3(0.2f * (i/4), 1.f, 0.2f * (i%4)));
-    // }
-    //this->objectManager->addStick(glm::vec3(1.f, 0.f, 1.f), 0.3f);
+
+    this->objectManager->addLight(0, glm::vec3(0.f, 3.f, 0.f));
+    this->objectManager->addLight(1, glm::vec3(-.5f, 3.f, 0.f));
+    this->objectManager->addLight(2, glm::vec3(+.5f, 3.f, 0.f));
+  
     this->objectManager->addBall(14, glm::vec3(-1.f, 1.f, -0.5f));
     this->objectManager->addBall(8, glm::vec3(-.5f, 1.f, -0.25f));
     this->objectManager->addBall(0, glm::vec3(-1.5f, 1.f, -0.5f));
+
+    this->shader = new Shader("src/shaders/vertex_core.glsl", "src/shaders/fragment_core.glsl");
+    this->shader->use_Program();
+    initMatrices();
+}
 
 }
 void GameManager::reset()
@@ -112,12 +114,12 @@ void GameManager::initMatrices()
     float fov = 90.f;
     this->ProjectionMatrix = glm::perspective(glm::radians(fov), static_cast<float>(w_buffer) / h_buffer, nearPlane, farPlane);
 
-    this->lightPos0 = glm::vec3(0.f, 8.f, 0.f);
-
     this->shader->set_Mat4fv(this->ModelMatrix, "ModelMatrix");
     this->shader->set_Mat4fv(this->ViewMatrix, "ViewMatrix");
     this->shader->set_Mat4fv(this->ProjectionMatrix, "ProjectionMatrix");
-    this->shader->set_3fv(this->lightPos0, "lightPos0");
+    this->shader->set_3fv(this->objectManager->getLight0(), "lightPos0");
+    this->shader->set_3fv(this->objectManager->getLight1(), "lightPos1");
+    this->shader->set_3fv(this->objectManager->getLight2(), "lightPos2");
     this->shader->set_3fv(this->camera->GetPos(), "camPosition");
 }
 

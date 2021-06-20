@@ -186,10 +186,18 @@ void Mesh::updateModelMatrix()
 	this->ModelMatrix = glm::scale(this->ModelMatrix, this->scale);
 
 	// Calculate orthogonal unit vector (Rx, Ry, Rz)
-    glm::vec3 R(1.f);
-	if (glm::length(this->rotation) > 0){
-		R = glm::cross(this->rotation, glm::vec3(0.f, 1.f, 0.f));
-		R = glm::normalize(R);
+	glm::vec3 R(1.f);
+	if (glm::length(this->rotation) > 0)
+	{
+		if (this->rotation.x == 0.f && this->rotation.z == 0.f)
+		{
+			R = glm::vec3(0.f, 1.f, 0.f);
+		}
+		else
+		{
+			R = glm::cross(this->rotation, glm::vec3(0.f, 1.f, 0.f));
+			R = glm::normalize(R);
+		}
 	}
 	//Calculate theta
 	float theta = - glm::length(this->rotation);
