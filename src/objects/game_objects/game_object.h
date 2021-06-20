@@ -16,7 +16,11 @@ public:
     }
 
     ~GameObject() {delete mesh;}
-
+    virtual void collide(GameObject* gameobj) {};
     virtual void update() {}
+    glm::vec3 getPos(){return this->mesh->getPos();}
     void render(Shader* shader) {this->mesh->render(shader);}
+    virtual bool inHole() {return false;}
+    virtual bool isBall() {return false;}
+    virtual bool isStick() {return false;}
 };
