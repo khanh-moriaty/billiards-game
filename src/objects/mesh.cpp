@@ -191,15 +191,10 @@ void Mesh::updateModelMatrix()
 		R = glm::cross(this->rotation, glm::vec3(0.f, 1.f, 0.f));
 		R = glm::normalize(R);
 	}
-	//std::cout<<this->rotation.x<<" "<<this->rotation.y<<" "<<this->rotation.z<<" /";
 	//Calculate theta
-	float theta = -glm::length(this->rotation);
-	//std::cout<<theta<<" ";
+	float theta = - glm::length(this->rotation);
 	this->ModelMatrix = glm::rotate(this->ModelMatrix, theta, R);
-
-
-    //float theta = -glm::length(this->rotation);
-	//this->ModelMatrix = glm::rotate(this->ModelMatrix, glm::radians(90.0f), this->rotation);
+	glm::rotate(this->ModelMatrix, glm::radians(90.0f), this->rotation);
 }
 
 void Mesh::render(Shader *shader)

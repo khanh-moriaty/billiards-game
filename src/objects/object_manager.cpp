@@ -8,7 +8,7 @@ ObjectManager::ObjectManager(TextureManager* textureManager)
     this->textureManager = textureManager;
 }
 
-void ObjectManager::addBall(int number, glm::vec3 position, glm::vec3 veSliding)
+void ObjectManager::addBall(int number, glm::vec3 position, glm::vec3 direction, float power)
 {
     Primitive *ball = new Sphere(Ball::RADIUS);
     std::string textureName = "ball" + std::to_string(number);
@@ -17,9 +17,24 @@ void ObjectManager::addBall(int number, glm::vec3 position, glm::vec3 veSliding)
     mesh->setShininess(30.0f);
     delete ball;
 
-    this->objectList.push_back(new Ball(number, mesh, veSliding));
+    this->objectList.push_back(new Ball(number, mesh, direction, power));
 }
 
+void ObjectManager::addStick()
+{
+    //
+
+
+    //
+    this->objectList.push_back(new Stick());
+}
+#include <iostream>
+void ObjectManager::removeBalls()
+{
+    this->objectList.pop_back();
+    this->objectList.pop_back();
+    this->objectList.pop_back();
+}
 void ObjectManager::initRoom()
 {
     std::vector<Vertex> wall, floor, door, pic, face, body, leg, chair, lightB, lightW, ball;
@@ -73,7 +88,6 @@ void ObjectManager::initRoom()
 void ObjectManager::update() {
     int n = objectList.size();
     for (int x = 0; x < n; x++){
-        // Check ball collision
         for(int y = x+1; y < n; y++){
             if (objectList[x]->isBall() && objectList[y]->isBall()) {
                 objectList[x]->collide(objectList[y]);
@@ -86,6 +100,7 @@ void ObjectManager::update() {
 
 void ObjectManager::render(Shader* shader) {
     for (auto x: this->objectList){
-        x->render(shader);
+        if(!x->inHole())
+            x->render(shader);
     }
 }

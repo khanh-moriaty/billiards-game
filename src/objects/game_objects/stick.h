@@ -11,5 +11,7 @@ class Stick: public GameObject
         float power;
         Stick(glm::vec3 dir, float pow);
         Stick();
+        bool isStick() {return true;}
+
 
 };

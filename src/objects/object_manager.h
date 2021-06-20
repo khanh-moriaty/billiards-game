@@ -9,9 +9,9 @@ class ObjectManager
 {
 private:
     TextureManager* textureManager;
-    std::vector<GameObject *> objectList;
 
 public:
+    std::vector<GameObject *> objectList;
     ObjectManager(TextureManager* textureManager);
 
     ~ObjectManager()
@@ -21,8 +21,9 @@ public:
     }
 
     void initRoom();
-    void addBall(int number, glm::vec3 position = glm::vec3(0.f), glm::vec3 veSliding = glm::vec3(0.f));
-
+    void addBall(int number, glm::vec3 position = glm::vec3(0.f), glm::vec3 direction = glm::vec3(0.f), float power = 0.f);
+    void removeBalls();
+    void addStick();
     void update();
     void render(Shader* shader);
 };

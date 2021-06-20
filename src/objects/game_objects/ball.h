@@ -22,14 +22,16 @@ private:
     std::vector<BallMovement*> ballMovements;
 
     glm::vec3 velocityVector;
-    float velocity;
+    float RollingVelocity;
+    float SlidingVelocity;
 
 public:
     // Ball(int number, Mesh* mesh);
-    Ball(int number, Mesh* mesh, glm::vec3 v = glm::vec3(0.f));
+    Ball(int number, Mesh* mesh, glm::vec3 direction = glm::vec3(0.f), float power = 0.f);
 
     void update();
     void collide(GameObject* gameobj);
+    bool inHole();
     void stickHitBall(glm::vec3 direction, float power);
 
     void updateRolling();
@@ -46,7 +48,8 @@ public:
 
     void isBallInHole();
 
-    glm::vec3 getVelocity();
+    glm::vec3 getRollingVelocity();
+    glm::vec3 getSlidingVelocity();
     int getNumber() { return this->number; }
     bool isBall() {return true;}
 };
