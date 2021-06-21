@@ -5,14 +5,37 @@
 #include <objects/vertex.h>
 class Primitive
 {
-public:
+protected:
 	static const GLfloat PI;
-
 	std::vector<Vertex> vertices;
 	std::vector<GLuint> indices;
 
+	// Current state of initialization
+	float xSegment, ySegment;
+	float xPos, yPos, zPos;
+	glm::vec3 normalVector;
 
-	Primitive() {}
+	// Number of vertices on mesh = Xmax * Ymax
+	// Define Xmax and Ymax based on primitive shapes.
+	// Spheres and circles need more vertices.
+	virtual int getXMax() = 0;
+	virtual int getYMax() = 0;
+
+	// Initialize vertices with position, normal vector and texture coordinate.
+	virtual void initVertices();
+	// Initialize indice of vertices in triangles.
+	virtual void initIndices(int offset=0);
+
+	// Calculate the position coordinate of current state.
+	// This is an abstract method. Has to be defined in derived classes.
+	virtual void getCoordinate() = 0;
+	
+	// Calculate the normal vector of current state.
+	// This is an abstract method. Has to be defined in derived classes.
+	virtual void getNormalVector() = 0;
+
+	Primitive();
+public:
 	virtual ~Primitive() {}
 
 	//Functions
@@ -30,18 +53,21 @@ public:
 
 class Sphere : public Primitive
 {
-private:
-	static const int X_SEGMENTS;
-	static const int Y_SEGMENTS;
+protected:
+	float radius;
+
+	virtual int getXMax();
+	virtual int getYMax();
+
+	virtual void getCoordinate();
+	virtual void getNormalVector();
 public:
 	Sphere(float radius);
 };
 
 class Cone : public Primitive
 {
-private:
-	static const int X_SEGMENTS;
-	static const int Y_SEGMENTS;
+protected:
 	static const float TOP_RATIO; // TOP_RATIO = p/h
 
 	float radius;
@@ -50,20 +76,47 @@ private:
 	float top;
 	float sphereRadius;
 
-	void generateConeLayer();
-	void generateIndices(int offset);
+	virtual int getXMax();
+	virtual int getYMax();
+
+	virtual void getCoordinate();
+	virtual void getNormalVector();
 public:
 	Cone(float radius, float height);
 };
 
 class Plane : public Primitive
 {
-private:
-	static const int X_SEGMENTS;
-	static const int Y_SEGMENTS;
+protected:
+	float width, height, depth;
+	float z;
+
+	virtual int getXMax();
+	virtual int getYMax();
+
+	virtual void getCoordinate();
+	virtual void getNormalVector();
+
+	virtual void initVertices();
 
 	void generateFace(float width, float height, float z);
 	void generateIndices(int offset);
 public:
 	Plane(float width, float height, float depth);
+};
+
+class Cylinder : public Primitive
+{
+protected:
+	float radius;
+	float height;
+
+	virtual int getXMax();
+	virtual int getYMax();
+
+	virtual void getCoordinate();
+	virtual void getNormalVector();
+
+public:
+	Cylinder(float radius, float height);
 };

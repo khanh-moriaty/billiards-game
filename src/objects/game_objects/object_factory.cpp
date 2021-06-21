@@ -2,7 +2,6 @@
 
 #include "ball.h"
 #include "light.h"
-#include <objects/primitives/cylinder.h>
 
 const float ObjectFactory::PI = 3.14f;
 
