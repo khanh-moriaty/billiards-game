@@ -1,5 +1,4 @@
 #include "primitive.h"
-#include "cylinder.h"
 
 int Cylinder::getXMax() {return 50;}
 int Cylinder::getYMax() {return 2;}
