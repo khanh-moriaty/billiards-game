@@ -44,13 +44,13 @@ private:
     glm::mat4 ModelMatrix;
     glm::mat4 ViewMatrix; 
     glm::mat4 ProjectionMatrix;
-    glm::vec3 lightPos0;
 
     float nearPlane = 0.1f;
     float farPlane = 1000.f;
 
     void init();
     void initMatrices();
+    int blockCam;
 
     GameManager(const int SCR_WIDTH, const int SCR_HEIGHT);
 
@@ -75,8 +75,8 @@ public:
     }
 
     Camera* getCamera() {return this->camera;}
-
-    void processInput(GLFWwindow* window);
+    void reset();
+    void processInput(GLFWwindow* window);//, glm::vec3* direction, float* power);
 
     static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
     static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);

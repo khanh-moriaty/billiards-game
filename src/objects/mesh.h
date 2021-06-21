@@ -1,4 +1,5 @@
 #pragma once
+
 #include <vector>
 #include "vertex.h"
 #include "primitives/primitive.h"
@@ -70,19 +71,25 @@ public:
 
 	void render(Shader* shader);
 
-	//Accessors
+	// Operator
+	Mesh& operator+(const Mesh&);
 
-	//Modifiers
+	glm::vec3 getPosition() {return this->position;}
+
+	// Modifiers
 	void setPosition(const glm::vec3 position) {this->position = position;}
 	void setOrigin(const glm::vec3 origin) {this->origin = origin;}
 	void setRotation(const glm::vec3 rotation) {this->rotation = rotation;}
 	void setScale(const glm::vec3 scale) {this->scale = scale;}
 	void setShininess(const GLfloat shininess) {this->shininess = shininess;}
 
-	//Functions
+	// Functions
 
 	void move(const glm::vec3 displacement);
 	void rotate(const glm::vec3 rotation);
 	void scaleUp(const glm::vec3 scale);
-
+	glm::vec3 getPos()
+	{
+		return this->position;
+	}
 };
