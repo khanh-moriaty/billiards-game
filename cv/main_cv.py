@@ -11,4 +11,5 @@ _, _, pts = segment_function.detect_billiards_table(img)
 
 img_trans, img_detected, new_coord = detect_function.detect_ball(img, pts, 1000, 500)
 
-print(new_coord)
+for i in range(len(new_coord)):
+    print(new_coord[i][0], new_coord[i][1])
