@@ -30,22 +30,23 @@ bool Ball::inHole()
 }
 void Ball::update()
 {   
-    //std::cout<<(this->isInHole==true);
     this->isBallInHole();
-    //std::cout<<"helo";
-    this->ballHitPool();
-    // Update velocity based on friction
-    if(this->SlidingVelocity > this->RollingVelocity)
+    if(!this->isInHole)
     {
-        this->SlidingVelocity -= 9.8 * this->SLIDING / 240.f;
-        this->ballSliding();
-    }else{
-        this->SlidingVelocity = -100.f; 
-        this->RollingVelocity -= 9.8 * this->ROLLING / 240.f;
-        if (this->RollingVelocity <= 0){
-            this->RollingVelocity = 0.f;
+        // Update velocity based on friction
+        if(this->SlidingVelocity > this->RollingVelocity)
+        {
+            this->SlidingVelocity -= 9.8 * this->SLIDING / 240.f;
+            this->ballSliding();
+        }else{
+            this->SlidingVelocity = -100.f; 
+            this->RollingVelocity -= 9.8 * this->ROLLING / 240.f;
+            if (this->RollingVelocity <= 0){
+                this->RollingVelocity = 0.f;
+            }
+            this->ballRolling();
         }
-        this->ballRolling();
+        this->ballHitPool();
     }
 }
 
@@ -66,11 +67,6 @@ bool Ball::isHitBall(Ball *ball)
     return false;
 }
 
-// void Ball::stickHitBall(glm::vec3 direction, float power)
-// {
-//     this->veSliding = direction * power;    
-// }
-
 // float Ball::timeSliding()
 // {
 //     return (2 * glm::length(this->veSliding))/(7 * 9.8 * this->SLIDING);
@@ -79,14 +75,13 @@ bool Ball::isHitBall(Ball *ball)
 void Ball::ballSliding()
 {
     glm::vec3 S = this->getSlidingVelocity();
-    // this->mesh[0]->move(S);
-    //std::cout<<"move";
+    this->mesh[0]->move(S);
 }
 
 void Ball::ballRolling()
 {
     glm::vec3 S = this->getRollingVelocity();
-    this->mesh[0]->move(S/2.f);
+    this->mesh[0]->move(S);
     this->mesh[0]->rotate(S/RADIUS);
 }
 
@@ -128,29 +123,29 @@ void Ball::collide(GameObject* gameobj)
 void Ball::ballHitPool()
 {
     //cham ben phai
-    if(this->mesh[0]->getPos().x + RADIUS > 2){
+    if(this->mesh[0]->getPos().x + RADIUS > 1.2f){
         this->velocityVector.x = - this->velocityVector.x;
-        // this->mesh[0]->setPosition(glm::vec3(2 - RADIUS,this->mesh[0]->getPos().y,this->mesh[0]->getPos().z));
+        this->mesh[0]->setPosition(glm::vec3(1.2f - RADIUS,this->mesh[0]->getPos().y,this->mesh[0]->getPos().z));
         //std::cout<<"cham phai"<<std::endl;
     }else
     //cham ben trai
-    if(this->mesh[0]->getPos().x - RADIUS < -2){
+    if(this->mesh[0]->getPos().x - RADIUS < -2.1f){
         this->velocityVector.x = - this->velocityVector.x;
-        // this->mesh[0]->setPosition(glm::vec3(-2 + RADIUS,this->mesh[0]->getPos().y,this->mesh[0]->getPos().z));
+        this->mesh[0]->setPosition(glm::vec3(-2.1f + RADIUS,this->mesh[0]->getPos().y,this->mesh[0]->getPos().z));
         //std::cout<<"cham trai"<<std::endl;
 
     }
     //cham ben tren
-    if(this->mesh[0]->getPos().z + RADIUS > 1){
+    if(this->mesh[0]->getPos().z + RADIUS > 0.85f){
         this->velocityVector.z = - this->velocityVector.z;
-        // this->mesh[0]->setPosition(glm::vec3(this->mesh[0]->getPos().x,this->mesh[0]->getPos().y,1 - RADIUS));
+        this->mesh[0]->setPosition(glm::vec3(this->mesh[0]->getPos().x,this->mesh[0]->getPos().y,0.85f - RADIUS));
         //std::cout<<"cham tren"<<std::endl;
 
     }else
     //cham ben duoi
-    if(this->mesh[0]->getPos().z + RADIUS < -1){
+    if(this->mesh[0]->getPos().z + RADIUS < -0.74f){
         this->velocityVector.z = - this->velocityVector.z;
-        // this->mesh[0]->setPosition(glm::vec3(this->mesh[0]->getPos().x,this->mesh[0]->getPos().y,-1 + RADIUS));
+        this->mesh[0]->setPosition(glm::vec3(this->mesh[0]->getPos().x,this->mesh[0]->getPos().y,-0.74f + RADIUS));
         //std::cout<<"cham duoi"<<std::endl;
 
     }
@@ -159,37 +154,37 @@ void Ball::ballHitPool()
 void Ball::isBallInHole()
 {
     //lo phai tren
-    if(glm::length(glm::vec2(this->mesh[0]->getPos().x,this->mesh[0]->getPos().z) - glm::vec2(2.f,1.f)) < RADIUS+RADIUS_HOLE){
+    if(glm::length(glm::vec2(this->mesh[0]->getPos().x,this->mesh[0]->getPos().z) - glm::vec2(1.22f,0.85f)) < RADIUS_HOLE){
         this->isInHole = true;
         this->RollingVelocity = 0.f;
         this->SlidingVelocity = 0.f;
     }else
     //lo giua tren
-    if(glm::length(glm::vec2(this->mesh[0]->getPos().x,this->mesh[0]->getPos().z) - glm::vec2(0.f,1.f)) < RADIUS+RADIUS_HOLE){
+    if(glm::length(glm::vec2(this->mesh[0]->getPos().x,this->mesh[0]->getPos().z) - glm::vec2(-0.42f,0.85f)) < RADIUS_HOLE){
         this->isInHole = true;
         this->RollingVelocity = 0.f;
         this->SlidingVelocity = 0.f;
     }else
     //lo trai tren
-    if(glm::length(glm::vec2(this->mesh[0]->getPos().x,this->mesh[0]->getPos().z) - glm::vec2(-2.f,1.f)) < RADIUS+RADIUS_HOLE){
+    if(glm::length(glm::vec2(this->mesh[0]->getPos().x,this->mesh[0]->getPos().z) - glm::vec2(-2.08f,0.85f)) < RADIUS_HOLE){
         this->isInHole = true;
         this->RollingVelocity = 0.f;
         this->SlidingVelocity = 0.f;
     }else
     //lo trai duoi
-    if(glm::length(glm::vec2(this->mesh[0]->getPos().x,this->mesh[0]->getPos().z) - glm::vec2(-2.f,-1.f)) < RADIUS+RADIUS_HOLE){
+    if(glm::length(glm::vec2(this->mesh[0]->getPos().x,this->mesh[0]->getPos().z) - glm::vec2(-2.08f,-0.76f)) < RADIUS_HOLE){
         this->isInHole = true;
         this->RollingVelocity = 0.f;
         this->SlidingVelocity = 0.f;
     }else
     //lo giua duoi
-    if(glm::length(glm::vec2(this->mesh[0]->getPos().x,this->mesh[0]->getPos().z) - glm::vec2(0.f,-1.f)) < RADIUS+RADIUS_HOLE){
+    if(glm::length(glm::vec2(this->mesh[0]->getPos().x,this->mesh[0]->getPos().z) - glm::vec2(-0.42f,-0.76f)) < RADIUS_HOLE){
         this->isInHole = true;
         this->RollingVelocity = 0.f;
         this->SlidingVelocity = 0.f;
     }else
     //lo phai duoi
-    if(glm::length(glm::vec2(this->mesh[0]->getPos().x,this->mesh[0]->getPos().z) - glm::vec2(2.f,-1.f)) < RADIUS+RADIUS_HOLE){
+    if(glm::length(glm::vec2(this->mesh[0]->getPos().x,this->mesh[0]->getPos().z) - glm::vec2(1.22f,-0.76f)) < RADIUS_HOLE){
         this->isInHole = true;
         this->RollingVelocity = 0.f;
         this->SlidingVelocity = 0.f;

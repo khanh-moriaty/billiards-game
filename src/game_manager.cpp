@@ -143,8 +143,7 @@ void GameManager::update()
     glfwGetFramebufferSize(this->window, &w_buffer, &h_buffer);
     this->ProjectionMatrix = glm::perspective(glm::radians(this->camera->Zoom), static_cast<float>(w_buffer) / h_buffer, nearPlane, farPlane);
     this->shader->set_Mat4fv(this->ProjectionMatrix, "ProjectionMatrix");
-    //if(this->blockCam == 0)
-        this->ViewMatrix = this->camera->GetViewMatrix();
+    this->ViewMatrix = this->camera->GetViewMatrix();
     this->shader->set_Mat4fv(this->ViewMatrix, "ViewMatrix");
 }
 
@@ -161,7 +160,7 @@ void GameManager::render()
     glfwPollEvents();
 }
 
-void GameManager::processInput(GLFWwindow *window)//, glm::vec3* direction, float* power)
+void GameManager::processInput(GLFWwindow *window)
 {   
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
@@ -179,7 +178,7 @@ void GameManager::processInput(GLFWwindow *window)//, glm::vec3* direction, floa
     {
         this->reset();
     }
-    //set camera pos at bida 0 pos
+    //set camera pos at bida 0 pos, and block Camera 
     if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS)
     {
         //this->camera->setPos(glm::vec3(-1.5f, 1.f, -0.5f), glm::vec3(0.f, 1.f, 0.f), 0.f, 0.f);
@@ -198,20 +197,19 @@ void GameManager::processInput(GLFWwindow *window)//, glm::vec3* direction, floa
         this->blockCam = 1;
     }
     //set the diretion of stick
-    if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
     {
         glm::vec3 direction = glm::vec3(this->camera->Front.x, 0, this->camera->Front.z);
-        float power = 0.05f;
+        float power = 0.2f;
         glm::vec3 pos = this->objectManager->getBall(0)->getPos();
         this->objectManager->removeBall(0);
         this->objectManager->addBall(0, pos, direction, power);
         this->blockCam = 0;
 
     }
+    //not block Camera
     if (glfwGetKey(window, GLFW_KEY_V) == GLFW_PRESS)
     {
-        //*direction = glm::vec3(this->camera->Front.x, 0, this->camera->Front.z);
-        //*power = 0.05f;
         this->blockCam = 0;
     }
     
