@@ -41,22 +41,28 @@ GameManager::GameManager(const int SCR_WIDTH, const int SCR_HEIGHT)
     this->objectManager->addLight(1, glm::vec3(-.5f, 3.f, 0.f));
     this->objectManager->addLight(2, glm::vec3(+.5f, 3.f, 0.f));
   
-    this->objectManager->addBall(14, glm::vec3(-1.f, 1.f, -0.5f));
-    this->objectManager->addBall(8, glm::vec3(-.5f, 1.f, -0.25f));
-    this->objectManager->addBall(0, glm::vec3(-1.5f, 1.f, -0.5f));
+    this->reset();
 
     this->shader = new Shader("src/shaders/vertex_core.glsl", "src/shaders/fragment_core.glsl");
     this->shader->use_Program();
     initMatrices();
 }
 
-
+#include "objects/game_objects/ball.h"
 void GameManager::reset()
 {
     this->objectManager->removeBalls();
-    this->objectManager->addBall(14, glm::vec3(-1.f, 1.f, -0.5f));
-    this->objectManager->addBall(8, glm::vec3(-.5f, 1.f, -0.25f));
-    this->objectManager->addBall(0, glm::vec3(-1.5f, 1.f, -0.5f));
+    this->objectManager->addBall(0, glm::vec3(+1.f, 1.f, +0.f));
+
+    for (int i=5; i>0; i--){
+        for (int j=0; j<i; j++) {
+            float zPos;
+            // if (i%2 == 1) {
+                zPos = (2*j - i) * Ball::RADIUS;
+            // }
+            this->objectManager->addBall((16-i*(i+1)/2+j), glm::vec3(-1.5f + Ball::RADIUS*2*(6-i), 1.f, zPos));
+        }
+    }
 }
 GameManager::~GameManager()
 {
@@ -278,7 +284,9 @@ void GameManager::drop_callback(GLFWwindow* window, int count, const char** file
         float a, b;
         ss_line >> a >> b;
         std::cout << "line: " << line << std::endl;
-        gameManager->objectManager->addBall(ballNumber, glm::vec3(a * 3.3f - 2.1f, 1.f, b * 1.6f - 0.75f));
-        ballNumber++;
+        gameManager->objectManager->addBall(ballNumber % 16, glm::vec3(a * 3.3f - 2.1f, 1.f, b * 1.6f - 0.75f));
+        ballNumber+=7;
     }
+
+    gameManager->camera->setViewMat(glm::vec3(2.0f, 3.0f, 2.0f), -135.f, -30.f);
 }

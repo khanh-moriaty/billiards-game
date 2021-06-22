@@ -26,7 +26,7 @@ GameObject* ObjectFactory::createBall(int number, glm::vec3 position, glm::vec3 
     Primitive *ball = new Sphere(Ball::RADIUS);
     std::string textureName = "ball" + std::to_string(number);
     Texture *texture = this->textureManager->get(textureName);
-    Mesh *mesh = new Mesh(ball, texture, position);
+    Mesh *mesh = new Mesh(ball, texture, position, position, glm::vec3(0.f, 3.14*5/4, 0.f));
     mesh->setShininess(30.0f);
     delete ball;
 

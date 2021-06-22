@@ -143,7 +143,7 @@ void Ball::ballHitPool()
 
     }else
     //cham ben duoi
-    if(this->mesh[0]->getPos().z + RADIUS < -0.74f){
+    if(this->mesh[0]->getPos().z - RADIUS < -0.74f){
         this->velocityVector.z = - this->velocityVector.z;
         this->mesh[0]->setPosition(glm::vec3(this->mesh[0]->getPos().x,this->mesh[0]->getPos().y,-0.74f + RADIUS));
         //std::cout<<"cham duoi"<<std::endl;
