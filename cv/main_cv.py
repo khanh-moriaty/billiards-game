@@ -21,8 +21,11 @@ def listen(img_path):
     _, _, pts = segment_function.detect_billiards_table(img)
 
     img_trans, img_detected, new_coord = detect_function.detect_ball(img, pts, 1000, 500)
+    if(len(new_coord) == 0):
+        res = ''
+    else:
+        res = '\n'.join([str(x[0]) + " " + str(x[1]) for x in new_coord])
     
-    res = '\n'.join([str(x[0]) + " " + str(x[1]) for x in new_coord])
     print(res)
 
     return res
