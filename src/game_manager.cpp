@@ -10,7 +10,7 @@ GameManager *GameManager::getInstance()
 {
     if (gameManager == NULL)
     {
-        gameManager = new GameManager(800, 600);
+        gameManager = new GameManager(1800, 900);
     }
     return gameManager;
 }
@@ -199,7 +199,7 @@ void GameManager::processInput(GLFWwindow *window)
     if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
     {
         glm::vec3 direction = glm::vec3(this->camera->Front.x, 0, this->camera->Front.z);
-        float power = 0.2f;
+        float power = 0.07f;
         glm::vec3 pos = this->objectManager->getBall(0)->getPos();
         this->objectManager->removeBall(0);
         this->objectManager->addBall(0, pos, direction, power);

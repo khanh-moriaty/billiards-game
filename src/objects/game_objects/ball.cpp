@@ -103,13 +103,18 @@ void Ball::resifhitball(Ball* ball)
         }
         this->velocityVector = glm::normalize(velocity1);
         this->RollingVelocity = glm::length(velocity1);
-
+        
         velocity2 += velocity;
         if (glm::length(velocity2) == 0) {
             velocity2 += glm::vec3(1e-5, 0, 1e-5);
         }
         ball->velocityVector = glm::normalize(velocity2);
         ball->RollingVelocity = glm::length(velocity2);
+
+        glm::vec3 dirCenter = this->mesh[0]->getPos()-ball->mesh[0]->getPos();
+        temp = RADIUS - dis;
+        this->mesh[0]->setPosition(glm::vec3(this->mesh[0]->getPos()-glm::normalize(dirCenter)*temp));
+        ball->mesh[0]->setPosition(glm::vec3(ball->mesh[0]->getPos()+glm::normalize(dirCenter)*temp));      
     }
 }
 

@@ -8,7 +8,6 @@ int main()
     while (gameManager->isRunning()){
         gameManager->update();
         gameManager->render();
-        _sleep(20);
     }
 
     delete gameManager;
