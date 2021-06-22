@@ -4,6 +4,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
 
+#include <HTTPRequest.hpp>
+#include <Base64.h>
+#include <sstream>
+
 GameManager *GameManager::gameManager = NULL;
 
 GameManager *GameManager::getInstance()
@@ -93,6 +97,7 @@ void GameManager::init()
     glfwSetInputMode(this->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); //ko hien thi con tro chuot
     glfwSetCursorPosCallback(this->window, mouse_callback);
     glfwSetScrollCallback(this->window, scroll_callback);
+    glfwSetDropCallback(this->window, drop_callback);
     glfwMakeContextCurrent(this->window);
     glewExperimental = GL_TRUE;
     if (glewInit() != GLEW_OK)
@@ -248,4 +253,32 @@ void GameManager::scroll_callback(GLFWwindow *window, double xoffset, double yof
 {
     GameManager *gameManager = GameManager::getInstance();
     gameManager->getCamera()->ProcessMouseScroll(yoffset);
+}
+
+void GameManager::drop_callback(GLFWwindow* window, int count, const char** fileList) {
+    if (count != 1) return;
+    // std::cout << fileList[0] << std::endl;
+    // you can pass http::InternetProtocol::V6 to Request to make an IPv6 request
+    std::string url = std::string("127.0.0.1:5678/") + macaron::Base64::Encode(fileList[0]);
+    std::cout << url << std::endl;
+    http::Request request(url);
+
+    // send a get request
+    const auto response = request.send("GET");
+    const std::string result = std::string(response.body.begin(), response.body.end());
+    std::stringstream ss(result);
+    std::string line;
+
+    GameManager *gameManager = GameManager::getInstance();
+    gameManager->objectManager->removeBalls();
+    int ballNumber = 0;
+
+    while(std::getline(ss, line, '\n')){
+        std::stringstream ss_line(line);
+        float a, b;
+        ss_line >> a >> b;
+        std::cout << "line: " << line << std::endl;
+        gameManager->objectManager->addBall(ballNumber, glm::vec3(a * 3.3f - 2.1f, 1.f, b * 1.6f - 0.75f));
+        ballNumber++;
+    }
 }

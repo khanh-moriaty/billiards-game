@@ -43,3 +43,6 @@ BilliardsGame
 *.ilk
 *.pdb
 *.sln
+
+# Python
+__pycache__/
