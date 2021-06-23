@@ -53,11 +53,11 @@ Hiện tại chương trình của chúng tôi chỉ mới hỗ trợ cho nền 
 
 **Tiến hành cài đặt:**
 
-*Đối với người dùng cuối:* Để thực hiện quy trình cài đặt hoàn chỉnh, thực thi lệnh `make install`. Sau khi thực thi thành công, tệp tin trò chơi `BilliardsGame.exe` sẽ được tạo.
+*Đối với người dùng cuối:* Để thực hiện quy trình cài đặt hoàn chỉnh, thực thi lệnh `make install`. Sau khi thực thi thành công, tệp tin Game Client `BilliardsGame.exe` sẽ được tạo. Để khởi động Billiards Server, vui lòng đến bước tiếp theo.
 
 *Đối với các nhà phát triển:* Để giữ lại các tệp tin mã máy sau khi biên dịch, sử dụng lệnh `make`.
 
-Ngoài ra, nhằm tăng tính tiện dụng cho quá trình phát triển và kiểm thử chương trình, có thể thực hiện lệnh `make run` để biên dịch và lập tức khởi động trò chơi.
+Ngoài ra, nhằm tăng tính tiện dụng cho quá trình phát triển và kiểm thử chương trình, có thể thực hiện lệnh `make run` để biên dịch và lập tức khởi động GameClient.
 
 Sau khi hoàn tất việc lập trình và kiểm thử mã nguồn, thực hiện lệnh `make clean` để dọn dẹp những tệp tin không cần thiết.
 
@@ -73,6 +73,10 @@ Khởi động Billiards Server bằng lệnh: `python3 server/src/server.py`.
 
 ### Cài đặt cho các hệ điều hành Linux
 
+**Yêu cầu kỹ thuật:**
+- Docker Engine. (Tham khảo [tại đây](https://docs.docker.com/engine/install/))
+- Docker Compose. (Tham khảo [tại đây](https://docs.docker.com/compose/install/))
+
 **Sử dụng Docker Image có sẵn:** TBA.
 
 **Tự xây dựng Docker Image:**
@@ -80,23 +84,15 @@ Khởi động Billiards Server bằng lệnh: `python3 server/src/server.py`.
 Để xây dựng lại Docker Image, di chuyển đến thư mục chứa chương trình và thực hiện lệnh sau:
 
 ```shellscript
-docker build -t billiards-game:latest .
+docker-compose build
 ```
 
 **Khởi động trò chơi:**
 
-Lần đầu khởi động trò chơi, bạn sẽ cần tạo Docker Container cho Image vừa xây dựng. Để tạo Docker Container, thực hiện lệnh sau:
+Để khởi động cả Game Client và Billiards Server, di chuyển đến thư mục chứa chương trình và thực hiện lệnh
 
-```shellscript
-docker run -it --name billiards-game --device=/dev/dri -v $XAUTHORITY:/root/.Xauthority --network="host" -e DISPLAY=$DISPLAY billiards-game:latest
 ```
-
-Sau khi thực hiện thành công câu lệnh bên trên, giao diện của trò chơi sẽ được hiển thị lên màn hình.
-
-Nếu những lần sau muốn khởi động trò chơi, bạn chỉ cần thực hiện lệnh sau:
-
-```shellscript
-docker start -i billiards-game
+docker-compose up
 ```
 
 
