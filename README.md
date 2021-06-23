@@ -49,6 +49,7 @@ Hiện tại chương trình của chúng tôi chỉ mới hỗ trợ cho nền 
 - Trình biên dịch GNU dành cho Windows: MinGW, MinGW-w64, hoặc TDM-GCC.
 - GCC >= 5.1.0.
 - OpenGL >= 3.3.
+- Python3 + pip.
 
 **Tiến hành cài đặt:**
 
@@ -59,6 +60,16 @@ Hiện tại chương trình của chúng tôi chỉ mới hỗ trợ cho nền 
 Ngoài ra, nhằm tăng tính tiện dụng cho quá trình phát triển và kiểm thử chương trình, có thể thực hiện lệnh `make run` để biên dịch và lập tức khởi động trò chơi.
 
 Sau khi hoàn tất việc lập trình và kiểm thử mã nguồn, thực hiện lệnh `make clean` để dọn dẹp những tệp tin không cần thiết.
+
+**Khởi động Billiards Server**
+
+Cài đặt các thư viện Python cần thiết thông qua lệnh `pip`:
+
+```
+pip install -r requirements.txt
+```
+
+Khởi động Billiards Server bằng lệnh: `python3 cv/main_cv.py`.
 
 ### Cài đặt cho các hệ điều hành Linux
 
