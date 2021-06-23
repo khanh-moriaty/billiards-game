@@ -51,7 +51,7 @@ private:
     void init();
     void initMatrices();
     int blockCam;
-
+    float power;
     GameManager(const int SCR_WIDTH, const int SCR_HEIGHT);
 
 public:

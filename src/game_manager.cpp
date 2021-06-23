@@ -14,7 +14,7 @@ GameManager *GameManager::getInstance()
 {
     if (gameManager == NULL)
     {
-        gameManager = new GameManager(1800, 900);
+        gameManager = new GameManager(1200, 900);
     }
     return gameManager;
 }
@@ -29,6 +29,7 @@ GameManager::GameManager(const int SCR_WIDTH, const int SCR_HEIGHT)
 
     this->running = true;
     this->blockCam = 0;
+    this->power = 0.f;
     init();
 
     this->textureManager = new TextureManager();
@@ -58,9 +59,11 @@ void GameManager::reset()
         for (int j=0; j<i; j++) {
             float zPos;
             // if (i%2 == 1) {
-                zPos = (2*j - i) * Ball::RADIUS;
+                zPos = (2*j - i) * (Ball::RADIUS);
             // }
-            this->objectManager->addBall((16-i*(i+1)/2+j), glm::vec3(-1.5f + Ball::RADIUS*2*(6-i), 1.f, zPos));
+            int x = 16-i*(i+1)/2+j;
+            //if(x==2 || x==0)
+                this->objectManager->addBall((x), glm::vec3(-1.5f + Ball::RADIUS*2*(6-i), 1.f, zPos));
         }
     }
 }
@@ -206,14 +209,35 @@ void GameManager::processInput(GLFWwindow *window)
         }
         this->blockCam = 1;
     }
+    //set power of stick
+    if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
+    {
+        this->power = 1.f;
+    }
+    if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
+    {
+        this->power = 2.f;
+    }
+    if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
+    {
+        this->power = 3.f;
+    }
+    if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
+    {
+        this->power = 4.f;
+    }
+    if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS)
+    {
+        this->power = 5.f;
+    }
     //set the diretion of stick
     if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
     {
         glm::vec3 direction = glm::vec3(this->camera->Front.x, 0, this->camera->Front.z);
-        float power = 0.07f;
+        //float power = 3.f;
         glm::vec3 pos = this->objectManager->getBall(0)->getPos();
         this->objectManager->removeBall(0);
-        this->objectManager->addBall(0, pos, direction, power);
+        this->objectManager->addBall(0, pos, direction, this->power);
         this->blockCam = 0;
 
     }
@@ -221,6 +245,11 @@ void GameManager::processInput(GLFWwindow *window)
     if (glfwGetKey(window, GLFW_KEY_V) == GLFW_PRESS)
     {
         this->blockCam = 0;
+    }
+    if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS)
+    {
+        this->objectManager->removeBall(0);
+        this->objectManager->addBall(0, glm::vec3(1.f, 1.f, 0.f));
     }
     
 }
