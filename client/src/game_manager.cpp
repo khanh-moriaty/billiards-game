@@ -3,6 +3,7 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
+#include <cstdlib>
 
 #include <HTTPRequest.hpp>
 #include <Base64.h>
@@ -294,7 +295,15 @@ void GameManager::drop_callback(GLFWwindow* window, int count, const char** file
     if (count != 1) return;
     // std::cout << fileList[0] << std::endl;
     // you can pass http::InternetProtocol::V6 to Request to make an IPv6 request
-    std::string url = std::string("127.0.0.1:5678/") + macaron::Base64::Encode(fileList[0]);
+
+    std::string fileName = fileList[0];
+
+    const char* runningInContainer = std::getenv("BILLIARDS_CONTAINER");
+    if (runningInContainer != NULL) {
+        fileName = "/mount" + fileName;
+    }
+
+    std::string url = std::string("127.0.0.1:5678/") + macaron::Base64::Encode(fileName);
     std::cout << url << std::endl;
     http::Request request(url);
 
