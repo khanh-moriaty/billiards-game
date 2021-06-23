@@ -69,7 +69,7 @@ Cài đặt các thư viện Python cần thiết thông qua lệnh `pip`:
 pip install -r requirements.txt
 ```
 
-Khởi động Billiards Server bằng lệnh: `python3 cv/main_cv.py`.
+Khởi động Billiards Server bằng lệnh: `python3 server/src/server.py`.
 
 ### Cài đặt cho các hệ điều hành Linux
 
