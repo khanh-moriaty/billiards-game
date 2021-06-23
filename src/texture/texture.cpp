@@ -12,7 +12,6 @@ Texture::Texture(const char* fileName, GLenum type, GLint texture_unit)
 	unsigned char* image = SOIL_load_image(fileName, &this->width, &this->height, NULL, SOIL_LOAD_RGBA);
 	glGenTextures(1, &this->id);
 	glBindTexture(type, this->id);
-
 	glTexParameteri(type, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(type, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(type, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);

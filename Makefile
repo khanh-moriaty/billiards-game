@@ -1,10 +1,11 @@
 CC 				= gcc
 CFLAGS 			= -w
 CPPFLAGS 		= -std=c++0x -DGLEW_NO_GLU -DGLEW_STATIC -DGLEW_BUILD -O2
-CINCLUDES 		= -I src/ -I dependencies/GLEW/include/ -I dependencies/GLFW/include/ -I dependencies/GLM/include/ -I dependencies/SOIL2/include/
+CINCLUDES 		= -I src/ -I dependencies/GLEW/include/ -I dependencies/GLFW/include/ -I dependencies/GLM/include/ \
+					-I dependencies/SOIL2/include/ -I dependencies/include
 
 ifeq ($(OS),Windows_NT)
-	LDFLAGS 	= -L. -lopengl32 -lglu32 -lgdi32 -lstdc++
+	LDFLAGS 	= -L. -lopengl32 -lglu32 -lgdi32 -lstdc++ -lwsock32 -lWs2_32
 	TARGET		= BilliardsGame.exe
 else
 	LDFLAGS 	= -L. -lGL -lGLU -lm -ldl -lX11 -lpthread -lstdc++

@@ -4,13 +4,17 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
 
+#include <HTTPRequest.hpp>
+#include <Base64.h>
+#include <sstream>
+
 GameManager *GameManager::gameManager = NULL;
 
 GameManager *GameManager::getInstance()
 {
     if (gameManager == NULL)
     {
-        gameManager = new GameManager(800, 600);
+        gameManager = new GameManager(1200, 900);
     }
     return gameManager;
 }
@@ -25,6 +29,7 @@ GameManager::GameManager(const int SCR_WIDTH, const int SCR_HEIGHT)
 
     this->running = true;
     this->blockCam = 0;
+    this->power = 0.f;
     init();
 
     this->textureManager = new TextureManager();
@@ -37,22 +42,30 @@ GameManager::GameManager(const int SCR_WIDTH, const int SCR_HEIGHT)
     this->objectManager->addLight(1, glm::vec3(-.5f, 3.f, 0.f));
     this->objectManager->addLight(2, glm::vec3(+.5f, 3.f, 0.f));
   
-    this->objectManager->addBall(14, glm::vec3(-1.f, 1.f, -0.5f));
-    this->objectManager->addBall(8, glm::vec3(-.5f, 1.f, -0.25f));
-    this->objectManager->addBall(0, glm::vec3(-1.5f, 1.f, -0.5f));
+    this->reset();
 
     this->shader = new Shader("src/shaders/vertex_core.glsl", "src/shaders/fragment_core.glsl");
     this->shader->use_Program();
     initMatrices();
 }
 
-
+#include "objects/game_objects/ball.h"
 void GameManager::reset()
 {
     this->objectManager->removeBalls();
-    this->objectManager->addBall(14, glm::vec3(-1.f, 1.f, -0.5f));
-    this->objectManager->addBall(8, glm::vec3(-.5f, 1.f, -0.25f));
-    this->objectManager->addBall(0, glm::vec3(-1.5f, 1.f, -0.5f));
+    this->objectManager->addBall(0, glm::vec3(+1.f, 1.f, +0.f));
+
+    for (int i=5; i>0; i--){
+        for (int j=0; j<i; j++) {
+            float zPos;
+            // if (i%2 == 1) {
+                zPos = (2*j - i) * (Ball::RADIUS);
+            // }
+            int x = 16-i*(i+1)/2+j;
+            //if(x==2 || x==0)
+                this->objectManager->addBall((x), glm::vec3(-1.5f + Ball::RADIUS*2*(6-i), 1.f, zPos));
+        }
+    }
 }
 GameManager::~GameManager()
 {
@@ -90,10 +103,10 @@ void GameManager::init()
     }
 
     glfwGetFramebufferSize(this->window, &this->w_buffer, &this->h_buffer);
-    // glfwSetFramebufferSizeCallback(this->window, framebuffer_size_callback);
     glfwSetInputMode(this->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); //ko hien thi con tro chuot
     glfwSetCursorPosCallback(this->window, mouse_callback);
     glfwSetScrollCallback(this->window, scroll_callback);
+    glfwSetDropCallback(this->window, drop_callback);
     glfwMakeContextCurrent(this->window);
     glewExperimental = GL_TRUE;
     if (glewInit() != GLEW_OK)
@@ -143,8 +156,7 @@ void GameManager::update()
     glfwGetFramebufferSize(this->window, &w_buffer, &h_buffer);
     this->ProjectionMatrix = glm::perspective(glm::radians(this->camera->Zoom), static_cast<float>(w_buffer) / h_buffer, nearPlane, farPlane);
     this->shader->set_Mat4fv(this->ProjectionMatrix, "ProjectionMatrix");
-    //if(this->blockCam == 0)
-        this->ViewMatrix = this->camera->GetViewMatrix();
+    this->ViewMatrix = this->camera->GetViewMatrix();
     this->shader->set_Mat4fv(this->ViewMatrix, "ViewMatrix");
 }
 
@@ -161,7 +173,7 @@ void GameManager::render()
     glfwPollEvents();
 }
 
-void GameManager::processInput(GLFWwindow *window)//, glm::vec3* direction, float* power)
+void GameManager::processInput(GLFWwindow *window)
 {   
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
@@ -179,7 +191,7 @@ void GameManager::processInput(GLFWwindow *window)//, glm::vec3* direction, floa
     {
         this->reset();
     }
-    //set camera pos at bida 0 pos
+    //set camera pos at bida 0 pos, and block Camera 
     if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS)
     {
         //this->camera->setPos(glm::vec3(-1.5f, 1.f, -0.5f), glm::vec3(0.f, 1.f, 0.f), 0.f, 0.f);
@@ -197,22 +209,47 @@ void GameManager::processInput(GLFWwindow *window)//, glm::vec3* direction, floa
         }
         this->blockCam = 1;
     }
+    //set power of stick
+    if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
+    {
+        this->power = 1.f;
+    }
+    if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
+    {
+        this->power = 2.f;
+    }
+    if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
+    {
+        this->power = 3.f;
+    }
+    if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
+    {
+        this->power = 4.f;
+    }
+    if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS)
+    {
+        this->power = 5.f;
+    }
     //set the diretion of stick
-    if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
     {
         glm::vec3 direction = glm::vec3(this->camera->Front.x, 0, this->camera->Front.z);
-        float power = 0.05f;
+        //float power = 3.f;
         glm::vec3 pos = this->objectManager->getBall(0)->getPos();
         this->objectManager->removeBall(0);
-        this->objectManager->addBall(0, pos, direction, power);
+        this->objectManager->addBall(0, pos, direction, this->power);
         this->blockCam = 0;
 
     }
+    //not block Camera
     if (glfwGetKey(window, GLFW_KEY_V) == GLFW_PRESS)
     {
-        //*direction = glm::vec3(this->camera->Front.x, 0, this->camera->Front.z);
-        //*power = 0.05f;
         this->blockCam = 0;
+    }
+    if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS)
+    {
+        this->objectManager->removeBall(0);
+        this->objectManager->addBall(0, glm::vec3(1.f, 1.f, 0.f));
     }
     
 }
@@ -251,4 +288,34 @@ void GameManager::scroll_callback(GLFWwindow *window, double xoffset, double yof
 {
     GameManager *gameManager = GameManager::getInstance();
     gameManager->getCamera()->ProcessMouseScroll(yoffset);
+}
+
+void GameManager::drop_callback(GLFWwindow* window, int count, const char** fileList) {
+    if (count != 1) return;
+    // std::cout << fileList[0] << std::endl;
+    // you can pass http::InternetProtocol::V6 to Request to make an IPv6 request
+    std::string url = std::string("127.0.0.1:5678/") + macaron::Base64::Encode(fileList[0]);
+    std::cout << url << std::endl;
+    http::Request request(url);
+
+    // send a get request
+    const auto response = request.send("GET");
+    const std::string result = std::string(response.body.begin(), response.body.end());
+    std::stringstream ss(result);
+    std::string line;
+
+    GameManager *gameManager = GameManager::getInstance();
+    gameManager->objectManager->removeBalls();
+    int ballNumber = 0;
+
+    while(std::getline(ss, line, '\n')){
+        std::stringstream ss_line(line);
+        float a, b;
+        ss_line >> a >> b;
+        std::cout << "line: " << line << std::endl;
+        gameManager->objectManager->addBall(ballNumber % 16, glm::vec3(a * 3.3f - 2.1f, 1.f, b * 1.6f - 0.75f));
+        ballNumber+=7;
+    }
+
+    gameManager->camera->setViewMat(glm::vec3(2.0f, 3.0f, 2.0f), -135.f, -30.f);
 }

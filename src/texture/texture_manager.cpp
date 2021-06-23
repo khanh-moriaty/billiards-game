@@ -23,7 +23,7 @@ void TextureManager::initTexture(){
     this->addTexture2D("light", "res/texture/light.jpg");
     this->addTexture2D("white", "res/texture/white.jpg");
 
-    this->addTexture2D("ball0", "res/texture/ball14.jpg");
+    this->addTexture2D("ball0", "res/texture/ball0.jpg");
     this->addTexture2D("ball1", "res/texture/ball1.jpg");
     this->addTexture2D("ball2", "res/texture/ball2.jpg");
     this->addTexture2D("ball3", "res/texture/ball3.jpg");

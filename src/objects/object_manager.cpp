@@ -51,7 +51,6 @@ void ObjectManager::removeBalls()
     }
 }
 
-#include <iostream>
 GameObject* ObjectManager::getBall(int number){
     for(auto x: this->objectList){
         if (!x->isBall()) continue;

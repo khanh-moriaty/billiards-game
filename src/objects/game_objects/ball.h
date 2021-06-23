@@ -32,7 +32,6 @@ public:
     void update();
     void collide(GameObject* gameobj);
     bool inHole();
-    void stickHitBall(glm::vec3 direction, float power);
 
     void updateRolling();
 
