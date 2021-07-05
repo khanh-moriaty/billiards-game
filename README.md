@@ -108,4 +108,4 @@ TBD
 
 TBD
 
-<img align="right" height="140" src="https://imgur.com/a/ue17NLF">
+<img align="right" height="140" src="https://media.giphy.com/media/iEZTWBWelBMfbTHsVK/source.gif">
