@@ -98,7 +98,15 @@ docker-compose up
 
 ## Hướng dẫn điều khiển
 
-TBD
+Sau khi đã khởi động được Billiards Server và Game Client, có thể bắt đầu chơi game theo hướng dẫn dưới đây:
+
+- Khi mới bắt đầu game, người chơi có thể sử dụng các phím WASD và chuột để có thể di chuyển tùy ý trong không gian game.
+- Người chơi có thể sử dụng lăn chuột để phóng to, thu nhỏ.
+- Sau khi sử dụng Camera, người chơi có thể nhấn nút C để khóa vị trí nhìn tại bi trắng cũng là viên bi mà chúng ta sẽ tác động lực vào.
+- Có các mức lực là các số từ 1 tới 5 tương ứng lực tác động từ nhẹ tới mạnh.
+- Sau khi xác định được mức lực, xác định hướng bắn và nhấn Space.
+- Để chơi lại từ đầu, nhấn phím P.
+
 
 ## Luật chơi
 
@@ -106,7 +114,7 @@ TBD
 
 ## Mô phỏng trạng thái game
 
-TBD
+Để mô phỏng trạng thái game từ một ảnh đầu vào, thực hiện thao tác kéo thả ảnh từ ngoài giao diện Desktop máy tính vào cửa sổ trò chơi. Tọa độ của các quả bóng sẽ được cập nhật thành trạng thái bạn mong muốn.
 
 <img src="https://media.giphy.com/media/iEZTWBWelBMfbTHsVK/giphy.gif" width="800" height="450" />
 
