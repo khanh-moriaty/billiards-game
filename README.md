@@ -108,6 +108,6 @@ TBD
 
 TBD
 
-![Alt Text](https://media.giphy.com/media/iEZTWBWelBMfbTHsVK/source.gif)
+<img src="https://media.giphy.com/media/iEZTWBWelBMfbTHsVK/source.gif" width="40" height="40" />
 
 
