@@ -107,3 +107,5 @@ TBD
 ## Mô phỏng trạng thái game
 
 TBD
+
+<img align="right" height="140" src="https://imgur.com/a/ue17NLF">
