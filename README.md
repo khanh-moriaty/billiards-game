@@ -108,5 +108,5 @@ TBD
 
 TBD
 
-<img src="https://media.giphy.com/media/iEZTWBWelBMfbTHsVK/giphy.gif" width="800" height="430" />
+<img src="https://media.giphy.com/media/iEZTWBWelBMfbTHsVK/giphy.gif" width="800" height="450" />
 
