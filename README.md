@@ -45,7 +45,7 @@ Hiện tại chương trình của chúng tôi chỉ mới hỗ trợ cho nền 
 ### Cài đặt cho hệ điều hành Windows
 
 **Yêu cầu kỹ thuật:**
-- Windows 32-bit hoặc 640bit.
+- Windows 32-bit hoặc 64-bit.
 - Trình biên dịch GNU dành cho Windows: MinGW, MinGW-w64, hoặc TDM-GCC.
 - GCC >= 5.1.0.
 - OpenGL >= 3.3.
